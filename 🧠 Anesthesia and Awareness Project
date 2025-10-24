@@ -1,0 +1,41 @@
+
+#Overview
+This project investigates how self-awareness emerges from the physical and informational organization of living systems. 
+It begins from the premise that consciousness is matter’s capacity to process information, while awareness is the 
+system’s recursive modeling of itself.
+I hypothesize that self-awareness arises near a critical point between order and chaos, where information flow, memory, 
+and stability are co-optimized. Anesthesia provides a natural testbed: awareness fades as the brain departs from this 
+critical balance and returns as it is restored.
+Through computational modeling and multimodal data analysis, this project aims to identify quantitative markers of 
+transitions between awareness and unawareness—reframing consciousness as a phenomenon of self-organized critical 
+homeostasis that links molecular biology, neuroscience, and quantum information.
+
+- link to blog
+
+#Project steps
+A multi-stage investigation combining:
+1. Data Analysis: Statistical and information-theoretic characterization of EEG/fMRI data during anesthesia.
+2. Simulation: Network-based and dynamical-systems modeling of brain criticality (e.g., coupled oscillators, Ising or 
+neural field models).
+3. Machine Learning: Classification and prediction of awareness states using entropy, mutual information, and criticality
+metrics.
+4. Quantum/Information Integration: Exploratory modeling of integrated information and coherence using Integrated 
+Information Theory (IIT) and quantum-inspired frameworks.
+
+#Methods (Proposed)
+Power-law analysis, entropy, and mutual information measures
+Dynamical network modeling and criticality simulations
+Unsupervised and supervised ML (e.g., clustering, logistic regression, neural networks)
+Python tools: NumPy, SciPy, PyTorch, NetworkX, Qiskit, PennyLane
+IIT modeling (via pyPhi or custom implementation)
+
+
+#Data Sources
+EEG/MEG Anesthesia Datasets – PhysioNet
+OpenNeuro fMRI Datasets
+Literature-based clinical datasets (for comparative validation)
+
+
+#Future Directions
+a. Extend analysis to memory and information integration dynamics under anesthesia and recovery.
+b. Build quantum-adaptive simulation models to explore coherence and decoherence in neural information flow.
