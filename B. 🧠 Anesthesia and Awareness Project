@@ -12,7 +12,7 @@ homeostasis that links molecular biology, neuroscience, and quantum information.
 
 - link to blog
 
-#Project steps
+##Project steps
 A multi-stage investigation combining:
 1. Data Analysis: Statistical and information-theoretic characterization of EEG/fMRI data during anesthesia.
 2. Simulation: Network-based and dynamical-systems modeling of brain criticality (e.g., coupled oscillators, Ising or 
@@ -22,20 +22,160 @@ metrics.
 4. Quantum/Information Integration: Exploratory modeling of integrated information and coherence using Integrated 
 Information Theory (IIT) and quantum-inspired frameworks.
 
-#Methods (Proposed)
-Power-law analysis, entropy, and mutual information measures
-Dynamical network modeling and criticality simulations
-Unsupervised and supervised ML (e.g., clustering, logistic regression, neural networks)
-Python tools: NumPy, SciPy, PyTorch, NetworkX, Qiskit, PennyLane
-IIT modeling (via pyPhi or custom implementation)
+##Methods (Proposed)
+Step 1 — Data access → preprocessing → feature extraction
+
+b. Access
+
+              i. EEG pipeline
+[Source]: PhysioNet anesthesia EEG datasets {MNE(.edf, .set, or .fif)}
+Organize: datasets/eeg/raw/, datasets/eeg/derivatives/, notebooks/eeg/
+
+              ii. fMRI pipeline 
+[Source]: OpenNeuro propofol sedation datasets
+Organize: BIDS layout in datasets/fmri/raw/ and derivatives in datasets/fmri/derivatives/
+
+b. Preprocessing 
+
+              i. EEG pipeline
+
+Re-reference: average mastoids, common average
+Filters: 0.3–45 Hz bandpass; 50/60 Hz notch
+Downsample: e.g., 250 Hz if needed
+Artifacts: blink and muscle removal via ICA; reject bad channels; interpolate
+Epoching: fixed windows (e.g., 10 s) with overlap for stable estimates
+Labeling: per metadata or provisional labels from depth-of-anesthesia notes
+
+              ii. fMRI pipeline
+
+fMRIPrep-like steps: motion correction, slice timing, susceptibility distortion correction, normalization to MNI, 
+nuisance regression (motion, WM, CSF), bandpass 0.01–0.1 Hz, scrubbing high-motion volumes
+Parcellation: AAL, Schaefer-200, or Glasser atlas. Extract regional time series
+
+c. Features 
+
+            i. EGG per epoch
+
+x. Spectral and aperiodic
+Absolute and relative power in delta 0.5–4, theta 4–8, alpha 8–14, beta 14–30
+Frontal alpha peak frequency and power
+Aperiodic 1/f exponent and offset (FOOOF)
+
+x. Complexity and entropy
+Multiscale entropy, permutation entropy
+Lempel–Ziv complexity (binary coarse graining)
+Sample entropy
+
+x. Criticality proxies
+Burst suppression ratio (time below amplitude threshold)
+Detrended fluctuation analysis (DFA) alpha
+Autocorrelation at lag 1, rolling variance (critical slowing down)
+Neuronal “avalanches”: event detection by z-threshold, size and duration distributions, power-law exponents, branching 
+ratio m
+
+x. Connectivity features (optional for EEG)
+Phase-locking value (PLV) or weighted phase lag index (wPLI) in alpha and delta bands
+Transfer entropy or phase slope index for directionality
+
+x. Output
+A tidy feature table per epoch: one row per epoch, columns for features and a state label
+Save to datasets/eeg/derivatives/features.parquet
+
+                ii. fMRI
+
+x. Functional connectivity
+Static FC: Pearson and partial correlations. Fisher-z store
+Spectral FC: coherence in low frequency band
+Dynamic FC: sliding windows, state clustering
+
+x. Effective connectivity
+Granger causality on prewhitened series or transfer entropy on downsampled series
+
+x. Graph measures
+Global efficiency, modularity, participation coefficient, clustering, hubness measures
+
+x. Complexity and criticality proxies
+Lempel–Ziv on regional or principal component time series
+Multiscale entropy
+Variance and lag-1 autocorrelation as critical slowing markers
+
+x. Output
+Per scan feature table and FC matrices saved to datasets/fmri/derivatives/
 
 
-#Data Sources
-EEG/MEG Anesthesia Datasets – PhysioNet
-OpenNeuro fMRI Datasets
-Literature-based clinical datasets (for comparative validation)
+Step 2 — Criticality and complexity analysis → state mapping → initial model
+
+A. States 
+1.Deep anesthesia
+2.Intermediate anesthesia
+3.Sedated
+4.Intermediate aware
+5.Aware
+
+B. Expected signatures per state (guide rails)
+|Feature family |--------------|	Deep--------|------ Intermediate |------- Sedated-----|------Intermediate-|----Aware|
+|Burst suppression ratio	      |High	        |   Low–moderate	    | Near zero	       |  Zero	            |  Zero
+|Frontal alpha power	          |Fragmented	  |   Low/slow	        | Weak	           |  Moderate	        |  Stronger
+|Delta power	                  |Very high    |  	High	            | Elevated	       |  Mild	            |  Baseline
+|1/f aperiodic exponent	        |Steeper	    |   Steep	            | Moderate	       |  Mild	            |  Flatter
+|LZ complexity	                |Lowest	      |   Low	              | Moderate	       |  Higher	          |  Highest
+|Multiscale entropy	            |Low          |   Low–moderate      | Moderate	       |  Higher	          |  High
+|DFA alpha	                    |Far          |   Closer	          | Closer	         |  Near 	            |  Close
+|Autocorr lag-1 variance	      |Transition   | Elevated	          |  Moderate	       | Mild	              |  Baseline
+|Avalanche exponents,branching m| m<1	        |Approaching 1	      | Near 1	         | ~1	                |  ~1
+FC integration (efficiency)	    | Low	        | Low–moderate	      | Moderate	       | Higher	            | Highest
+
+Learn boudanries.
+
+C. Criticality test 
+
+Power-law fits of avalanche size and duration with Clauset method and cpmpare exponents to theoretical near-critical 
+values and test goodness of fit versus log-normal.
+
+Branching ratio m: estimate from avalanche trees or point processes. Near 1 indicates criticality.
+
+Critical slowing down: rising variance and lag-1 autocorrelation when approaching loss or recovery of responsiveness. 
+Track over time to mark transitions.
+
+DFA on amplitude envelopes and principal components. Values near 0.5 are uncorrelated, higher values indicate long-range
+dependence.
+Aperiodic exponent from FOOOF as a proxy for excitation-inhibition balance changes
 
 
-#Future Directions
-a. Extend analysis to memory and information integration dynamics under anesthesia and recovery.
-b. Build quantum-adaptive simulation models to explore coherence and decoherence in neural information flow.
+D. State Model 
+
+Create a feature vector per epoch or per scan: [spectral, aperiodic, entropy, LZC, DFA, autocorr, avalanche, FC graph 
+metrics]
+
+Fit an HMM or Bayesian state-space model with 5 latent states. Initialize with k-means centroids for stability.
+
+Constrain interpretation by anchoring one state to burst suppression epochs and one to fully awake epochs. The others 
+are learned.
+Output a state trajectory over time and state centroids that define the five levels.
+
+E. Evalaution 
+
+Internal: silhouette on state clusters, temporal dwell times, transition probabilities that match clinical phases.
+
+External: accuracy vs. behavioral responsiveness if available. Cross-dataset replication on a second EEG or fMRI set.
+
+Interpretability: SHAP or permutation importance on features that define each state.
+
+Step 3. Modeling, simulation, ML
+
+Simulate critical transitions with Kuramoto or Wilson–Cowan networks and fit to observed features.
+
+Train classifiers to predict the five states from features.
+
+Step 4 IIT integration
+
+Compute toy Φ on reduced networks and relate to state index. Include as a feature.
+
+Step 5. Quantum extensions
+
+CV-friendly encodings for spectral features.
+
+QML hybrid kernels as a baseline alongside classical kernels.
+
+Long-term: toy simulation of drug mechanism effects on network parameters.
+
