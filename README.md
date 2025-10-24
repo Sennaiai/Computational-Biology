@@ -1,0 +1,9 @@
+🧬 Computational Biology
+Bridging my background in Molecular and Cellular Biology with computational methodologies, this repository explores the intersection of wet-lab science and 
+computational modeling. The goal is to develop hands-on projects that strengthen skills in AI/ML, biological computation, and molecular simulations — with 
+applications across Molecular Genetics, Systems Biology, and Neurobiology.
+By combining wet-lab and dry-lab approaches, and leveraging the rapid progress of computational and AI-driven research, this repository aims to contribute to 
+the emerging maturity and impact of computational biology as a core pillar of modern science.
+In parallel, by integrating quantum computing and technology skills, each project is designed with quantum system adaptability in mind. As quantum hardware 
+evolves beyond the Noisy Intermediate-Scale Quantum (NISQ) era, these methods may enable more accurate, holistic, and powerful models — advancing the full 
+adoption of quantum-enhanced computation in scientific research.
