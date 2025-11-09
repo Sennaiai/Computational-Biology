@@ -108,28 +108,3 @@ Design or import gRNAs for a (adaptable) target locus (CD19/CD22), predict calib
   
 * **Editing Persistence**: stochastic division model for T‑cell expansion (Cas9 decay, re‑cut, mosaicism) → updated priors for CAR‑T
 
-
-### Repo Skeleton
-
-```
-crispr-design/
-  README.md
-  config.yaml
-  data/  designs/
-  datasets/raw/  datasets/features/
-  models/  mechanism/
-  notebooks/
-    01_design.ipynb
-    02_cut_probability_and_calibration.ipynb
-    03_scenarios_and_reports.ipynb
-  reports/  app/
-```
-
-## Milestones (MVP -> V1)
-
-* **MVP**: Step 1 + Step 2 (logistic + calibration) + Step 4 (scenarios) → design & scenario reports for top‑5 gRNAs
-  
-* **V1**: add epigenetic features + ablation; repair outcome plots; optional UI and JSON handoff
-
-* **Stretch**: deep model + conformal intervals; optimizer; lightweight animations; alternate nucleases
-
