@@ -1,0 +1,160 @@
+##############################
+# Snakefile – Genomic_Ancestry
+##############################
+
+import os
+
+# CONFIG
+
+# List of samples in run
+SAMPLES = [
+    "HGDP00082",
+    "HGDP00450",
+    # add more sample IDs if needed
+]
+
+# Paths to 1000G SVD / population resources
+SVD_PREFIX    = "data/1000G/1000g.phase3.100k.b38.vcf.gz.dat"
+REF_V         = SVD_PREFIX + ".V"
+REF_POP_FILE  = "data/1000G/1000G_reference_populations.txt"
+
+# Reference FASTA for VerifyBamID2
+REF_FASTA = "data/reference/GRCh38_full_analysis_set_plus_decoy_hla.fa"
+
+
+
+# RULE: all (final targets)
+
+rule all:
+    """
+    Final outputs of the ancestry / contamination pipeline.
+    """
+    input:
+        # contamination summary
+        "output/final/Contamination.txt",
+        # ancestry PCs
+        "output/ancestry/reference_pcs.tsv",
+        "output/ancestry/study_pcs.tsv",
+        # population assignment for study samples
+        "output/final/Populations.txt",
+        # PCA plots
+        "output/plots/PC1_PC2.png",
+        "output/plots/PC2_PC3.png",
+        "output/plots/PC3_PC4.png",
+        "output/plots/PC1_PC2_PC3.png",
+
+
+
+# RULE: verify_bamid
+
+rule verify_bamid:
+    """
+    Run VerifyBamID2 for each sample to estimate contamination and PCs.
+    Produces:
+      output/verifybamid/{sample}.selfSM
+      output/verifybamid/{sample}.Ancestry
+    """
+    input:
+        cram = "data/input_crams/{sample}.GRCh38.low_coverage.cram",
+        ref  = REF_FASTA
+    output:
+        "output/verifybamid/{sample}.selfSM",
+        "output/verifybamid/{sample}.Ancestry"
+    threads: 4
+    shell:
+        r"""
+        bash scripts/run_verifybamid.sh {input.cram} {input.ref} {wildcards.sample}
+        """
+
+
+
+
+# RULE: contamination_table  (scripts/parse_contamination.py)
+
+
+rule contamination_table:
+    """
+    Combine all *.selfSM files into a contamination summary table.
+    """
+    input:
+        expand("output/verifybamid/{sample}.selfSM", sample=SAMPLES)
+    output:
+        "output/final/Contamination.txt"
+    script:
+        "scripts/parse_contamination.py"
+    # parse_contamination.py uses:
+    #   input_files = list(snakemake.input)
+    #   out_file   = snakemake.output[0]
+
+
+# RULE: extract_pcs  (scripts/extract_pcs.py as CLI)
+
+rule extract_pcs:
+    """
+    Extract PCs for reference and study samples and save them as TSV.
+    Uses scripts/extract_pcs.py as a normal CLI tool.
+    """
+    input:
+        v        = REF_V,
+        popfile  = REF_POP_FILE,
+        ancestry = expand(
+            "output/verifybamid/{sample}.Ancestry",
+            sample=SAMPLES,
+        )
+    output:
+        ref   = "output/ancestry/reference_pcs.tsv",
+        study = "output/ancestry/study_pcs.tsv"
+    shell:
+        r"""
+        python scripts/extract_pcs.py \
+            {input.v} \
+            {input.popfile} \
+            {output.ref} \
+            {output.study} \
+            {input.ancestry}
+        """
+
+
+
+# RULE: assign_population  (scripts/assign_population.py)
+
+
+rule assign_population:
+    """
+    Assign populations to study samples using K-nearest neighbors (KNN) in PC space.
+    """
+    input:
+        pcs = "output/ancestry/study_pcs.tsv",
+        ref = "output/ancestry/reference_pcs.tsv"
+    output:
+        "output/final/Populations.txt"
+    script:
+        "scripts/assign_population.py"
+    # scripts/assign_population.py expects:
+    #   snakemake.input.pcs
+    #   snakemake.input.ref
+    #   snakemake.output[0]
+
+
+
+# RULE: plot_pcs  (scripts/plot_pcs.py)
+
+
+rule plot_pcs:
+    """
+    Generate 2D and 3D PCA plots of reference + study samples.
+    """
+    input:
+        pcs = "output/ancestry/study_pcs.tsv",
+        ref = "output/ancestry/reference_pcs.tsv"
+    output:
+        "output/plots/PC1_PC2.png",
+        "output/plots/PC2_PC3.png",
+        "output/plots/PC3_PC4.png",
+        "output/plots/PC1_PC2_PC3.png"
+    script:
+        "scripts/plot_pcs.py"
+    # scripts/plot_pcs.py expects:
+    #   snakemake.input.pcs
+    #   snakemake.input.ref
+    #   snakemake.output (list of 4 pngs)

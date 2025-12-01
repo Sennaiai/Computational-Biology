@@ -1,0 +1,13 @@
+name: genomics-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - snakemake
+  - pandas
+  - numpy
+  - matplotlib
+  - verifybamid
+  - samtools

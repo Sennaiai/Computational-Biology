@@ -1,0 +1,14 @@
+data/
+output/
+.snakemake/
+*.selfSM
+*.Ancestry
+*.png
+*.tsv
+*.vcf
+*.vcf.gz
+*.cram
+*.bam
+*.log
+*.idx
+
