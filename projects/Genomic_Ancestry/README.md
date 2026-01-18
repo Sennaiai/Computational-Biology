@@ -1,70 +1,90 @@
-## Genomic Ancestry Pipeline
+## Genomic Ancestry Inference Pipeline
 
-A Snakemake workflow for processing low-coverage CRAM files, running VerifyBamID2, extracting population PCs, and assigning ancestry labels using 1000 Genomes reference data.
+This repository implements a fully automated, end-to-end genomic ancestry inference pipeline built using **Snakemake**. The workflow is designed for reproducible and scalable population assignment in human genomic datasets, particularly for low-coverage sequencing data.
 
-This repository contains a fully automated end-to-end pipeline designed for reproducible ancestry inference in human genomic datasets. It integrates reference resources, contamination assessment, PCA extraction, population assignment, and visualization in a single, modular workflow.
+The pipeline integrates contamination assessment, principal component analysis (PCA) extraction, and ancestry classification using **1000 Genomes reference populations**, providing a unified framework for ancestry inference suitable for large-scale genomic studies.
+
+---
 
 ## Workflow Overview
 
-The pipeline performs the following tasks:
+The pipeline executes the following major stages:
 
-# Indexing reference genome (GRCh38).
+1. **Reference Genome Preparation**
+   Indexing the GRCh38 reference genome to support downstream alignment-based analyses.
 
-# Running VerifyBamID2 on each input CRAM to generate contamination metrics and PC estimates.
+2. **Contamination Assessment and PCA Estimation**
+   Running **VerifyBamID2** on each input CRAM file to estimate sample contamination and extract ancestry-informative principal components.
 
-# Parsing VerifyBamID2 outputs and standardizing the PCA representation.
+3. **PCA Standardization**
+   Parsing VerifyBamID2 outputs and harmonizing PCA coordinates across samples.
 
-# Extracting reference PCs from 1000 Genomes data and harmonizing sample IDs.
+4. **Reference Population Integration**
+   Extracting and harmonizing PCA coordinates from the 1000 Genomes reference panel.
 
-# Assigning ancestry to study samples using a K-nearest neighbors classifier trained on reference PCs.
+5. **Ancestry Assignment**
+   Training a **k-nearest neighbors (KNN)** classifier on reference population PCs and assigning ancestry labels to study samples.
 
-# Producing summary tables and PCA plots for downstream interpretation.
+6. **Visualization and Reporting**
+   Generating PCA plots and summary tables for downstream interpretation and quality control.
 
-All steps are managed through Snakemake, ensuring reproducibility, modularity, and transparent dependency handling.
+All steps are orchestrated through **Snakemake**, ensuring reproducibility, modular execution, and transparent dependency tracking.
+
+---
 
 ## Inputs
 
-The workflow expects:
+The workflow requires the following inputs:
 
-# Low-coverage CRAM files (e.g., HGDP samples).
+* Low-coverage CRAM files (e.g., HGDP or cohort samples)
+* GRCh38 reference genome with associated index files
+* 1000 Genomes population metadata table
+* 1000 Genomes PCA matrix (`.V`) compatible with VerifyBamID2
 
-# GRCh38 full reference genome with index files.
+Sample configuration is managed through:
 
-# 1000 Genomes population reference table.
+```
+config/samples.tsv
+```
 
-# 1000 Genomes PCA matrix (.V) compatible with VerifyBamID2.
-
-Configuration of input samples is handled through config/samples.tsv.
+---
 
 ## Outputs
 
-The pipeline produces:
+The pipeline produces a comprehensive set of analysis-ready outputs, including:
 
-# VerifyBamID2 contamination estimates (*.selfSM and summary tables).
+* VerifyBamID2 contamination metrics (`*.selfSM` and summary tables)
+* Per-sample PCA coordinates extracted from ancestry outputs
+* Harmonized reference PCA table with population labels
+* Predicted ancestry labels for study samples
+* PCA visualization plots (PC1–PC4 combinations)
+* Final summary tables integrating contamination and ancestry results
 
-# Per-sample PCA coordinates extracted from .Ancestry outputs.
+These outputs support both quality control and downstream population genetics analysis.
 
-# Harmonized reference PCA table with population labels.
-
-# Assigned population labels for study samples.
-
-# PCA visualization plots (PC1–PC4 combinations).
-
-# Final summary tables collating contamination and ancestry calls.
-
+---
 
 ## Reproducibility
 
-All software dependencies are specified in environment.yml.
-The workflow is portable and can be executed with:
+All software dependencies are defined in `environment.yml`. The pipeline can be executed in a fully reproducible environment using:
 
-            conda env create -f environment.yml
-            conda activate genomics-env
-            snakemake --cores N
+```bash
+conda env create -f environment.yml
+conda activate genomics-env
+snakemake --cores N
+```
 
+All core data-processing logic is encapsulated in the `scripts/` directory, enabling transparent inspection and modification of each analytical step.
 
-Scripts under scripts/ encapsulate all core processing steps and can be adapted independently if required for alternative population panels or extended PCA dimensions.
+---
 
 ## Adaptability
 
-The pipeline is modular and can be repurposed.
+The workflow is modular by design and can be readily extended to:
+
+* Alternative reference panels (e.g., gnomAD, TOPMed)
+* Additional principal components
+* Different ancestry classifiers
+* Expanded quality control metrics
+
+This makes the pipeline suitable for both research and clinical genomics applications.
