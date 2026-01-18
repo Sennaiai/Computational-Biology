@@ -48,7 +48,8 @@ Conceptual and theoretical reference material supporting the projects.
 This repository serves as a continuously evolving research portfolio at the intersection of biological systems modeling and advanced computation.
 
 ---
-Connect With Me
-LinkedIn
-Medium
-“We are the music while the music lasts.” — T. S. Eliot
+## Connect With Me
+- [LinkedIn](https://www.linkedin.com/in/senay-kahsay)
+- [Medium](https://medium.com/@kahssai.sen)
+
+> “We are the music while the music lasts.” — *T. S. Eliot*
