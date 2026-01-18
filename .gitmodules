@@ -1,0 +1,3 @@
+[submodule "tools/FeNNol-PMC"]
+	path = tools/FeNNol-PMC
+	url = https://github.com/FeNNol-tools/FeNNol-PMC.git
