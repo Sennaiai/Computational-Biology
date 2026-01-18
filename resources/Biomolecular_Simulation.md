@@ -1,39 +1,11 @@
-# Anesthesia & Awareness Modeling
+# CRISPR-Cas9 in T Cells — Molecular Editing Dynamics Model
 
-## Overview
+This project formulates CRISPR-Cas9 genome editing in T cells as a **molecular-scale dynamical system**, where sequence recognition, binding stability, chromatin accessibility, and stochastic repair jointly determine editing outcomes.
 
-This project develops a computational framework to study how brain states transition between unconsciousness and awareness using quantitative systems modeling.
+Rather than treating editing as a binary event, the pipeline models the full probabilistic landscape of cleavage and repair. Biophysical priors are combined with statistical learning to estimate calibrated on- and off-target cutting probabilities, predict indel distributions, and propagate uncertainty through end-to-end scenario simulations.
 
-The central idea is that awareness emerges from large-scale neural dynamics operating near critical regimes of information flow and stability. Anesthesia provides a controlled setting to study how biological networks move between ordered, disordered, and functional states.
+CRISPR is treated analogously to an enzyme–substrate system: guide–DNA interactions define an energetic landscape, reaction pathways shape outcome distributions, and population-level behavior emerges from molecular-scale kinetics.
 
-This work treats consciousness not as a philosophical abstraction, but as a measurable dynamical phenomenon in complex biological systems.
+By integrating sequence context, epigenetic state, and probabilistic simulation, the framework provides a unified computational model of genome engineering decisions with standardized outputs designed for downstream systems-level modeling.
 
-## Objective
-
-To model and quantify transitions between brain states using a unified pipeline combining:
-
-* Dynamical systems modeling of neural networks
-* Statistical and information-theoretic analysis of neural signals
-* Machine learning for state classification and prediction
-
-The long-term aim is to build biologically grounded, computationally rigorous models of cognitive state transitions with translational relevance to neuroscience and medicine.
-
-## Project Scope
-
-The project integrates:
-
-* Multimodal neural data analysis (EEG, fMRI)
-* Network and criticality-based brain modeling
-* Machine learning–driven state inference
-* Exploratory quantum-inspired computational extensions
-
-This repository documents the computational architecture behind a larger research program focused on quantitative modeling of biological intelligence.
-
-## Status
-
-Active research framework under development.
-Detailed technical design and modeling roadmap maintained privately to guide implementation.
-
----
-
-*This project is part of a broader portfolio in computational biology and quantitative life-science modeling.*
+The broader aim is to connect molecular biophysics and modern learning methods into a rigorous computational framework for high-resolution modeling of biological interventions.
