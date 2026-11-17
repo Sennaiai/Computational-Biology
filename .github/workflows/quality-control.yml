@@ -1,0 +1,14 @@
+name: Python quality checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    uses: Sennaiai/Quality-Control-/.github/workflows/python-ci.yml@f39e3a601fac9890ef214b58ad02794745f2e54f
