@@ -138,6 +138,6 @@ def main(snakemake=None):
 
 
 if "snakemake" in globals():
-    main(snakemake)
+    main(snakemake)  # noqa: F821
 else:
     main()
