@@ -39,7 +39,7 @@ def load_reference_pcs(v_file: str, pop_file: str) -> pd.DataFrame:
     # Raw V matrix (any whitespace)
     v_raw = pd.read_csv(
         v_file,
-        delim_whitespace=True,
+        sep=r"\s+",
         header=None,
         comment="#"
     )
@@ -47,49 +47,54 @@ def load_reference_pcs(v_file: str, pop_file: str) -> pd.DataFrame:
     # Population labels
     pops = pd.read_csv(
         pop_file,
-        delim_whitespace=True,
+        sep=r"\s+",
         header=None,
         names=["ID", "POPULATION"],
     )
+    if v_raw.empty:
+        raise ValueError(f"V file contains no data: {v_file}")
+    if pops.empty:
+        raise ValueError(f"Population file contains no data: {pop_file}")
 
-    # Align row counts
-    if len(v_raw) != len(pops):
-        print(
-            f"[WARN] V has {len(v_raw)} rows, population file has {len(pops)} rows. "
-            "Truncating both to the minimum length.",
-            file=sys.stderr,
-        )
-        n = min(len(v_raw), len(pops))
-        v_raw = v_raw.iloc[:n].reset_index(drop=True)
-        pops = pops.iloc[:n].reset_index(drop=True)
+    pops["ID"] = pops["ID"].astype(str)
+    has_sample_ids = not pd.api.types.is_numeric_dtype(v_raw.iloc[:, 0])
 
-    # Decide where PCs start:
-    # If first column of v_raw matches ID (e.g. HG00096), treat col 0 as ID,
-    # and use the next 4 columns as PC1..PC4.
-    pc_start = 0
+    if has_sample_ids:
+        if v_raw.shape[1] < 5:
+            raise ValueError(
+                f"V file {v_file} has a sample ID column but fewer than 4 PCs."
+            )
 
-    if v_raw.shape[1] >= 5:
-        try:
-            if str(v_raw.iloc[0, 0]) == str(pops.iloc[0, 0]):
-                pc_start = 1
-        except Exception:
-            pc_start = 0
+        v_ids = v_raw.iloc[:, 0].astype(str)
+        if v_ids.duplicated().any() or pops["ID"].duplicated().any():
+            raise ValueError("V and population files must contain unique sample IDs.")
+        if set(v_ids) != set(pops["ID"]):
+            raise ValueError("Sample IDs in the V and population files do not match.")
 
-    # Take 4 PC columns from v_raw starting at pc_start
-    if v_raw.shape[1] < pc_start + 4:
-        raise ValueError(
-            f"Not enough columns in V file {v_file} to extract 4 PCs "
-            f"starting at column {pc_start} (total columns: {v_raw.shape[1]})."
-        )
+        V = v_raw.iloc[:, 1:5].copy()
+        V.columns = ["PC1", "PC2", "PC3", "PC4"]
+        V.insert(0, "ID", v_ids)
+        ref = pops.merge(V, on="ID", how="left", sort=False, validate="one_to_one")
+    else:
+        if v_raw.shape[1] < 4:
+            raise ValueError(
+                f"Not enough columns in V file {v_file} to extract 4 PCs "
+                f"(total columns: {v_raw.shape[1]})."
+            )
+        if len(v_raw) != len(pops):
+            raise ValueError(
+                f"V file has {len(v_raw)} rows but population file has "
+                f"{len(pops)} rows; positional alignment is unsafe."
+            )
 
-    V = v_raw.iloc[:, pc_start:pc_start + 4].copy()
-    V.columns = ["PC1", "PC2", "PC3", "PC4"]
+        V = v_raw.iloc[:, :4].copy()
+        V.columns = ["PC1", "PC2", "PC3", "PC4"]
+        ref = pd.concat([pops.reset_index(drop=True), V.reset_index(drop=True)], axis=1)
 
     # Ensure PCs are numeric
     for c in ["PC1", "PC2", "PC3", "PC4"]:
-        V[c] = pd.to_numeric(V[c], errors="coerce")
+        ref[c] = pd.to_numeric(ref[c], errors="coerce")
 
-    ref = pd.concat([pops, V], axis=1)
     return ref
 
 
@@ -167,7 +172,10 @@ def load_study_pcs(ancestry_paths) -> pd.DataFrame:
             c for c in df.columns
             if isinstance(c, str) and c.upper().startswith("PC")
         ]
-        pc_like_sorted = sorted(pc_like)
+        pc_like_sorted = sorted(
+            pc_like,
+            key=lambda col: int(col[2:]) if col[2:].isdigit() else float("inf"),
+        )
         if len(pc_like_sorted) < 4:
             raise ValueError(
                 f"Could not find 4 PC columns in Ancestry file {p}. "

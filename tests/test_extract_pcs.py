@@ -35,6 +35,31 @@ def test_reference_pcs_reject_too_few_columns(tmp_path):
         extract_pcs.load_reference_pcs(str(values), str(populations))
 
 
+def test_reference_pcs_aligns_sample_ids_instead_of_row_order(tmp_path):
+    values = tmp_path / "reference.V"
+    populations = tmp_path / "populations.txt"
+    values.write_text(
+        "sample2 0.5 0.6 0.7 0.8\n"
+        "sample1 0.1 0.2 0.3 0.4\n"
+    )
+    populations.write_text("sample1 POP1\nsample2 POP2\n")
+
+    result = extract_pcs.load_reference_pcs(str(values), str(populations))
+
+    assert result["ID"].tolist() == ["sample1", "sample2"]
+    assert result["PC1"].tolist() == [0.1, 0.5]
+
+
+def test_reference_pcs_rejects_mismatched_row_counts(tmp_path):
+    values = tmp_path / "reference.V"
+    populations = tmp_path / "populations.txt"
+    values.write_text("0.1 0.2 0.3 0.4\n0.5 0.6 0.7 0.8\n")
+    populations.write_text("sample1 POP1\n")
+
+    with pytest.raises(ValueError, match="positional alignment is unsafe"):
+        extract_pcs.load_reference_pcs(str(values), str(populations))
+
+
 def test_sample_id_prefers_input_and_falls_back_to_filename():
     assert extract_pcs.infer_sample_id_from_row_or_path(
         pd.Series({"SampleID": "actual"}), Path("fallback.Ancestry")
@@ -55,6 +80,18 @@ def test_wide_study_pcs(tmp_path):
         "PC3": 0.3,
         "PC4": 0.4,
     }
+
+
+def test_wide_study_pcs_sort_pc_columns_numerically(tmp_path):
+    ancestry = tmp_path / "sample.Ancestry"
+    ancestry.write_text(
+        "SampleID PC1 PC2 PC3 PC10 PC4\n"
+        "sample 0.1 0.2 0.3 10.0 0.4\n"
+    )
+
+    result = extract_pcs.load_study_pcs([ancestry])
+
+    assert result.loc[0, "PC4"] == 0.4
 
 
 def test_study_pcs_rejects_missing_columns(tmp_path):
