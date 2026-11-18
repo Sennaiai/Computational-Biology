@@ -66,12 +66,20 @@ These outputs support both quality control and downstream population genetics an
 
 ## Reproducibility
 
-All software dependencies are defined in `environment.yml`. The pipeline can be executed in a fully reproducible environment using:
+Software and local test dependencies are defined in `environment.yml`. From the repository root, create and activate the environment, then run the test suite and lint checks:
 
 ```bash
-conda env create -f environment.yml
+conda env create -f projects/Genomic_Ancestry/environment.yml
 conda activate genomics-env
-snakemake --cores N
+pytest
+ruff check .
+```
+
+To run the ancestry workflow, make sure the required CRAM files, reference genome, and 1000 Genomes files are in the locations expected by the `Snakefile`, then run it from the project directory:
+
+```bash
+cd projects/Genomic_Ancestry
+snakemake --cores 4
 ```
 
 All core data-processing logic is encapsulated in the `scripts/` directory, enabling transparent inspection and modification of each analytical step.
