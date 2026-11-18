@@ -1,0 +1,5 @@
+[tool.ruff]
+extend-exclude = ["tools/FeNNol-PMC"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
