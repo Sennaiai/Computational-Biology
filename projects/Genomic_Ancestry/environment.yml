@@ -5,6 +5,8 @@ channels:
   - defaults
 dependencies:
   - python=3.11
+  - pytest=8.4.2
+  - ruff=0.14.6
   - snakemake
   - pandas
   - numpy
