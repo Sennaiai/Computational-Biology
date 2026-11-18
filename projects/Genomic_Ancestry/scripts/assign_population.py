@@ -76,7 +76,7 @@ def assign_populations(ref_file: str, stu_file: str, out_file: str) -> None:
 
     X_test = stu[PC_COLS].values
 
-    knn = KNeighborsClassifier(n_neighbors=5)
+    knn = KNeighborsClassifier(n_neighbors=min(5, len(X_train)))
     knn.fit(X_train, y_train)
 
     preds = knn.predict(X_test)

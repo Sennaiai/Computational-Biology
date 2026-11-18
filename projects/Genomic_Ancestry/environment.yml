@@ -10,6 +10,7 @@ dependencies:
   - snakemake
   - pandas
   - numpy
+  - scikit-learn
   - matplotlib
-  - verifybamid
+  - verifybamid2
   - samtools
