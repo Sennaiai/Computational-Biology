@@ -7,6 +7,7 @@ Computational Biology · Molecular Systems Modeling · Translational Life Scienc
 
 - [Genomic ancestry](projects/Genomic_Ancestry): bioinformatics workflow.
 - [CRISPR-Cas9 simulation](projects/modeling/crispr_cas9): intracellular editing and lineage prototype with a published-assay repair reference; Arabidopsis predictions remain unvalidated.
+- [CAR-T tradeoff simulation](projects/modeling/cart_cell): antigen escape, cellular response and exposure-matched activation comparisons; literature-referenced, conditional prototype.
 
 ---
 

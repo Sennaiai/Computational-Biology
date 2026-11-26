@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cart-cell-dynamics-study"
+version = "0.1.0"
+description = "Mechanistic CAR-T recognition and antigen-escape simulations with explicit reference checks"
+requires-python = ">=3.11,<3.12"
+dependencies = ["numpy==2.3.4", "scipy==1.16.3", "matplotlib==3.10.7"]
+
+[project.optional-dependencies]
+notebook = ["nbformat==5.10.4", "nbclient==0.10.2", "ipykernel==7.1.0"]
+
+[project.scripts]
+cart-study = "cart_dynamics.study:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cart_dynamics = ["data/*.json"]

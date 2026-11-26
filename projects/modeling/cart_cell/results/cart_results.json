@@ -1,0 +1,3902 @@
+{
+  "schema_version": 1,
+  "evidence_boundary": "Numerically verified, literature-referenced mechanistic prototype. No B-ALL assay calibration, clinical response, CRS prediction or quantum-advantage result.",
+  "seed": 20261126,
+  "environment": {
+    "python": "3.11.18",
+    "numpy": "2.3.4",
+    "scipy": "1.16.3",
+    "matplotlib": "3.10.7"
+  },
+  "source_sha256": "273096ce3d50d1f660a59874b2a2035ee4b7bdef5411adf22f55c5c7ce38968d",
+  "configuration": {
+    "horizon_days": 30,
+    "output_interval_days": 0.1,
+    "initial_million_cells": {
+      "effector": 0.2,
+      "memory": 0.0,
+      "CD19+CD22+": 0.7,
+      "CD19+CD22-": 0.15,
+      "CD19-CD22+": 0.14,
+      "CD19-CD22-": 0.01
+    },
+    "parameters": {
+      "growth": 0.15,
+      "capacity": 100.0,
+      "proliferation": 0.8,
+      "reduction": 0.35,
+      "memory_formation": 0.15,
+      "memory_death": 0.005,
+      "recall": 1.0,
+      "suppression": 0.03,
+      "killing": 2.0,
+      "activation_half": 0.2,
+      "loss19": 0.002,
+      "loss22": 0.002,
+      "cytokine_production": 1.0,
+      "cytokine_clearance": 2.0
+    },
+    "receptor": {
+      "association": 2.0,
+      "dissociation": 0.2,
+      "proofreading": 1.0,
+      "steps": 2
+    },
+    "solver": "DOP853",
+    "rtol": 1e-08,
+    "atol": 1e-10,
+    "max_step_days": 0.5
+  },
+  "nominal": {
+    "cd19": {
+      "final_tumor_million_cells": 12.287473589749508,
+      "minimum_tumor_million_cells": 0.5145746400467544,
+      "final_double_negative_fraction": 0.12270312121565516,
+      "final_effector_million_cells": 0.04573342600981842,
+      "final_memory_million_cells": 0.23942938619062396,
+      "peak_cytokine_proxy_arbitrary_units": 0.1098798701413878,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.8119875844535757,
+      "tumor_ledger_max_error_million_cells": 3.3306690738754696e-15,
+      "minimum_integrated_state": 0.0,
+      "rhs_evaluations": 962
+    },
+    "cd22": {
+      "final_tumor_million_cells": 12.974514835386051,
+      "minimum_tumor_million_cells": 0.5392505084312637,
+      "final_double_negative_fraction": 0.11851870555640785,
+      "final_effector_million_cells": 0.044364350352195506,
+      "final_memory_million_cells": 0.23402714371797334,
+      "peak_cytokine_proxy_arbitrary_units": 0.10878048834460843,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.8085207629542194,
+      "tumor_ledger_max_error_million_cells": 3.1086244689504383e-15,
+      "minimum_integrated_state": 0.0,
+      "rhs_evaluations": 962
+    },
+    "or": {
+      "final_tumor_million_cells": 1.1081870513549172,
+      "minimum_tumor_million_cells": 0.07213053145374684,
+      "final_double_negative_fraction": 0.9199080085233524,
+      "final_effector_million_cells": 0.06933521332077963,
+      "final_memory_million_cells": 0.29209283851484397,
+      "peak_cytokine_proxy_arbitrary_units": 0.12374204207135325,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.7351522370641129,
+      "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+      "minimum_integrated_state": 0.0,
+      "rhs_evaluations": 962
+    },
+    "and": {
+      "final_tumor_million_cells": 22.123908999585638,
+      "minimum_tumor_million_cells": 1.0,
+      "final_double_negative_fraction": 0.08662990928418354,
+      "final_effector_million_cells": 0.04461721169597814,
+      "final_memory_million_cells": 0.17647422741987343,
+      "peak_cytokine_proxy_arbitrary_units": 0.08636719631459615,
+      "cytokine_proxy_auc_arbitrary_unit_days": 1.1251071178028524,
+      "tumor_ledger_max_error_million_cells": 7.105427357601002e-15,
+      "minimum_integrated_state": 0.0,
+      "rhs_evaluations": 947
+    }
+  },
+  "no_car_control": {
+    "final_tumor_million_cells": 47.623795092626786,
+    "minimum_tumor_million_cells": 1.0,
+    "final_double_negative_fraction": 0.029262243944629958,
+    "final_effector_million_cells": 0.0,
+    "final_memory_million_cells": 0.0,
+    "peak_cytokine_proxy_arbitrary_units": 0.0,
+    "cytokine_proxy_auc_arbitrary_unit_days": 0.0,
+    "tumor_ledger_max_error_million_cells": 1.4210854715202004e-14,
+    "minimum_integrated_state": 0.0,
+    "rhs_evaluations": 917
+  },
+  "structural_control": {
+    "description": "Dual recognition with no double-positive joint-probability bonus: max(s19,s22), instead of independent-opportunity OR. This is a dependence sensitivity check, not a receptor-expression calibration.",
+    "signals": [
+      0.6313131313131314,
+      0.6313131313131314,
+      0.6313131313131314,
+      0.0
+    ],
+    "result": {
+      "final_tumor_million_cells": 1.1123590586190306,
+      "minimum_tumor_million_cells": 0.08835036443958555,
+      "final_double_negative_fraction": 0.9144642965281939,
+      "final_effector_million_cells": 0.07968103177588104,
+      "final_memory_million_cells": 0.32718837934098527,
+      "peak_cytokine_proxy_arbitrary_units": 0.1252526257480299,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.8626803351683091,
+      "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+      "minimum_integrated_state": 0.0,
+      "rhs_evaluations": 962
+    }
+  },
+  "numerical_checks": {
+    "dop853_radau_max_absolute_difference": 4.335856298998131e-09,
+    "published_equilibria_cells_E_M_T": [
+      [
+        15205.233351742114,
+        197518.70636375056,
+        1091.1974657571775
+      ],
+      [
+        15205.202579273442,
+        263.36592603199995,
+        1442519.9136453546
+      ]
+    ],
+    "published_equilibrium_max_relative_difference": 0.0020178748918067146,
+    "printed_equilibrium_residual_cells_per_day": [
+      [
+        -2.5809750249995886,
+        2.565853999999945,
+        0.0009442703882456271
+      ],
+      [
+        -3.1348994499999208,
+        3.1352840000000106,
+        1.0858621999941533
+      ]
+    ],
+    "receptor_mc_max_absolute_difference": 0.01248005367876015,
+    "receptor_mc_simultaneous_hoeffding_bound_delta_1e_6": 0.04457430888365532,
+    "receptor_mc_counts": [
+      730,
+      1180,
+      976,
+      1114
+    ],
+    "receptor_matrix_exponential_probabilities": [
+      0.19498005367876015,
+      0.28370944437450757,
+      0.24636734994705672,
+      0.274943151999676
+    ]
+  },
+  "recognition": {
+    "cd19": [
+      0.6313131313131314,
+      0.6313131313131314,
+      0.0,
+      0.0
+    ],
+    "cd22": [
+      0.6313131313131314,
+      0.0,
+      0.6313131313131314,
+      0.0
+    ],
+    "or": [
+      0.8640699928578717,
+      0.6313131313131314,
+      0.6313131313131314,
+      0.0
+    ],
+    "and": [
+      0.3985562697683911,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "uncertainty": {
+    "design": "Paired Latin-hypercube draws; independent log-uniform factors from 0.5 to 2 of six synthetic nominal rates. Exploratory bounds, not a fitted posterior or population distribution.",
+    "samples": 64,
+    "varied": [
+      "growth",
+      "killing",
+      "recall",
+      "suppression",
+      "loss19",
+      "loss22"
+    ],
+    "final_tumor_million_cells_quantiles": {
+      "cd19": {
+        "q10": 2.0627618347476107,
+        "median": 12.03866852816298,
+        "q90": 78.7709125698918
+      },
+      "or": {
+        "q10": 0.1941616363134252,
+        "median": 1.103485904611743,
+        "q90": 22.153314435001647
+      },
+      "and": {
+        "q10": 4.148094857841083,
+        "median": 21.74574881497679,
+        "q90": 88.16041820851679
+      }
+    },
+    "or_final_tumor_spearman_descriptive_only": {
+      "growth": 0.9987637362637363,
+      "killing": -0.05677655677655677,
+      "recall": -0.0038919413919413916,
+      "suppression": -0.062362637362637356,
+      "loss19": 0.029258241758241755,
+      "loss22": -0.07939560439560438
+    },
+    "paired_or_below_cd19_count": 64,
+    "runs": [
+      {
+        "sample": 0,
+        "parameters": {
+          "growth": 0.09961240903192106,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.81560139676647,
+          "suppression": 0.03179427090954864,
+          "killing": 2.0427702318354264,
+          "activation_half": 0.2,
+          "loss19": 0.0033275894250295443,
+          "loss22": 0.0017417114073829771,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 3.0785850908979233,
+            "minimum_tumor_million_cells": 0.3822039302973703,
+            "final_double_negative_fraction": 0.1171563280939055,
+            "final_effector_million_cells": 0.03706570928911475,
+            "final_memory_million_cells": 0.2108542157395275,
+            "peak_cytokine_proxy_arbitrary_units": 0.10187157732320763,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6568567405843933,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.27089502779723174,
+            "minimum_tumor_million_cells": 0.04975588164509448,
+            "final_double_negative_fraction": 0.8697110508028646,
+            "final_effector_million_cells": 0.035548828163074614,
+            "final_memory_million_cells": 0.24734787131257843,
+            "peak_cytokine_proxy_arbitrary_units": 0.11718991225668134,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6119132034123879,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 6.043654884510923,
+            "minimum_tumor_million_cells": 0.8767532416084526,
+            "final_double_negative_fraction": 0.09951024254560037,
+            "final_effector_million_cells": 0.05410342408183602,
+            "final_memory_million_cells": 0.1533141709608826,
+            "peak_cytokine_proxy_arbitrary_units": 0.07325607338746905,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.83098862748857,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 1,
+        "parameters": {
+          "growth": 0.09648943480917531,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7408225425043972,
+          "suppression": 0.055539026384761596,
+          "killing": 2.741859776900914,
+          "activation_half": 0.2,
+          "loss19": 0.002829889988398119,
+          "loss22": 0.002012789123670825,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.816611444689782,
+            "minimum_tumor_million_cells": 0.3621231560300694,
+            "final_double_negative_fraction": 0.12160663171023571,
+            "final_effector_million_cells": 0.022752386633823233,
+            "final_memory_million_cells": 0.2126772140697649,
+            "peak_cytokine_proxy_arbitrary_units": 0.08037107007046886,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.47526589243692957,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.25925709251459805,
+            "minimum_tumor_million_cells": 0.048674471755437994,
+            "final_double_negative_fraction": 0.809709461998842,
+            "final_effector_million_cells": 0.02050783594895209,
+            "final_memory_million_cells": 0.2449961580120051,
+            "peak_cytokine_proxy_arbitrary_units": 0.09287772871299957,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4431814326370951,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 5.633398420018074,
+            "minimum_tumor_million_cells": 0.8220076983016226,
+            "final_double_negative_fraction": 0.0945889510822987,
+            "final_effector_million_cells": 0.0343734285598291,
+            "final_memory_million_cells": 0.1583750230172835,
+            "peak_cytokine_proxy_arbitrary_units": 0.05713864070296418,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5900179203625914,
+            "tumor_ledger_max_error_million_cells": 2.220446049250313e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 2,
+        "parameters": {
+          "growth": 0.08762717795853761,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.8517062143552707,
+          "suppression": 0.016551859468815502,
+          "killing": 1.8474713746979787,
+          "activation_half": 0.2,
+          "loss19": 0.0013403976179318848,
+          "loss22": 0.003151050652308343,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.117015999811375,
+            "minimum_tumor_million_cells": 0.3535852266885308,
+            "final_double_negative_fraction": 0.1499583993514213,
+            "final_effector_million_cells": 0.0398945715802885,
+            "final_memory_million_cells": 0.2511510104435081,
+            "peak_cytokine_proxy_arbitrary_units": 0.10916004680044551,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7079642318404396,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.19150290580717977,
+            "minimum_tumor_million_cells": 0.04604529550361622,
+            "final_double_negative_fraction": 0.8470921274892322,
+            "final_effector_million_cells": 0.03329619447573716,
+            "final_memory_million_cells": 0.2756420049317083,
+            "peak_cytokine_proxy_arbitrary_units": 0.12506343580826773,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6605461505890436,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 4.2849386034699455,
+            "minimum_tumor_million_cells": 0.8284820000614446,
+            "final_double_negative_fraction": 0.09040724499685537,
+            "final_effector_million_cells": 0.0672088827880714,
+            "final_memory_million_cells": 0.21248922073920162,
+            "peak_cytokine_proxy_arbitrary_units": 0.07843448864428496,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8723891547240852,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 3,
+        "parameters": {
+          "growth": 0.29663346363033005,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7920206025308324,
+          "suppression": 0.03233093097704141,
+          "killing": 2.4200552757095815,
+          "activation_half": 0.2,
+          "loss19": 0.002528919734473194,
+          "loss22": 0.0026698322009144505,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 91.8383481899298,
+            "minimum_tumor_million_cells": 0.8823959592876004,
+            "final_double_negative_fraction": 0.14093248765250388,
+            "final_effector_million_cells": 0.004227062793686444,
+            "final_memory_million_cells": 0.05006766150084827,
+            "peak_cytokine_proxy_arbitrary_units": 0.12456970738353902,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9083065556121569,
+            "tumor_ledger_max_error_million_cells": 4.6407322429331543e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 992
+          },
+          "or": {
+            "final_tumor_million_cells": 45.8929602702378,
+            "minimum_tumor_million_cells": 0.14051895178281187,
+            "final_double_negative_fraction": 0.9902963022652488,
+            "final_effector_million_cells": 0.028857301173041167,
+            "final_memory_million_cells": 0.1346122850103828,
+            "peak_cytokine_proxy_arbitrary_units": 0.13116914958268783,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9328947264781482,
+            "tumor_ledger_max_error_million_cells": 1.3766765505351941e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 95.77586510812628,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10301927611545565,
+            "final_effector_million_cells": 0.0012886345282639281,
+            "final_memory_million_cells": 0.009809584794350408,
+            "peak_cytokine_proxy_arbitrary_units": 0.1284975272258511,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3266177179899397,
+            "tumor_ledger_max_error_million_cells": 4.6629367034256575e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 4,
+        "parameters": {
+          "growth": 0.16907615750616847,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.6887734354186865,
+          "suppression": 0.025587008107864913,
+          "killing": 1.804262611776582,
+          "activation_half": 0.2,
+          "loss19": 0.0013994106439659396,
+          "loss22": 0.0020972143471592,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 19.719859245338338,
+            "minimum_tumor_million_cells": 0.5983389984699163,
+            "final_double_negative_fraction": 0.12463948488191529,
+            "final_effector_million_cells": 0.049986661924055535,
+            "final_memory_million_cells": 0.3060070489774745,
+            "peak_cytokine_proxy_arbitrary_units": 0.1228143403052786,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9864392319439151,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.8955763051360381,
+            "minimum_tumor_million_cells": 0.08646530973068983,
+            "final_double_negative_fraction": 0.933683471930181,
+            "final_effector_million_cells": 0.0954521022136198,
+            "final_memory_million_cells": 0.3660645994687738,
+            "peak_cytokine_proxy_arbitrary_units": 0.13592558040589195,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8920441148103512,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 33.277739253774854,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07980021038274297,
+            "final_effector_million_cells": 0.04531046846681227,
+            "final_memory_million_cells": 0.2556537101366567,
+            "peak_cytokine_proxy_arbitrary_units": 0.10457204090902135,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4008350606161681,
+            "tumor_ledger_max_error_million_cells": 1.4210854715202004e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 5,
+        "parameters": {
+          "growth": 0.12411794287932391,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.5488954943199242,
+          "suppression": 0.053568134859968614,
+          "killing": 1.5605454751843495,
+          "activation_half": 0.2,
+          "loss19": 0.0016794177908265645,
+          "loss22": 0.002416046943634466,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 6.085281673414103,
+            "minimum_tumor_million_cells": 0.49223953250320757,
+            "final_double_negative_fraction": 0.1327495003488725,
+            "final_effector_million_cells": 0.04690358348046343,
+            "final_memory_million_cells": 0.22192330938284302,
+            "peak_cytokine_proxy_arbitrary_units": 0.12575043140030823,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9864639363326881,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.5400153346505321,
+            "minimum_tumor_million_cells": 0.06717790804196519,
+            "final_double_negative_fraction": 0.8950436084013565,
+            "final_effector_million_cells": 0.06432918346051833,
+            "final_memory_million_cells": 0.3073283399900726,
+            "peak_cytokine_proxy_arbitrary_units": 0.14312193399859008,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.894321012716124,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 11.790273111652064,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08600841067234864,
+            "final_effector_million_cells": 0.04275466670893816,
+            "final_memory_million_cells": 0.11009697281758844,
+            "peak_cytokine_proxy_arbitrary_units": 0.09616862924838475,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3170270511091586,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 6,
+        "parameters": {
+          "growth": 0.08459270527476741,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5193736124919,
+          "suppression": 0.04367305929131483,
+          "killing": 2.315577593732659,
+          "activation_half": 0.2,
+          "loss19": 0.0028981235302438122,
+          "loss22": 0.002257922350713478,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.0196774616885516,
+            "minimum_tumor_million_cells": 0.3607868408922984,
+            "final_double_negative_fraction": 0.12715496974077634,
+            "final_effector_million_cells": 0.023070277262688746,
+            "final_memory_million_cells": 0.2782440416192521,
+            "peak_cytokine_proxy_arbitrary_units": 0.08539820915193379,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5506695527228225,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.2003653408279978,
+            "minimum_tumor_million_cells": 0.050551968353396946,
+            "final_double_negative_fraction": 0.7559972037360336,
+            "final_effector_million_cells": 0.018014919449755192,
+            "final_memory_million_cells": 0.3005314914165635,
+            "peak_cytokine_proxy_arbitrary_units": 0.09938956765207588,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5172909847425833,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 4.089447538285857,
+            "minimum_tumor_million_cells": 0.8246562033506752,
+            "final_double_negative_fraction": 0.09711106055456056,
+            "final_effector_million_cells": 0.04316527701594878,
+            "final_memory_million_cells": 0.24345040649544664,
+            "peak_cytokine_proxy_arbitrary_units": 0.059421794786657114,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6672376099299677,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 7,
+        "parameters": {
+          "growth": 0.28251758737158655,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0412049274213753,
+          "suppression": 0.01913518730415485,
+          "killing": 2.1374654804489848,
+          "activation_half": 0.2,
+          "loss19": 0.0018943486326197837,
+          "loss22": 0.001632693465385449,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 87.96639529634544,
+            "minimum_tumor_million_cells": 0.8674596669500022,
+            "final_double_negative_fraction": 0.11349705990746513,
+            "final_effector_million_cells": 0.011768141523544943,
+            "final_memory_million_cells": 0.1059147992899603,
+            "peak_cytokine_proxy_arbitrary_units": 0.1423285555457343,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0245065819840902,
+            "tumor_ledger_max_error_million_cells": 5.750955267558311e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 34.73664575941947,
+            "minimum_tumor_million_cells": 0.1298212445486589,
+            "final_double_negative_fraction": 0.9931169152105561,
+            "final_effector_million_cells": 0.07318422764549776,
+            "final_memory_million_cells": 0.2065021466688657,
+            "peak_cytokine_proxy_arbitrary_units": 0.14761244243298793,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0463149174472741,
+            "tumor_ledger_max_error_million_cells": 1.1546319456101628e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 93.58557621484648,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0817643029780977,
+            "final_effector_million_cells": 0.008469852884036082,
+            "final_memory_million_cells": 0.0645719546364752,
+            "peak_cytokine_proxy_arbitrary_units": 0.1531382344835843,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.5204872844416966,
+            "tumor_ledger_max_error_million_cells": 3.019806626980426e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 8,
+        "parameters": {
+          "growth": 0.1390080789164967,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.6265643153420202,
+          "suppression": 0.0508822028606014,
+          "killing": 2.8260068860505685,
+          "activation_half": 0.2,
+          "loss19": 0.0011654768661537374,
+          "loss22": 0.002287277577041057,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 9.04764271218757,
+            "minimum_tumor_million_cells": 0.41867997612492497,
+            "final_double_negative_fraction": 0.12843784465359717,
+            "final_effector_million_cells": 0.02546958088290741,
+            "final_memory_million_cells": 0.1217510610073022,
+            "peak_cytokine_proxy_arbitrary_units": 0.0867476808996073,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.520959989399885,
+            "tumor_ledger_max_error_million_cells": 3.1086244689504383e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.7679459072942558,
+            "minimum_tumor_million_cells": 0.05474621415852089,
+            "final_double_negative_fraction": 0.9206492906066508,
+            "final_effector_million_cells": 0.04213625386647735,
+            "final_memory_million_cells": 0.18225750609600402,
+            "peak_cytokine_proxy_arbitrary_units": 0.09877222358172386,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4753862529800872,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 16.959500780775535,
+            "minimum_tumor_million_cells": 0.9394692627224174,
+            "final_double_negative_fraction": 0.07831984986552301,
+            "final_effector_million_cells": 0.017915346435191562,
+            "final_memory_million_cells": 0.04693942079680938,
+            "peak_cytokine_proxy_arbitrary_units": 0.06347078485251956,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.690486865155656,
+            "tumor_ledger_max_error_million_cells": 3.552713678800501e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 9,
+        "parameters": {
+          "growth": 0.16380831048944705,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.2759887732499926,
+          "suppression": 0.029008717387911262,
+          "killing": 1.7084721928770863,
+          "activation_half": 0.2,
+          "loss19": 0.0011165786692207366,
+          "loss22": 0.002371238459579493,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 17.26296256394819,
+            "minimum_tumor_million_cells": 0.573940083518653,
+            "final_double_negative_fraction": 0.13147784400361884,
+            "final_effector_million_cells": 0.04937879268306273,
+            "final_memory_million_cells": 0.2302066757574724,
+            "peak_cytokine_proxy_arbitrary_units": 0.13225809080114811,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.011671524485279,
+            "tumor_ledger_max_error_million_cells": 7.549516567451064e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.6051424299211279,
+            "minimum_tumor_million_cells": 0.07964120394184275,
+            "final_double_negative_fraction": 0.9439029847807546,
+            "final_effector_million_cells": 0.0937134854740393,
+            "final_memory_million_cells": 0.30723619506192124,
+            "peak_cytokine_proxy_arbitrary_units": 0.14565684291163064,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9136759359506419,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 29.870134320331555,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07926143062489192,
+            "final_effector_million_cells": 0.04010320409841655,
+            "final_memory_million_cells": 0.1469466596797947,
+            "peak_cytokine_proxy_arbitrary_units": 0.11360929218243314,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4196126589044422,
+            "tumor_ledger_max_error_million_cells": 1.4654943925052066e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 10,
+        "parameters": {
+          "growth": 0.08570443947617275,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.8059631210524901,
+          "suppression": 0.03074228088215258,
+          "killing": 1.7714135829893163,
+          "activation_half": 0.2,
+          "loss19": 0.001621819815005032,
+          "loss22": 0.0012468257137965473,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.039510049720283,
+            "minimum_tumor_million_cells": 0.3776734148307518,
+            "final_double_negative_fraction": 0.10054756245750372,
+            "final_effector_million_cells": 0.0363140960818718,
+            "final_memory_million_cells": 0.3244320835135995,
+            "peak_cytokine_proxy_arbitrary_units": 0.10318116336937834,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7463139199723371,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.190459251393175,
+            "minimum_tumor_million_cells": 0.05127841639679773,
+            "final_double_negative_fraction": 0.7695952054424706,
+            "final_effector_million_cells": 0.02930874678610611,
+            "final_memory_million_cells": 0.347953161077404,
+            "peak_cytokine_proxy_arbitrary_units": 0.12003822988805092,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6946332748360988,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 4.072724406087707,
+            "minimum_tumor_million_cells": 0.8795838628751889,
+            "final_double_negative_fraction": 0.06964019114186364,
+            "final_effector_million_cells": 0.06698290269105768,
+            "final_memory_million_cells": 0.29612098666793235,
+            "peak_cytokine_proxy_arbitrary_units": 0.07155329814066261,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9335143904541808,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 11,
+        "parameters": {
+          "growth": 0.07538067052160688,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.603083093722097,
+          "suppression": 0.017358065412869304,
+          "killing": 1.043303693061204,
+          "activation_half": 0.2,
+          "loss19": 0.0012693119284926762,
+          "loss22": 0.0032391631125110935,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 1.519501714275032,
+            "minimum_tumor_million_cells": 0.4039981872704352,
+            "final_double_negative_fraction": 0.14960733350210242,
+            "final_effector_million_cells": 0.05338661402215191,
+            "final_memory_million_cells": 0.593408467353596,
+            "peak_cytokine_proxy_arbitrary_units": 0.1492342506293558,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2858395111468277,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.16403487876376882,
+            "minimum_tumor_million_cells": 0.059786928365300154,
+            "final_double_negative_fraction": 0.7319846869327429,
+            "final_effector_million_cells": 0.039570792397970046,
+            "final_memory_million_cells": 0.5992181369074384,
+            "peak_cytokine_proxy_arbitrary_units": 0.1728683052524278,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1954256823499287,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 3.1395269185976535,
+            "minimum_tumor_million_cells": 0.9833397225412512,
+            "final_double_negative_fraction": 0.08721118669849941,
+            "final_effector_million_cells": 0.11344618754143725,
+            "final_memory_million_cells": 0.6129525968746568,
+            "peak_cytokine_proxy_arbitrary_units": 0.10535064206115358,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.575730823844265,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 12,
+        "parameters": {
+          "growth": 0.15130556933206518,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0645426615683218,
+          "suppression": 0.03308196912798147,
+          "killing": 2.506942475586265,
+          "activation_half": 0.2,
+          "loss19": 0.0015045992358672037,
+          "loss22": 0.0021715076480613,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 12.611185040377986,
+            "minimum_tumor_million_cells": 0.4690136762268259,
+            "final_double_negative_fraction": 0.12615546298034225,
+            "final_effector_million_cells": 0.03519628389177242,
+            "final_memory_million_cells": 0.18262615453258207,
+            "peak_cytokine_proxy_arbitrary_units": 0.094238632679604,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6273357197180361,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.1190761613981983,
+            "minimum_tumor_million_cells": 0.06450059755500659,
+            "final_double_negative_fraction": 0.9228942907561671,
+            "final_effector_million_cells": 0.05614115625855308,
+            "final_memory_million_cells": 0.23356076645695636,
+            "peak_cytokine_proxy_arbitrary_units": 0.10666670644641146,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5693941451797807,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 22.716499439529528,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08207753783461179,
+            "final_effector_million_cells": 0.03168682587202307,
+            "final_memory_million_cells": 0.1176956793363997,
+            "peak_cytokine_proxy_arbitrary_units": 0.07088876900249233,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8610294819517686,
+            "tumor_ledger_max_error_million_cells": 1.021405182655144e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 13,
+        "parameters": {
+          "growth": 0.2699060700792876,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5869318968888575,
+          "suppression": 0.021558049516329662,
+          "killing": 1.541890662572328,
+          "activation_half": 0.2,
+          "loss19": 0.0013043991786626538,
+          "loss22": 0.001282406267256195,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 83.27935172521602,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10369226088242353,
+            "final_effector_million_cells": 0.019630975290789925,
+            "final_memory_million_cells": 0.26678540613744917,
+            "peak_cytokine_proxy_arbitrary_units": 0.19343013369395606,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.512240352178485,
+            "tumor_ledger_max_error_million_cells": 2.886579864025407e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 26.537609462578985,
+            "minimum_tumor_million_cells": 0.1529649842092313,
+            "final_double_negative_fraction": 0.989369384403704,
+            "final_effector_million_cells": 0.1202290976402327,
+            "final_memory_million_cells": 0.4266836749315116,
+            "peak_cytokine_proxy_arbitrary_units": 0.1945080057312942,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.5071691927549877,
+            "tumor_ledger_max_error_million_cells": 7.993605777301127e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 90.84555083198342,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0687096669266957,
+            "final_effector_million_cells": 0.016472204893860073,
+            "final_memory_million_cells": 0.19207989955345203,
+            "peak_cytokine_proxy_arbitrary_units": 0.22650453866078654,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.2755896806354245,
+            "tumor_ledger_max_error_million_cells": 2.6201263381153694e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 14,
+        "parameters": {
+          "growth": 0.13608305481529626,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.1049104297958914,
+          "suppression": 0.01676606766436308,
+          "killing": 2.237123467808527,
+          "activation_half": 0.2,
+          "loss19": 0.0012563967893280455,
+          "loss22": 0.0033274999012044334,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 8.363716471546669,
+            "minimum_tumor_million_cells": 0.4459228805348052,
+            "final_double_negative_fraction": 0.15531563973256124,
+            "final_effector_million_cells": 0.049792845241770335,
+            "final_memory_million_cells": 0.24354019206906788,
+            "peak_cytokine_proxy_arbitrary_units": 0.10136491893840216,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.677280230654646,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.7491395437064015,
+            "minimum_tumor_million_cells": 0.06173837833569684,
+            "final_double_negative_fraction": 0.9064703866988679,
+            "final_effector_million_cells": 0.05224355737959735,
+            "final_memory_million_cells": 0.26444934059007774,
+            "peak_cytokine_proxy_arbitrary_units": 0.1144493296656254,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6143803466157026,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 15.793186359997309,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.09273880987704682,
+            "final_effector_million_cells": 0.06520488388898761,
+            "final_memory_million_cells": 0.2233098397416484,
+            "peak_cytokine_proxy_arbitrary_units": 0.07661762038485329,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9167092202983506,
+            "tumor_ledger_max_error_million_cells": 5.329070518200751e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 15,
+        "parameters": {
+          "growth": 0.22469563792718644,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.9738813921361149,
+          "suppression": 0.01514615820673907,
+          "killing": 1.6217761185635002,
+          "activation_half": 0.2,
+          "loss19": 0.0025781308913667865,
+          "loss22": 0.0038750147211546373,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 56.77376761815552,
+            "minimum_tumor_million_cells": 0.7953984690202146,
+            "final_double_negative_fraction": 0.17232088528447392,
+            "final_effector_million_cells": 0.041106180051171164,
+            "final_memory_million_cells": 0.2676891946719243,
+            "peak_cytokine_proxy_arbitrary_units": 0.16461005819345373,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.27020003394694,
+            "tumor_ledger_max_error_million_cells": 1.5765166949677223e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 9.638006216112151,
+            "minimum_tumor_million_cells": 0.11994612725407189,
+            "final_double_negative_fraction": 0.9844743085513712,
+            "final_effector_million_cells": 0.15452043931157722,
+            "final_memory_million_cells": 0.3658441349544405,
+            "peak_cytokine_proxy_arbitrary_units": 0.17214903005659316,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2029582563297654,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 72.7904655326018,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.11858243146225819,
+            "final_effector_million_cells": 0.033833392359066336,
+            "final_memory_million_cells": 0.23520914633938697,
+            "peak_cytokine_proxy_arbitrary_units": 0.1692588364827822,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.8343509374094802,
+            "tumor_ledger_max_error_million_cells": 1.7319479184152442e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 16,
+        "parameters": {
+          "growth": 0.14353139993743314,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.783201510083483,
+          "suppression": 0.023225010904044708,
+          "killing": 1.2849863848950722,
+          "activation_half": 0.2,
+          "loss19": 0.0010019185514868276,
+          "loss22": 0.0013750667990640917,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 10.245395738728094,
+            "minimum_tumor_million_cells": 0.5882764669036562,
+            "final_double_negative_fraction": 0.10511455745268318,
+            "final_effector_million_cells": 0.07690006854376588,
+            "final_memory_million_cells": 0.45618841627467066,
+            "peak_cytokine_proxy_arbitrary_units": 0.1588054254924575,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3291280697910903,
+            "tumor_ledger_max_error_million_cells": 2.886579864025407e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.9035289964011431,
+            "minimum_tumor_million_cells": 0.08121931684569732,
+            "final_double_negative_fraction": 0.8995491242176424,
+            "final_effector_million_cells": 0.09581196549787754,
+            "final_memory_million_cells": 0.49197495587283063,
+            "peak_cytokine_proxy_arbitrary_units": 0.1744222079963514,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1903171967327637,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 18.75047096456477,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0648798226099099,
+            "final_effector_million_cells": 0.09156056345077696,
+            "final_memory_million_cells": 0.44558635623184284,
+            "peak_cytokine_proxy_arbitrary_units": 0.1405310578876228,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.8751652537147834,
+            "tumor_ledger_max_error_million_cells": 7.327471962526033e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 17,
+        "parameters": {
+          "growth": 0.20457914485706533,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.1917537286644981,
+          "suppression": 0.04765716455980585,
+          "killing": 1.1979031780140121,
+          "activation_half": 0.2,
+          "loss19": 0.0010989577543060907,
+          "loss22": 0.0029474527827268427,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 41.43251615406766,
+            "minimum_tumor_million_cells": 0.8686095568047056,
+            "final_double_negative_fraction": 0.1465949864359707,
+            "final_effector_million_cells": 0.02112167557361923,
+            "final_memory_million_cells": 0.146445271849401,
+            "peak_cytokine_proxy_arbitrary_units": 0.2099723789676502,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.7271219766732984,
+            "tumor_ledger_max_error_million_cells": 1.9539925233402755e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 5.293590632065018,
+            "minimum_tumor_million_cells": 0.12152627458735038,
+            "final_double_negative_fraction": 0.9733478393476478,
+            "final_effector_million_cells": 0.14211286705483991,
+            "final_memory_million_cells": 0.41204882037289225,
+            "peak_cytokine_proxy_arbitrary_units": 0.21895342591607347,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.5785323733280563,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 59.39708786100752,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08496223657596834,
+            "final_effector_million_cells": 0.0038359827933273543,
+            "final_memory_million_cells": 0.014789645790709561,
+            "peak_cytokine_proxy_arbitrary_units": 0.21385548166480398,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.459096391867868,
+            "tumor_ledger_max_error_million_cells": 3.064215547965432e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 18,
+        "parameters": {
+          "growth": 0.1894658113916521,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.1832333211606936,
+          "suppression": 0.04591889283797586,
+          "killing": 3.2149526279240326,
+          "activation_half": 0.2,
+          "loss19": 0.0017233844141358505,
+          "loss22": 0.002529557939555231,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 31.11531779436868,
+            "minimum_tumor_million_cells": 0.4975922584055914,
+            "final_double_negative_fraction": 0.13559838522005563,
+            "final_effector_million_cells": 0.012217458184780152,
+            "final_memory_million_cells": 0.07439985121177783,
+            "peak_cytokine_proxy_arbitrary_units": 0.08467560727121627,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5169300401582552,
+            "tumor_ledger_max_error_million_cells": 9.769962616701378e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 3.2814178056613534,
+            "minimum_tumor_million_cells": 0.0692443646503816,
+            "final_double_negative_fraction": 0.9630351463619843,
+            "final_effector_million_cells": 0.05795490095462756,
+            "final_memory_million_cells": 0.1655834057083743,
+            "peak_cytokine_proxy_arbitrary_units": 0.09520236537063928,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.48381782616534985,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 48.0000678172616,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08961458102838417,
+            "final_effector_million_cells": 0.003912361308281953,
+            "final_memory_million_cells": 0.015385863577042101,
+            "peak_cytokine_proxy_arbitrary_units": 0.06431284623479575,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7041230193822247,
+            "tumor_ledger_max_error_million_cells": 2.55351295663786e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 19,
+        "parameters": {
+          "growth": 0.1338798162017754,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5346762829580687,
+          "suppression": 0.03419181667854009,
+          "killing": 3.282340120147722,
+          "activation_half": 0.2,
+          "loss19": 0.001989435057156947,
+          "loss22": 0.0024351353800412083,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 7.965572528532925,
+            "minimum_tumor_million_cells": 0.3984243609841061,
+            "final_double_negative_fraction": 0.13233418373659406,
+            "final_effector_million_cells": 0.025677758803177537,
+            "final_memory_million_cells": 0.20561116954945952,
+            "peak_cytokine_proxy_arbitrary_units": 0.07823452626803323,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.43531241929428427,
+            "tumor_ledger_max_error_million_cells": 3.9968028886505635e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 0.7117037742292256,
+            "minimum_tumor_million_cells": 0.05435661626064133,
+            "final_double_negative_fraction": 0.8714872819978288,
+            "final_effector_million_cells": 0.028736726235554646,
+            "final_memory_million_cells": 0.23031073190940168,
+            "peak_cytokine_proxy_arbitrary_units": 0.0887107558756858,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3973532410904698,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 15.036817129768156,
+            "minimum_tumor_million_cells": 0.8788507536274439,
+            "final_double_negative_fraction": 0.09118518584617671,
+            "final_effector_million_cells": 0.03220028069808627,
+            "final_memory_million_cells": 0.169209003806998,
+            "peak_cytokine_proxy_arbitrary_units": 0.05780453641111977,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5823520426688812,
+            "tumor_ledger_max_error_million_cells": 4.218847493575595e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 20,
+        "parameters": {
+          "growth": 0.17178832037403682,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.241683835410338,
+          "suppression": 0.023043370193705986,
+          "killing": 1.1117631110932877,
+          "activation_half": 0.2,
+          "loss19": 0.0020916359008701473,
+          "loss22": 0.0017846543542748773,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 21.259993058409457,
+            "minimum_tumor_million_cells": 0.7145122949874295,
+            "final_double_negative_fraction": 0.11870233571311507,
+            "final_effector_million_cells": 0.07673823541635295,
+            "final_memory_million_cells": 0.3967067664136305,
+            "peak_cytokine_proxy_arbitrary_units": 0.2105228224171613,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6840131342950189,
+            "tumor_ledger_max_error_million_cells": 6.439293542825908e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 2.092503696880969,
+            "minimum_tumor_million_cells": 0.09761092468827569,
+            "final_double_negative_fraction": 0.9556137953938825,
+            "final_effector_million_cells": 0.14871093606624172,
+            "final_memory_million_cells": 0.4924087768466284,
+            "peak_cytokine_proxy_arbitrary_units": 0.22254659542559457,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.5169858326211525,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 35.19441571204163,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08545664706810938,
+            "final_effector_million_cells": 0.06875751064557917,
+            "final_memory_million_cells": 0.3108768126564187,
+            "peak_cytokine_proxy_arbitrary_units": 0.20986244249665784,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.4162202438204505,
+            "tumor_ledger_max_error_million_cells": 8.43769498715119e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 21,
+        "parameters": {
+          "growth": 0.1783741904905347,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.9938172977718864,
+          "suppression": 0.040893039592697494,
+          "killing": 3.0118799214090255,
+          "activation_half": 0.2,
+          "loss19": 0.002342998758281631,
+          "loss22": 0.0014029260455103766,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 24.625992899163226,
+            "minimum_tumor_million_cells": 0.49472165195478024,
+            "final_double_negative_fraction": 0.10693108746139578,
+            "final_effector_million_cells": 0.018687666718423805,
+            "final_memory_million_cells": 0.1158754898562633,
+            "peak_cytokine_proxy_arbitrary_units": 0.08641197030970085,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5464225359756794,
+            "tumor_ledger_max_error_million_cells": 6.8833827526759706e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 2.390604713819928,
+            "minimum_tumor_million_cells": 0.06860742075464979,
+            "final_double_negative_fraction": 0.9509495592314526,
+            "final_effector_million_cells": 0.06026052685781129,
+            "final_memory_million_cells": 0.1949263991388137,
+            "peak_cytokine_proxy_arbitrary_units": 0.09746024723678069,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.506057908678411,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 39.75529256030157,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08369517008139592,
+            "final_effector_million_cells": 0.010130791652637654,
+            "final_memory_million_cells": 0.04407685130574492,
+            "peak_cytokine_proxy_arbitrary_units": 0.06539882558360004,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7540617864589143,
+            "tumor_ledger_max_error_million_cells": 8.215650382226158e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 22,
+        "parameters": {
+          "growth": 0.15761683100205837,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7693666531752039,
+          "suppression": 0.01828278760409304,
+          "killing": 1.3606111982001086,
+          "activation_half": 0.2,
+          "loss19": 0.0016826994239676732,
+          "loss22": 0.0010492663376363196,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 14.931655670306121,
+            "minimum_tumor_million_cells": 0.623797912130274,
+            "final_double_negative_fraction": 0.09789782362443325,
+            "final_effector_million_cells": 0.07804822669709707,
+            "final_memory_million_cells": 0.4422558479770355,
+            "peak_cytokine_proxy_arbitrary_units": 0.15790304932466398,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3020611602215548,
+            "tumor_ledger_max_error_million_cells": 2.886579864025407e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.3521314367660133,
+            "minimum_tumor_million_cells": 0.0866353108910082,
+            "final_double_negative_fraction": 0.9230315019690237,
+            "final_effector_million_cells": 0.1091105596045285,
+            "final_memory_million_cells": 0.4740760763641499,
+            "peak_cytokine_proxy_arbitrary_units": 0.17201130322814903,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1697499350817582,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 25.992774909235184,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07034336617809447,
+            "final_effector_million_cells": 0.08748792445132224,
+            "final_memory_million_cells": 0.4508189450050486,
+            "peak_cytokine_proxy_arbitrary_units": 0.1446351269958926,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.8590317983483573,
+            "tumor_ledger_max_error_million_cells": 6.217248937900877e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 23,
+        "parameters": {
+          "growth": 0.19936662921042703,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.611427355079974,
+          "suppression": 0.04248098661053282,
+          "killing": 2.1895093377828507,
+          "activation_half": 0.2,
+          "loss19": 0.0014722803981390526,
+          "loss22": 0.0010676241483591998,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 37.832663130555,
+            "minimum_tumor_million_cells": 0.6504477774373263,
+            "final_double_negative_fraction": 0.09727205394801314,
+            "final_effector_million_cells": 0.018148674457978756,
+            "final_memory_million_cells": 0.1620551316351255,
+            "peak_cytokine_proxy_arbitrary_units": 0.10799657462770752,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8604074246192026,
+            "tumor_ledger_max_error_million_cells": 1.199040866595169e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 4.283303466643597,
+            "minimum_tumor_million_cells": 0.09511656625649648,
+            "final_double_negative_fraction": 0.9574643382105279,
+            "final_effector_million_cells": 0.09443320577129226,
+            "final_memory_million_cells": 0.3016518990240538,
+            "peak_cytokine_proxy_arbitrary_units": 0.12001208914105507,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8110401377866311,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 55.11785486292399,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0672782245841406,
+            "final_effector_million_cells": 0.00944891715045019,
+            "final_memory_million_cells": 0.06337883725379882,
+            "peak_cytokine_proxy_arbitrary_units": 0.09152086569740935,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2191916880602713,
+            "tumor_ledger_max_error_million_cells": 1.554312234475219e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 24,
+        "parameters": {
+          "growth": 0.09805078335703737,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.6676892840668882,
+          "suppression": 0.04024796803717026,
+          "killing": 3.697118296727285,
+          "activation_half": 0.2,
+          "loss19": 0.0015490087636255364,
+          "loss22": 0.0025735895323332793,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.8772568456016674,
+            "minimum_tumor_million_cells": 0.3203373694063204,
+            "final_double_negative_fraction": 0.13428931793360888,
+            "final_effector_million_cells": 0.016364787914591138,
+            "final_memory_million_cells": 0.18951639139931187,
+            "peak_cytokine_proxy_arbitrary_units": 0.07271668255789566,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3396790048969293,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.2531351110995727,
+            "minimum_tumor_million_cells": 0.04004519049599456,
+            "final_double_negative_fraction": 0.829042233522722,
+            "final_effector_million_cells": 0.012950447394991552,
+            "final_memory_million_cells": 0.20844286447225585,
+            "peak_cytokine_proxy_arbitrary_units": 0.08248767167062925,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.31803945525314875,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1001
+          },
+          "and": {
+            "final_tumor_million_cells": 5.765763735098243,
+            "minimum_tumor_million_cells": 0.7255485857439822,
+            "final_double_negative_fraction": 0.0857645467995763,
+            "final_effector_million_cells": 0.028434338243483258,
+            "final_memory_million_cells": 0.15458722000667371,
+            "peak_cytokine_proxy_arbitrary_units": 0.053956420921049145,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4183926255799415,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 25,
+        "parameters": {
+          "growth": 0.0908008395148281,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.9299931990168973,
+          "suppression": 0.02440609054730299,
+          "killing": 1.393619464196969,
+          "activation_half": 0.2,
+          "loss19": 0.003724469602786887,
+          "loss22": 0.0033678870129596893,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.4251207553408634,
+            "minimum_tumor_million_cells": 0.4036371973262544,
+            "final_double_negative_fraction": 0.15977394932978664,
+            "final_effector_million_cells": 0.05207874486940017,
+            "final_memory_million_cells": 0.30064365310885616,
+            "peak_cytokine_proxy_arbitrary_units": 0.1334143595835915,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9712041305004914,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.23357484352371613,
+            "minimum_tumor_million_cells": 0.055484825189812625,
+            "final_double_negative_fraction": 0.8640938347856164,
+            "final_effector_million_cells": 0.0468896305254859,
+            "final_memory_million_cells": 0.33860974174088454,
+            "peak_cytokine_proxy_arbitrary_units": 0.15305087855372798,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9064056212196587,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 4.856560384790075,
+            "minimum_tumor_million_cells": 0.9472512718748802,
+            "final_double_negative_fraction": 0.12400763685594696,
+            "final_effector_million_cells": 0.08311908236221958,
+            "final_memory_million_cells": 0.24466244119745031,
+            "peak_cytokine_proxy_arbitrary_units": 0.0976623855986552,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2094518809880033,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 26,
+        "parameters": {
+          "growth": 0.2186000696845647,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5591024771363958,
+          "suppression": 0.028626493432453912,
+          "killing": 1.2198141660712463,
+          "activation_half": 0.2,
+          "loss19": 0.002073113527963474,
+          "loss22": 0.001704150859166555,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 52.23152684910329,
+            "minimum_tumor_million_cells": 0.9552181777573364,
+            "final_double_negative_fraction": 0.11643910885726488,
+            "final_effector_million_cells": 0.03426932848987489,
+            "final_memory_million_cells": 0.39105608565010846,
+            "peak_cytokine_proxy_arbitrary_units": 0.21200232522005755,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.7821743188295673,
+            "tumor_ledger_max_error_million_cells": 1.554312234475219e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 7.774259429965585,
+            "minimum_tumor_million_cells": 0.1374935492404198,
+            "final_double_negative_fraction": 0.9741750007944717,
+            "final_effector_million_cells": 0.17139880233339438,
+            "final_memory_million_cells": 0.5934283626592944,
+            "peak_cytokine_proxy_arbitrary_units": 0.21788631251665694,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6638800418594188,
+            "tumor_ledger_max_error_million_cells": 3.552713678800501e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 68.66642623288348,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08404488491479567,
+            "final_effector_million_cells": 0.025934091984264298,
+            "final_memory_million_cells": 0.25131284838670065,
+            "peak_cytokine_proxy_arbitrary_units": 0.2336659546225549,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.6338529577207086,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 992
+          }
+        }
+      },
+      {
+        "sample": 27,
+        "parameters": {
+          "growth": 0.24904963530169252,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.3192697242109874,
+          "suppression": 0.020907874092479507,
+          "killing": 2.903801658470134,
+          "activation_half": 0.2,
+          "loss19": 0.0018174942404794827,
+          "loss22": 0.0011373612529196602,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 72.82090768073887,
+            "minimum_tumor_million_cells": 0.6352518505004672,
+            "final_double_negative_fraction": 0.0997140577454642,
+            "final_effector_million_cells": 0.010690906532713129,
+            "final_memory_million_cells": 0.0655788379110225,
+            "peak_cytokine_proxy_arbitrary_units": 0.10135806529660188,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6622563651460759,
+            "tumor_ledger_max_error_million_cells": 2.7977620220553945e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 16.009313262424314,
+            "minimum_tumor_million_cells": 0.0908956300444459,
+            "final_double_negative_fraction": 0.9895812384268748,
+            "final_effector_million_cells": 0.07598009687240376,
+            "final_memory_million_cells": 0.15604264120063693,
+            "peak_cytokine_proxy_arbitrary_units": 0.11038552921041159,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6619114365008377,
+            "tumor_ledger_max_error_million_cells": 4.884981308350689e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 84.2660864608688,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07420964628103188,
+            "final_effector_million_cells": 0.005943858954002271,
+            "final_memory_million_cells": 0.02887109843653814,
+            "peak_cytokine_proxy_arbitrary_units": 0.08993952670772254,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9558413319388743,
+            "tumor_ledger_max_error_million_cells": 5.595524044110789e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 28,
+        "parameters": {
+          "growth": 0.2660312988319834,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.4481710246806696,
+          "suppression": 0.057354491697961946,
+          "killing": 1.9454371700406958,
+          "activation_half": 0.2,
+          "loss19": 0.0021871623450656105,
+          "loss22": 0.001213751736057581,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 81.862902651343,
+            "minimum_tumor_million_cells": 0.9026776257891707,
+            "final_double_negative_fraction": 0.10251342694566211,
+            "final_effector_million_cells": 0.000680083369660141,
+            "final_memory_million_cells": 0.004726521087100805,
+            "peak_cytokine_proxy_arbitrary_units": 0.14595096286060533,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0924550121563354,
+            "tumor_ledger_max_error_million_cells": 2.7533531010703882e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 992
+          },
+          "or": {
+            "final_tumor_million_cells": 24.752770519288674,
+            "minimum_tumor_million_cells": 0.1309669857688271,
+            "final_double_negative_fraction": 0.9860958321402835,
+            "final_effector_million_cells": 0.031997193232731785,
+            "final_memory_million_cells": 0.09926116499263843,
+            "peak_cytokine_proxy_arbitrary_units": 0.15402610139489187,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0675300923827669,
+            "tumor_ledger_max_error_million_cells": 7.549516567451064e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 90.14189873860009,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07827264905808505,
+            "final_effector_million_cells": 4.7056780206245526e-07,
+            "final_memory_million_cells": 1.2147507830977835e-06,
+            "peak_cytokine_proxy_arbitrary_units": 0.14670742264439646,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.5238213411368697,
+            "tumor_ledger_max_error_million_cells": 5.728750807065808e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 29,
+        "parameters": {
+          "growth": 0.19862616065443006,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.9176307387380145,
+          "suppression": 0.019462308924330655,
+          "killing": 1.1252434389713328,
+          "activation_half": 0.2,
+          "loss19": 0.0026071798235115626,
+          "loss22": 0.0030454009947470575,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 37.77897893743373,
+            "minimum_tumor_million_cells": 0.8435457713469847,
+            "final_double_negative_fraction": 0.1522650942193682,
+            "final_effector_million_cells": 0.06478478414477246,
+            "final_memory_million_cells": 0.43897178378748974,
+            "peak_cytokine_proxy_arbitrary_units": 0.22587198197029557,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.8113459007328718,
+            "tumor_ledger_max_error_million_cells": 1.199040866595169e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 4.775336796380645,
+            "minimum_tumor_million_cells": 0.12194781465971175,
+            "final_double_negative_fraction": 0.9727812657320133,
+            "final_effector_million_cells": 0.18154465965446337,
+            "final_memory_million_cells": 0.5543471695561853,
+            "peak_cytokine_proxy_arbitrary_units": 0.2332886316247852,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6551539655750749,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 55.1711838528797,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10830706680334178,
+            "final_effector_million_cells": 0.05448384604008981,
+            "final_memory_million_cells": 0.37165825378331496,
+            "peak_cytokine_proxy_arbitrary_units": 0.24065599927257855,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.627794976666957,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 30,
+        "parameters": {
+          "growth": 0.21456691547396614,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.3535708194415959,
+          "suppression": 0.01602316508721456,
+          "killing": 1.97120098107039,
+          "activation_half": 0.2,
+          "loss19": 0.0030118409754914754,
+          "loss22": 0.001239928704997759,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 49.31382516659257,
+            "minimum_tumor_million_cells": 0.6780758725751459,
+            "final_double_negative_fraction": 0.10467355236638198,
+            "final_effector_million_cells": 0.03513498495883159,
+            "final_memory_million_cells": 0.17292387758711736,
+            "peak_cytokine_proxy_arbitrary_units": 0.13364047461750836,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9728200653627673,
+            "tumor_ledger_max_error_million_cells": 1.4432899320127035e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 6.772078110499673,
+            "minimum_tumor_million_cells": 0.09608395027525313,
+            "final_double_negative_fraction": 0.9818026643195704,
+            "final_effector_million_cells": 0.1229459334956455,
+            "final_memory_million_cells": 0.25587507448852675,
+            "peak_cytokine_proxy_arbitrary_units": 0.14366247138036686,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9165614544670786,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 65.91509553825617,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.09128702680189987,
+            "final_effector_million_cells": 0.02751957420888521,
+            "final_memory_million_cells": 0.1272317196690129,
+            "peak_cytokine_proxy_arbitrary_units": 0.1269691178837788,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4026355983888583,
+            "tumor_ledger_max_error_million_cells": 2.220446049250313e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 31,
+        "parameters": {
+          "growth": 0.24284121491151173,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.4838343396212994,
+          "suppression": 0.0276027932308923,
+          "killing": 2.628521977486317,
+          "activation_half": 0.2,
+          "loss19": 0.0023062062420420343,
+          "loss22": 0.003209873146039803,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 69.14768015118113,
+            "minimum_tumor_million_cells": 0.6589274395922101,
+            "final_double_negative_fraction": 0.1543455235493538,
+            "final_effector_million_cells": 0.00798989820183171,
+            "final_memory_million_cells": 0.047433035536088186,
+            "peak_cytokine_proxy_arbitrary_units": 0.10849673700621566,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.728416719374976,
+            "tumor_ledger_max_error_million_cells": 1.687538997430238e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 14.539183330038767,
+            "minimum_tumor_million_cells": 0.09707099163006283,
+            "final_double_negative_fraction": 0.9883165241876578,
+            "final_effector_million_cells": 0.07107454520479546,
+            "final_memory_million_cells": 0.14899829639312362,
+            "peak_cytokine_proxy_arbitrary_units": 0.11784828195591769,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7175133233386806,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 81.98305542309052,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10702148752392389,
+            "final_effector_million_cells": 0.0026688073489177064,
+            "final_memory_million_cells": 0.011516694405650769,
+            "peak_cytokine_proxy_arbitrary_units": 0.09730107966431156,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.035425507848868,
+            "tumor_ledger_max_error_million_cells": 2.353672812205332e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 32,
+        "parameters": {
+          "growth": 0.23291444247002063,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.5119321080053119,
+          "suppression": 0.017554293705263343,
+          "killing": 1.463447198718907,
+          "activation_half": 0.2,
+          "loss19": 0.0010889803951101766,
+          "loss22": 0.0011843480232422764,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 62.14507642221145,
+            "minimum_tumor_million_cells": 0.8330299434138474,
+            "final_double_negative_fraction": 0.10079663687032943,
+            "final_effector_million_cells": 0.03308866706182224,
+            "final_memory_million_cells": 0.18734727737110982,
+            "peak_cytokine_proxy_arbitrary_units": 0.19428959513076732,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4299049682983693,
+            "tumor_ledger_max_error_million_cells": 2.2426505097428162e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 10.58895031807369,
+            "minimum_tumor_million_cells": 0.11337975550586246,
+            "final_double_negative_fraction": 0.987463496798102,
+            "final_effector_million_cells": 0.161397961389749,
+            "final_memory_million_cells": 0.31762678293010416,
+            "peak_cytokine_proxy_arbitrary_units": 0.1990777624509365,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3502499171038056,
+            "tumor_ledger_max_error_million_cells": 2.220446049250313e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 76.66597622656047,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.06456754806298093,
+            "final_effector_million_cells": 0.024070897854937916,
+            "final_memory_million_cells": 0.1249051664683698,
+            "peak_cytokine_proxy_arbitrary_units": 0.21154913497408193,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.098857147506891,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 33,
+        "parameters": {
+          "growth": 0.08268784387430587,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.7512750370059262,
+          "suppression": 0.0392367589887382,
+          "killing": 3.119267264789543,
+          "activation_half": 0.2,
+          "loss19": 0.0015993174171276743,
+          "loss22": 0.0014750335600361847,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 1.8302263054007133,
+            "minimum_tumor_million_cells": 0.3028562471330557,
+            "final_double_negative_fraction": 0.10677948302917395,
+            "final_effector_million_cells": 0.019845291998979553,
+            "final_memory_million_cells": 0.16482713993706694,
+            "peak_cytokine_proxy_arbitrary_units": 0.07926448494682957,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3926277172843568,
+            "tumor_ledger_max_error_million_cells": 5.551115123125783e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 0.1536164158794897,
+            "minimum_tumor_million_cells": 0.03566683433980822,
+            "final_double_negative_fraction": 0.846264335802077,
+            "final_effector_million_cells": 0.01666059483967117,
+            "final_memory_million_cells": 0.1925326893891931,
+            "peak_cytokine_proxy_arbitrary_units": 0.090701958381143,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.37079747180178785,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 3.6734110141035945,
+            "minimum_tumor_million_cells": 0.6917045720323821,
+            "final_double_negative_fraction": 0.07334188817459358,
+            "final_effector_million_cells": 0.031677396620639044,
+            "final_memory_million_cells": 0.11332341881766683,
+            "peak_cytokine_proxy_arbitrary_units": 0.057398778470127886,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.471547354927853,
+            "tumor_ledger_max_error_million_cells": 1.4432899320127035e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 34,
+        "parameters": {
+          "growth": 0.2925289084596357,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.9132463357495498,
+          "suppression": 0.015344079975396637,
+          "killing": 1.656787035182406,
+          "activation_half": 0.2,
+          "loss19": 0.00223185974416247,
+          "loss22": 0.001552864389984696,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 90.83965927113347,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.11231256419678043,
+            "final_effector_million_cells": 0.019165389648487248,
+            "final_memory_million_cells": 0.2148434147134324,
+            "peak_cytokine_proxy_arbitrary_units": 0.1953392548486481,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4147788876100038,
+            "tumor_ledger_max_error_million_cells": 4.1744385725905886e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 42.29577143975599,
+            "minimum_tumor_million_cells": 0.15679225506700936,
+            "final_double_negative_fraction": 0.9943587660169292,
+            "final_effector_million_cells": 0.0966483520974819,
+            "final_memory_million_cells": 0.3068551292731868,
+            "peak_cytokine_proxy_arbitrary_units": 0.19468834066327964,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4337898566317895,
+            "tumor_ledger_max_error_million_cells": 3.730349362740526e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 95.16164821569956,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08530455240087242,
+            "final_effector_million_cells": 0.017519393127771416,
+            "final_memory_million_cells": 0.18226010887837502,
+            "peak_cytokine_proxy_arbitrary_units": 0.2328258619704581,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.129354247422931,
+            "tumor_ledger_max_error_million_cells": 5.417888360170764e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 35,
+        "parameters": {
+          "growth": 0.19196915079967491,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5745063740417075,
+          "suppression": 0.04675047669590681,
+          "killing": 1.082356580587817,
+          "activation_half": 0.2,
+          "loss19": 0.00318341748131213,
+          "loss22": 0.002188713037966887,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 33.6745959842866,
+            "minimum_tumor_million_cells": 0.9297030470949956,
+            "final_double_negative_fraction": 0.13113617321904453,
+            "final_effector_million_cells": 0.03458263745165413,
+            "final_memory_million_cells": 0.37636919569268174,
+            "peak_cytokine_proxy_arbitrary_units": 0.2132116179658388,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.9181286619172757,
+            "tumor_ledger_max_error_million_cells": 1.199040866595169e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 4.030373095316563,
+            "minimum_tumor_million_cells": 0.13521109571915135,
+            "final_double_negative_fraction": 0.9579210918368232,
+            "final_effector_million_cells": 0.14925624301198645,
+            "final_memory_million_cells": 0.6411929213857587,
+            "peak_cytokine_proxy_arbitrary_units": 0.22531217590465957,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.744512484414641,
+            "tumor_ledger_max_error_million_cells": 2.220446049250313e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 50.68551308791279,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10286330119968405,
+            "final_effector_million_cells": 0.017906781946512407,
+            "final_memory_million_cells": 0.12452140558974283,
+            "peak_cytokine_proxy_arbitrary_units": 0.21646136642876956,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.7393380565229775,
+            "tumor_ledger_max_error_million_cells": 1.2878587085651816e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 36,
+        "parameters": {
+          "growth": 0.10158826678751219,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.6999558565196264,
+          "suppression": 0.04883106899556033,
+          "killing": 3.0212335675014117,
+          "activation_half": 0.2,
+          "loss19": 0.0028013561052552243,
+          "loss22": 0.00196827911176705,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 3.214019109858768,
+            "minimum_tumor_million_cells": 0.3436926973974328,
+            "final_double_negative_fraction": 0.1214518802904255,
+            "final_effector_million_cells": 0.023194414389711735,
+            "final_memory_million_cells": 0.1512991162606662,
+            "peak_cytokine_proxy_arbitrary_units": 0.0808520970010677,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.42840589443589644,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 0.2738788501493557,
+            "minimum_tumor_million_cells": 0.042819664151654356,
+            "final_double_negative_fraction": 0.8762842947095203,
+            "final_effector_million_cells": 0.023299516421764126,
+            "final_memory_million_cells": 0.1885452172930107,
+            "peak_cytokine_proxy_arbitrary_units": 0.09263680097714633,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.40017713753272577,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 6.355218050247253,
+            "minimum_tumor_million_cells": 0.7818726205718675,
+            "final_double_negative_fraction": 0.09568626612280602,
+            "final_effector_million_cells": 0.02951821216060123,
+            "final_memory_million_cells": 0.08921353347532185,
+            "peak_cytokine_proxy_arbitrary_units": 0.058331142087677444,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5336296713875298,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 37,
+        "parameters": {
+          "growth": 0.12173679841394443,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.8826062960075022,
+          "suppression": 0.02993481190998617,
+          "killing": 3.6012498458223585,
+          "activation_half": 0.2,
+          "loss19": 0.003061435820875443,
+          "loss22": 0.0018533437724833782,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 5.710701103107271,
+            "minimum_tumor_million_cells": 0.3586378660442614,
+            "final_double_negative_fraction": 0.11861443638547356,
+            "final_effector_million_cells": 0.023086908041673543,
+            "final_memory_million_cells": 0.1761863757063997,
+            "peak_cytokine_proxy_arbitrary_units": 0.07578105156476125,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3722131894181636,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.4910772013794344,
+            "minimum_tumor_million_cells": 0.045850731529339564,
+            "final_double_negative_fraction": 0.8835344649226232,
+            "final_effector_million_cells": 0.022698469431807977,
+            "final_memory_million_cells": 0.19848034932336972,
+            "peak_cytokine_proxy_arbitrary_units": 0.08576950464760187,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.34452883999576067,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 10.9370814180398,
+            "minimum_tumor_million_cells": 0.7985856130466629,
+            "final_double_negative_fraction": 0.09843618782251622,
+            "final_effector_million_cells": 0.03302743912654741,
+            "final_memory_million_cells": 0.13811771850534532,
+            "peak_cytokine_proxy_arbitrary_units": 0.056405658491233926,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.484638104176234,
+            "tumor_ledger_max_error_million_cells": 9.547918011776346e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 38,
+        "parameters": {
+          "growth": 0.2274685833905889,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.527404798961153,
+          "suppression": 0.04478485696323188,
+          "killing": 1.7503400859492888,
+          "activation_half": 0.2,
+          "loss19": 0.0021362983589711545,
+          "loss22": 0.0011067403340214686,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 58.785029944402915,
+            "minimum_tumor_million_cells": 0.8523524800095372,
+            "final_double_negative_fraction": 0.09975435658560443,
+            "final_effector_million_cells": 0.012716036612495272,
+            "final_memory_million_cells": 0.1576141810173214,
+            "peak_cytokine_proxy_arbitrary_units": 0.1406435564559013,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1998580797219272,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 992
+          },
+          "or": {
+            "final_tumor_million_cells": 9.560905389571122,
+            "minimum_tumor_million_cells": 0.12728786997667663,
+            "final_double_negative_fraction": 0.9726750420682392,
+            "final_effector_million_cells": 0.10374551425009478,
+            "final_memory_million_cells": 0.37689225269660737,
+            "peak_cytokine_proxy_arbitrary_units": 0.15085165312037946,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.159466435923627,
+            "tumor_ledger_max_error_million_cells": 3.1086244689504383e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 74.13763457592853,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07639673972210177,
+            "final_effector_million_cells": 0.00466059504627649,
+            "final_memory_million_cells": 0.03664891741887782,
+            "peak_cytokine_proxy_arbitrary_units": 0.13878768689975793,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.716804757032838,
+            "tumor_ledger_max_error_million_cells": 3.019806626980426e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1022
+          }
+        }
+      },
+      {
+        "sample": 39,
+        "parameters": {
+          "growth": 0.18156500671603512,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7064971791388746,
+          "suppression": 0.020439853971586725,
+          "killing": 1.021117112573985,
+          "activation_half": 0.2,
+          "loss19": 0.002662355715150232,
+          "loss22": 0.002995791720609263,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 26.819225886006652,
+            "minimum_tumor_million_cells": 0.8212975844113466,
+            "final_double_negative_fraction": 0.15120520795350165,
+            "final_effector_million_cells": 0.08034402686941329,
+            "final_memory_million_cells": 0.5882312633156545,
+            "peak_cytokine_proxy_arbitrary_units": 0.23255824350117021,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.9455921278532307,
+            "tumor_ledger_max_error_million_cells": 8.215650382226158e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 3.0121101880809404,
+            "minimum_tumor_million_cells": 0.11932360457914873,
+            "final_double_negative_fraction": 0.9576340117389861,
+            "final_effector_million_cells": 0.17034809410336105,
+            "final_memory_million_cells": 0.6734367839120767,
+            "peak_cytokine_proxy_arbitrary_units": 0.24221436062348506,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.7556476103830383,
+            "tumor_ledger_max_error_million_cells": 1.5543122344752192e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 42.65061264597485,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10798266035442634,
+            "final_effector_million_cells": 0.07419703658772374,
+            "final_memory_million_cells": 0.5519876430162621,
+            "peak_cytokine_proxy_arbitrary_units": 0.24331074116963142,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.813532168835229,
+            "tumor_ledger_max_error_million_cells": 2.220446049250313e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          }
+        }
+      },
+      {
+        "sample": 40,
+        "parameters": {
+          "growth": 0.11296722838566758,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7260161076651113,
+          "suppression": 0.03873944809550591,
+          "killing": 1.051450108083129,
+          "activation_half": 0.2,
+          "loss19": 0.0014212087278711574,
+          "loss22": 0.0015958347507029217,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 4.466332399531679,
+            "minimum_tumor_million_cells": 0.5410677659805064,
+            "final_double_negative_fraction": 0.11101817515211765,
+            "final_effector_million_cells": 0.07315173090140392,
+            "final_memory_million_cells": 0.5368114546032273,
+            "peak_cytokine_proxy_arbitrary_units": 0.1670240235067667,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4994367303170784,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.4107587452774696,
+            "minimum_tumor_million_cells": 0.07559078779989006,
+            "final_double_negative_fraction": 0.8344908599006444,
+            "final_effector_million_cells": 0.07448550702963808,
+            "final_memory_million_cells": 0.5877214653011145,
+            "peak_cytokine_proxy_arbitrary_units": 0.18836506815145537,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.352727372190672,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 8.70723178198616,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0719832948925562,
+            "final_effector_million_cells": 0.10571176039451556,
+            "final_memory_million_cells": 0.48642640204836923,
+            "peak_cytokine_proxy_arbitrary_units": 0.13628655387128155,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.036564147698198,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 41,
+        "parameters": {
+          "growth": 0.12863336738355624,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0887125736298375,
+          "suppression": 0.05029767606376077,
+          "killing": 2.1144966841577277,
+          "activation_half": 0.2,
+          "loss19": 0.001358087190307719,
+          "loss22": 0.0015132942853087379,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 6.859460971137924,
+            "minimum_tumor_million_cells": 0.45744521954295264,
+            "final_double_negative_fraction": 0.10835051184778237,
+            "final_effector_million_cells": 0.03665076646287745,
+            "final_memory_million_cells": 0.20486592555360475,
+            "peak_cytokine_proxy_arbitrary_units": 0.0991028174557129,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7140504788767829,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.5894538244487504,
+            "minimum_tumor_million_cells": 0.06212468980388766,
+            "final_double_negative_fraction": 0.8825875665525635,
+            "final_effector_million_cells": 0.04975665278999839,
+            "final_memory_million_cells": 0.2663478994451108,
+            "peak_cytokine_proxy_arbitrary_units": 0.11369268190199955,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6480666711458418,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 13.072294842733085,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07074213004203969,
+            "final_effector_million_cells": 0.03580541334663938,
+            "final_memory_million_cells": 0.11989986390395684,
+            "peak_cytokine_proxy_arbitrary_units": 0.07226154189100924,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9588750645838764,
+            "tumor_ledger_max_error_million_cells": 3.552713678800501e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 42,
+        "parameters": {
+          "growth": 0.09264054559531963,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.36622382677817,
+          "suppression": 0.036157967233461916,
+          "killing": 1.260292265040145,
+          "activation_half": 0.2,
+          "loss19": 0.001028675123951567,
+          "loss22": 0.0035464200574872296,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.4597166365480656,
+            "minimum_tumor_million_cells": 0.4214720080803586,
+            "final_double_negative_fraction": 0.15897670228927946,
+            "final_effector_million_cells": 0.05797795975060073,
+            "final_memory_million_cells": 0.3602165941135207,
+            "peak_cytokine_proxy_arbitrary_units": 0.14010529659528717,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1159226577348884,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.23577598298449778,
+            "minimum_tumor_million_cells": 0.05864161842479466,
+            "final_double_negative_fraction": 0.8309746443166698,
+            "final_effector_million_cells": 0.0518974315813826,
+            "final_memory_million_cells": 0.4062057720881825,
+            "peak_cytokine_proxy_arbitrary_units": 0.16051604449041432,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0257307545356449,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 5.035705136093445,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.08914621669008518,
+            "final_effector_million_cells": 0.0901382486253524,
+            "final_memory_million_cells": 0.2943786812003849,
+            "peak_cytokine_proxy_arbitrary_units": 0.10265997838988267,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.4150397950662894,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 43,
+        "parameters": {
+          "growth": 0.07973048910267135,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.6568683594469442,
+          "suppression": 0.03416013672674187,
+          "killing": 1.3379929532976957,
+          "activation_half": 0.2,
+          "loss19": 0.003832302994783005,
+          "loss22": 0.0016761135488526575,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 1.8044414920954808,
+            "minimum_tumor_million_cells": 0.4121897519794021,
+            "final_double_negative_fraction": 0.11570820366789028,
+            "final_effector_million_cells": 0.04213584811808058,
+            "final_memory_million_cells": 0.43239959661735794,
+            "peak_cytokine_proxy_arbitrary_units": 0.12012336990036372,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.989392006668963,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.1861813875735563,
+            "minimum_tumor_million_cells": 0.05968205640072626,
+            "final_double_negative_fraction": 0.7538874944882767,
+            "final_effector_million_cells": 0.033961792618785444,
+            "final_memory_million_cells": 0.46065187810089625,
+            "peak_cytokine_proxy_arbitrary_units": 0.14148529999426976,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9280784317731986,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 3.6019733637384395,
+            "minimum_tumor_million_cells": 0.9597315661783455,
+            "final_double_negative_fraction": 0.10080083008645169,
+            "final_effector_million_cells": 0.08258368623457829,
+            "final_memory_million_cells": 0.40330940701108764,
+            "peak_cytokine_proxy_arbitrary_units": 0.08192522178387676,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.217503127222591,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 44,
+        "parameters": {
+          "growth": 0.10546681058350987,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0073611275779466,
+          "suppression": 0.051576002400215704,
+          "killing": 2.5620322629239145,
+          "activation_half": 0.2,
+          "loss19": 0.003488292008625319,
+          "loss22": 0.0010026940994480721,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 3.6613873938003003,
+            "minimum_tumor_million_cells": 0.3850128943732158,
+            "final_double_negative_fraction": 0.09705616310394044,
+            "final_effector_million_cells": 0.02725270799640209,
+            "final_memory_million_cells": 0.19983473735015578,
+            "peak_cytokine_proxy_arbitrary_units": 0.08507545307168672,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5259618231804556,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.3225953828346986,
+            "minimum_tumor_million_cells": 0.051080905705133225,
+            "final_double_negative_fraction": 0.8441060591209534,
+            "final_effector_million_cells": 0.027977163038716748,
+            "final_memory_million_cells": 0.23933041184182588,
+            "peak_cytokine_proxy_arbitrary_units": 0.09839875570118155,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.48825662369802203,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 7.146894026609127,
+            "minimum_tumor_million_cells": 0.8677912575935978,
+            "final_double_negative_fraction": 0.09078285855846625,
+            "final_effector_million_cells": 0.03671064214346865,
+            "final_memory_million_cells": 0.13705009167751514,
+            "peak_cytokine_proxy_arbitrary_units": 0.06020441507109152,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.671818487047326,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 45,
+        "parameters": {
+          "growth": 0.2371597823728429,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.9949579439345388,
+          "suppression": 0.04201450750471804,
+          "killing": 3.7518363835221216,
+          "activation_half": 0.2,
+          "loss19": 0.00343659457626525,
+          "loss22": 0.0034662925617206393,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 65.58826493556656,
+            "minimum_tumor_million_cells": 0.5353172983096646,
+            "final_double_negative_fraction": 0.16112169547016864,
+            "final_effector_million_cells": 0.0021848426401494857,
+            "final_memory_million_cells": 0.011861170746965013,
+            "peak_cytokine_proxy_arbitrary_units": 0.08374995410754507,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4551681173239567,
+            "tumor_ledger_max_error_million_cells": 3.8413716652030416e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 12.59504773054239,
+            "minimum_tumor_million_cells": 0.07572184027113556,
+            "final_double_negative_fraction": 0.9871423086470842,
+            "final_effector_million_cells": 0.03807360978850967,
+            "final_memory_million_cells": 0.08024918069091026,
+            "peak_cytokine_proxy_arbitrary_units": 0.09292527875151999,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.45041630554824563,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 79.50544156869684,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.12505151222974611,
+            "final_effector_million_cells": 0.00011087126453920242,
+            "final_memory_million_cells": 0.0003323090083264653,
+            "peak_cytokine_proxy_arbitrary_units": 0.06642805814991644,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6216230726959322,
+            "tumor_ledger_max_error_million_cells": 4.884981308350689e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 46,
+        "parameters": {
+          "growth": 0.25265097466188935,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.4418537796405122,
+          "suppression": 0.017964353747181458,
+          "killing": 1.3086514176249402,
+          "activation_half": 0.2,
+          "loss19": 0.0035626754493352287,
+          "loss22": 0.0019438607677754124,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 75.51756054317035,
+            "minimum_tumor_million_cells": 0.9934346105247609,
+            "final_double_negative_fraction": 0.12515146154251808,
+            "final_effector_million_cells": 0.02654150440066833,
+            "final_memory_million_cells": 0.19646210927258587,
+            "peak_cytokine_proxy_arbitrary_units": 0.23295734442097848,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6835504419729788,
+            "tumor_ledger_max_error_million_cells": 1.554312234475219e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 19.407983111582702,
+            "minimum_tumor_million_cells": 0.14215999825236325,
+            "final_double_negative_fraction": 0.9918381100886774,
+            "final_effector_million_cells": 0.15465823003499676,
+            "final_memory_million_cells": 0.3416984311821785,
+            "peak_cytokine_proxy_arbitrary_units": 0.2341520304989107,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6181995395114728,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 85.94224331637328,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.1074921143059629,
+            "final_effector_million_cells": 0.019195607246557705,
+            "final_memory_million_cells": 0.12393536231048671,
+            "peak_cytokine_proxy_arbitrary_units": 0.26787102985196054,
+            "cytokine_proxy_auc_arbitrary_unit_days": 2.4929689982784167,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          }
+        }
+      },
+      {
+        "sample": 47,
+        "parameters": {
+          "growth": 0.11974168318800281,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.9526402945036544,
+          "suppression": 0.02473479299800709,
+          "killing": 1.1480546268384528,
+          "activation_half": 0.2,
+          "loss19": 0.0010651109064454736,
+          "loss22": 0.001148329425395292,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 5.337030497543395,
+            "minimum_tumor_million_cells": 0.5229332502759578,
+            "final_double_negative_fraction": 0.09892776505626334,
+            "final_effector_million_cells": 0.07840509218588348,
+            "final_memory_million_cells": 0.4798922464970722,
+            "peak_cytokine_proxy_arbitrary_units": 0.16520510713040817,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3762453295421317,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.464378842970941,
+            "minimum_tumor_million_cells": 0.07058253470486375,
+            "final_double_negative_fraction": 0.862062271621482,
+            "final_effector_million_cells": 0.0790084820158313,
+            "final_memory_million_cells": 0.5107475714411427,
+            "peak_cytokine_proxy_arbitrary_units": 0.1839597185639984,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2420878445348906,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 10.227765468091581,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.06244917518734161,
+            "final_effector_million_cells": 0.11369202378575433,
+            "final_memory_million_cells": 0.47076976694317574,
+            "peak_cytokine_proxy_arbitrary_units": 0.13888080178330695,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.885615977639338,
+            "tumor_ledger_max_error_million_cells": 3.1086244689504383e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 48,
+        "parameters": {
+          "growth": 0.08144239801978144,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.8249355371255651,
+          "suppression": 0.03539395494002884,
+          "killing": 3.407297975813271,
+          "activation_half": 0.2,
+          "loss19": 0.0036352798918361955,
+          "loss22": 0.0028534513681176556,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 1.8149170907914214,
+            "minimum_tumor_million_cells": 0.30498121167526593,
+            "final_double_negative_fraction": 0.14339274544341088,
+            "final_effector_million_cells": 0.014843022421943653,
+            "final_memory_million_cells": 0.19733736248797804,
+            "peak_cytokine_proxy_arbitrary_units": 0.07460104200838288,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3534827292395004,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.16688413135669974,
+            "minimum_tumor_million_cells": 0.038263091592916666,
+            "final_double_negative_fraction": 0.8191762148625895,
+            "final_effector_million_cells": 0.011243427762207887,
+            "final_memory_million_cells": 0.2151590168672657,
+            "peak_cytokine_proxy_arbitrary_units": 0.08510956355913464,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3361018301999601,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 3.674323236019295,
+            "minimum_tumor_million_cells": 0.689762351591833,
+            "final_double_negative_fraction": 0.11566454886847027,
+            "final_effector_million_cells": 0.027888647922969093,
+            "final_memory_million_cells": 0.16230085871968075,
+            "peak_cytokine_proxy_arbitrary_units": 0.05470217234570562,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.41615427386170933,
+            "tumor_ledger_max_error_million_cells": 1.4432899320127035e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 49,
+        "parameters": {
+          "growth": 0.26173614459115574,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.7224614346284294,
+          "suppression": 0.05472510190135406,
+          "killing": 2.8537086157987512,
+          "activation_half": 0.2,
+          "loss19": 0.003976107361614491,
+          "loss22": 0.0018758672046190776,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 80.16520629562955,
+            "minimum_tumor_million_cells": 0.7333765842509159,
+            "final_double_negative_fraction": 0.12129098596844916,
+            "final_effector_million_cells": 0.001984897143542543,
+            "final_memory_million_cells": 0.022726737354248315,
+            "peak_cytokine_proxy_arbitrary_units": 0.09675630115463951,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6943198602493574,
+            "tumor_ledger_max_error_million_cells": 2.4202861936828413e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          },
+          "or": {
+            "final_tumor_million_cells": 23.32988500218118,
+            "minimum_tumor_million_cells": 0.11550265787032776,
+            "final_double_negative_fraction": 0.9817459559504049,
+            "final_effector_million_cells": 0.02988111103134532,
+            "final_memory_million_cells": 0.13299513449044215,
+            "peak_cytokine_proxy_arbitrary_units": 0.10695429757800587,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7129265885007112,
+            "tumor_ledger_max_error_million_cells": 1.4654943925052066e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 89.11106459086399,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10979288138289744,
+            "final_effector_million_cells": 0.00010815663247179077,
+            "final_memory_million_cells": 0.0006516692766560688,
+            "peak_cytokine_proxy_arbitrary_units": 0.0831571000547134,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9546377237096384,
+            "tumor_ledger_max_error_million_cells": 2.1760371282653068e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1022
+          }
+        }
+      },
+      {
+        "sample": 50,
+        "parameters": {
+          "growth": 0.09336304930898544,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5541900280911028,
+          "suppression": 0.023909529787146486,
+          "killing": 3.505933294677504,
+          "activation_half": 0.2,
+          "loss19": 0.0031399358038140023,
+          "loss22": 0.0013331081513994864,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 2.5561936053807397,
+            "minimum_tumor_million_cells": 0.320411862518647,
+            "final_double_negative_fraction": 0.10411644656344889,
+            "final_effector_million_cells": 0.015624040700699646,
+            "final_memory_million_cells": 0.21456898464145374,
+            "peak_cytokine_proxy_arbitrary_units": 0.07458019802572774,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3530557453639397,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.2278364978423151,
+            "minimum_tumor_million_cells": 0.040237351085839354,
+            "final_double_negative_fraction": 0.8126436269759976,
+            "final_effector_million_cells": 0.011591298418803919,
+            "final_memory_million_cells": 0.22566832051418226,
+            "peak_cytokine_proxy_arbitrary_units": 0.08461835271481175,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3332013781496389,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 986
+          },
+          "and": {
+            "final_tumor_million_cells": 5.06467969766009,
+            "minimum_tumor_million_cells": 0.7176671700509855,
+            "final_double_negative_fraction": 0.09100890390174915,
+            "final_effector_million_cells": 0.032713470916165575,
+            "final_memory_million_cells": 0.19610382548031205,
+            "peak_cytokine_proxy_arbitrary_units": 0.055269557995423414,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.43265195403980033,
+            "tumor_ledger_max_error_million_cells": 1.887379141862766e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 51,
+        "parameters": {
+          "growth": 0.18387729989232274,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.1345988899251547,
+          "suppression": 0.03048225659955094,
+          "killing": 3.318560633700848,
+          "activation_half": 0.2,
+          "loss19": 0.0037657892764363632,
+          "loss22": 0.002806484605519097,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 28.02372533570674,
+            "minimum_tumor_million_cells": 0.47851658121875607,
+            "final_double_negative_fraction": 0.1449328708916377,
+            "final_effector_million_cells": 0.019627736027272333,
+            "final_memory_million_cells": 0.11149683251232845,
+            "peak_cytokine_proxy_arbitrary_units": 0.0837554358161579,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.48844968632618035,
+            "tumor_ledger_max_error_million_cells": 9.992007221626409e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 2.9411673324088046,
+            "minimum_tumor_million_cells": 0.06708158596004145,
+            "final_double_negative_fraction": 0.962486940937439,
+            "final_effector_million_cells": 0.05743740599943695,
+            "final_memory_million_cells": 0.1741874624382179,
+            "peak_cytokine_proxy_arbitrary_units": 0.09404819508828509,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4547306657607974,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 44.074854294975665,
+            "minimum_tumor_million_cells": 0.9960959490539588,
+            "final_double_negative_fraction": 0.12087267542166244,
+            "final_effector_million_cells": 0.012142701535090512,
+            "final_memory_million_cells": 0.05124088090710633,
+            "peak_cytokine_proxy_arbitrary_units": 0.06375146065342165,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6720393235249027,
+            "tumor_ledger_max_error_million_cells": 3.352873534367973e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 52,
+        "parameters": {
+          "growth": 0.07776816532620899,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.8486360248912389,
+          "suppression": 0.01576739608570203,
+          "killing": 1.1762501774224245,
+          "activation_half": 0.2,
+          "loss19": 0.002423016128486446,
+          "loss22": 0.003998032426978318,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 1.651743447742838,
+            "minimum_tumor_million_cells": 0.3964211206742448,
+            "final_double_negative_fraction": 0.1711798644885285,
+            "final_effector_million_cells": 0.051258131625303335,
+            "final_memory_million_cells": 0.48655854571988755,
+            "peak_cytokine_proxy_arbitrary_units": 0.13993675060645114,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1294132806166974,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.17674182336826993,
+            "minimum_tumor_million_cells": 0.05839318092100423,
+            "final_double_negative_fraction": 0.7796212441890179,
+            "final_effector_million_cells": 0.03954854819531486,
+            "final_memory_million_cells": 0.5005010554685646,
+            "peak_cytokine_proxy_arbitrary_units": 0.16195188992920892,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0547817794782228,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 3.401909911056643,
+            "minimum_tumor_million_cells": 0.9504115114008458,
+            "final_double_negative_fraction": 0.11213844356845644,
+            "final_effector_million_cells": 0.10088099695061009,
+            "final_memory_million_cells": 0.48223301336381874,
+            "peak_cytokine_proxy_arbitrary_units": 0.0986045968301787,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.3744198640800938,
+            "tumor_ledger_max_error_million_cells": 1.3322676295501878e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 53,
+        "parameters": {
+          "growth": 0.14693135241692243,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.9099589768753313,
+          "suppression": 0.0371340128615363,
+          "killing": 2.0475061279484383,
+          "activation_half": 0.2,
+          "loss19": 0.0017911903617916012,
+          "loss22": 0.0014286507660146769,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 11.277278044407296,
+            "minimum_tumor_million_cells": 0.48542737385649987,
+            "final_double_negative_fraction": 0.1074858349582259,
+            "final_effector_million_cells": 0.038184860444102534,
+            "final_memory_million_cells": 0.15194439249054986,
+            "peak_cytokine_proxy_arbitrary_units": 0.11115670998931027,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.766720803353442,
+            "tumor_ledger_max_error_million_cells": 4.6629367034256575e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.9670490442777727,
+            "minimum_tumor_million_cells": 0.06410341254410332,
+            "final_double_negative_fraction": 0.93462139878562,
+            "final_effector_million_cells": 0.06467270274914777,
+            "final_memory_million_cells": 0.220766378028549,
+            "peak_cytokine_proxy_arbitrary_units": 0.12497787397654533,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6973337681490972,
+            "tumor_ledger_max_error_million_cells": 7.771561172376096e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 20.45111321666211,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.07659212467874407,
+            "final_effector_million_cells": 0.029590214854123314,
+            "final_memory_million_cells": 0.07067247500515611,
+            "peak_cytokine_proxy_arbitrary_units": 0.08750017928028317,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0473963403201862,
+            "tumor_ledger_max_error_million_cells": 5.10702591327572e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 54,
+        "parameters": {
+          "growth": 0.1465651560826089,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.1471468400547937,
+          "suppression": 0.02587074136883204,
+          "killing": 1.440428242106009,
+          "activation_half": 0.2,
+          "loss19": 0.0032443722913748888,
+          "loss22": 0.002626932015937927,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 11.466152015947975,
+            "minimum_tumor_million_cells": 0.57468848774034,
+            "final_double_negative_fraction": 0.14155819085355426,
+            "final_effector_million_cells": 0.06448005961604784,
+            "final_memory_million_cells": 0.3281636616221456,
+            "peak_cytokine_proxy_arbitrary_units": 0.14613294370789193,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1564643905884595,
+            "tumor_ledger_max_error_million_cells": 3.9968028886505635e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.0878956478252875,
+            "minimum_tumor_million_cells": 0.08204923163700538,
+            "final_double_negative_fraction": 0.9272496788285041,
+            "final_effector_million_cells": 0.09022334554616232,
+            "final_memory_million_cells": 0.3845570233696666,
+            "peak_cytokine_proxy_arbitrary_units": 0.16194885448212779,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0472265455137695,
+            "tumor_ledger_max_error_million_cells": 1.1102230246251565e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 20.77499819042405,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.11073706839179902,
+            "final_effector_million_cells": 0.06809501690148076,
+            "final_memory_million_cells": 0.2659328444487854,
+            "peak_cytokine_proxy_arbitrary_units": 0.12437284680236128,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.6032512618152714,
+            "tumor_ledger_max_error_million_cells": 1.2878587085651816e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 55,
+        "parameters": {
+          "growth": 0.16063950363391946,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.6417875263283742,
+          "suppression": 0.01871099002703525,
+          "killing": 3.9961604971046567,
+          "activation_half": 0.2,
+          "loss19": 0.001849365397395943,
+          "loss22": 0.0036110730331392017,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 15.999567590199135,
+            "minimum_tumor_million_cells": 0.39965860942389125,
+            "final_double_negative_fraction": 0.16267666704754968,
+            "final_effector_million_cells": 0.027628899977343115,
+            "final_memory_million_cells": 0.17235998744594305,
+            "peak_cytokine_proxy_arbitrary_units": 0.07492710087630358,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.37309137435601025,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 1.4844204594367203,
+            "minimum_tumor_million_cells": 0.05368014967842735,
+            "final_double_negative_fraction": 0.9274688395506174,
+            "final_effector_million_cells": 0.035852240925176124,
+            "final_memory_million_cells": 0.19230394509824794,
+            "peak_cytokine_proxy_arbitrary_units": 0.08383181563823851,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3392947819676054,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1001
+          },
+          "and": {
+            "final_tumor_million_cells": 28.022842424229335,
+            "minimum_tumor_million_cells": 0.8722966054676609,
+            "final_double_negative_fraction": 0.10511022753890054,
+            "final_effector_million_cells": 0.031229232611982533,
+            "final_memory_million_cells": 0.14753381806787497,
+            "peak_cytokine_proxy_arbitrary_units": 0.05698315297432251,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5140596270223529,
+            "tumor_ledger_max_error_million_cells": 1.0880185641326534e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 56,
+        "parameters": {
+          "growth": 0.11685539748738034,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.4021043772632635,
+          "suppression": 0.02013705149054587,
+          "killing": 1.4873131818025775,
+          "activation_half": 0.2,
+          "loss19": 0.0012136788576926625,
+          "loss22": 0.0013083445978355045,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 4.9081201490978,
+            "minimum_tumor_million_cells": 0.45806309394221023,
+            "final_double_negative_fraction": 0.10333537155073147,
+            "final_effector_million_cells": 0.06353765110870878,
+            "final_memory_million_cells": 0.3252423243884882,
+            "peak_cytokine_proxy_arbitrary_units": 0.13438910885764763,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0040973229489594,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.4184351682786615,
+            "minimum_tumor_million_cells": 0.06054597754035007,
+            "final_double_negative_fraction": 0.8769060858840291,
+            "final_effector_million_cells": 0.06191965771339603,
+            "final_memory_million_cells": 0.3534769325628531,
+            "peak_cytokine_proxy_arbitrary_units": 0.1512084590184084,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9147427636282288,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "and": {
+            "final_tumor_million_cells": 9.451478219703429,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.06684854651177363,
+            "final_effector_million_cells": 0.09385006147291697,
+            "final_memory_million_cells": 0.2997025256684346,
+            "peak_cytokine_proxy_arbitrary_units": 0.10630966066057715,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.346805478682199,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 57,
+        "parameters": {
+          "growth": 0.1305795362316109,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.7594285454184382,
+          "suppression": 0.05811634822099014,
+          "killing": 3.5878206476901005,
+          "activation_half": 0.2,
+          "loss19": 0.0019471175368574987,
+          "loss22": 0.001033023468234778,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 7.2190902377528285,
+            "minimum_tumor_million_cells": 0.3689592914446193,
+            "final_double_negative_fraction": 0.09609623969958384,
+            "final_effector_million_cells": 0.019154198613884597,
+            "final_memory_million_cells": 0.10524047219519955,
+            "peak_cytokine_proxy_arbitrary_units": 0.07641693072996798,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.383261097113785,
+            "tumor_ledger_max_error_million_cells": 2.4424906541753444e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 0.5865269528105791,
+            "minimum_tumor_million_cells": 0.04526194872936312,
+            "final_double_negative_fraction": 0.9171384107989999,
+            "final_effector_million_cells": 0.02898113942941224,
+            "final_memory_million_cells": 0.1555595399528193,
+            "peak_cytokine_proxy_arbitrary_units": 0.0867869159835267,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3534054884641967,
+            "tumor_ledger_max_error_million_cells": 4.440892098500626e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 13.651026994145772,
+            "minimum_tumor_million_cells": 0.8278683501277607,
+            "final_double_negative_fraction": 0.0730637299554245,
+            "final_effector_million_cells": 0.014324034978507802,
+            "final_memory_million_cells": 0.037650682159030543,
+            "peak_cytokine_proxy_arbitrary_units": 0.056469157292004656,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.49780443864685775,
+            "tumor_ledger_max_error_million_cells": 3.552713678800501e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 58,
+        "parameters": {
+          "growth": 0.10837405509736986,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.8666666160652031,
+          "suppression": 0.02231051453097724,
+          "killing": 1.890770548993268,
+          "activation_half": 0.2,
+          "loss19": 0.0024611697229781925,
+          "loss22": 0.0018029426414058068,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 3.9401884923890833,
+            "minimum_tumor_million_cells": 0.4219247734569483,
+            "final_double_negative_fraction": 0.11739117486268794,
+            "final_effector_million_cells": 0.044333001492407625,
+            "final_memory_million_cells": 0.3081052920920462,
+            "peak_cytokine_proxy_arbitrary_units": 0.10513096217302938,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7476306756034481,
+            "tumor_ledger_max_error_million_cells": 3.3306690738754696e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.3582772784077419,
+            "minimum_tumor_million_cells": 0.05833922188797332,
+            "final_double_negative_fraction": 0.8403478568110082,
+            "final_effector_million_cells": 0.039821178080138186,
+            "final_memory_million_cells": 0.3280083111326254,
+            "peak_cytokine_proxy_arbitrary_units": 0.12068449678390164,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6875450305137749,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 7.674965439407083,
+            "minimum_tumor_million_cells": 0.9623443584692996,
+            "final_double_negative_fraction": 0.08917713940613843,
+            "final_effector_million_cells": 0.07190192951137356,
+            "final_memory_million_cells": 0.2915142135118526,
+            "peak_cytokine_proxy_arbitrary_units": 0.07627041486567007,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.979128661862146,
+            "tumor_ledger_max_error_million_cells": 1.9984014443252818e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 59,
+        "parameters": {
+          "growth": 0.11047414675113694,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.2665384939279574,
+          "suppression": 0.02727485237259778,
+          "killing": 3.8503693951500684,
+          "activation_half": 0.2,
+          "loss19": 0.0012216886586746568,
+          "loss22": 0.0020545726610944636,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 4.062411989566349,
+            "minimum_tumor_million_cells": 0.3238889068361464,
+            "final_double_negative_fraction": 0.12192539838908371,
+            "final_effector_million_cells": 0.020983475956347104,
+            "final_memory_million_cells": 0.15870227015392374,
+            "peak_cytokine_proxy_arbitrary_units": 0.0741897447874733,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3339453452420009,
+            "tumor_ledger_max_error_million_cells": 1.7763568394002505e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "or": {
+            "final_tumor_million_cells": 0.3344055501541818,
+            "minimum_tumor_million_cells": 0.038762564112183706,
+            "final_double_negative_fraction": 0.8853605072808699,
+            "final_effector_million_cells": 0.018513829574257325,
+            "final_memory_million_cells": 0.17990358650942254,
+            "peak_cytokine_proxy_arbitrary_units": 0.08372761897929422,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3108696800455871,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1001
+          },
+          "and": {
+            "final_tumor_million_cells": 7.95296939756164,
+            "minimum_tumor_million_cells": 0.7311842433387624,
+            "final_double_negative_fraction": 0.07650321600940846,
+            "final_effector_million_cells": 0.032167180382325584,
+            "final_memory_million_cells": 0.1191363384209151,
+            "peak_cytokine_proxy_arbitrary_units": 0.05548323857908346,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.42316913088791164,
+            "tumor_ledger_max_error_million_cells": 2.6645352591003757e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 60,
+        "parameters": {
+          "growth": 0.27628302506110086,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.6711408726267563,
+          "suppression": 0.05985624565160037,
+          "killing": 2.6752804103641137,
+          "activation_half": 0.2,
+          "loss19": 0.0011403781142316058,
+          "loss22": 0.003750497208621142,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 85.80458048900817,
+            "minimum_tumor_million_cells": 0.7617213809910635,
+            "final_double_negative_fraction": 0.16601817523460113,
+            "final_effector_million_cells": 0.00016734967811781268,
+            "final_memory_million_cells": 0.0010251956857832384,
+            "peak_cytokine_proxy_arbitrary_units": 0.10988001446487962,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7477390957425545,
+            "tumor_ledger_max_error_million_cells": 6.838973831690964e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 977
+          },
+          "or": {
+            "final_tumor_million_cells": 31.279065454145716,
+            "minimum_tumor_million_cells": 0.11496690571231352,
+            "final_double_negative_fraction": 0.9868418190706181,
+            "final_effector_million_cells": 0.013863463957233972,
+            "final_memory_million_cells": 0.040687299558579665,
+            "peak_cytokine_proxy_arbitrary_units": 0.11873797874552018,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.7421177880679715,
+            "tumor_ledger_max_error_million_cells": 6.8833827526759706e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 992
+          },
+          "and": {
+            "final_tumor_million_cells": 92.62129691615148,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0952480289462855,
+            "final_effector_million_cells": 3.8501032003448985e-08,
+            "final_memory_million_cells": 9.688493104121297e-08,
+            "peak_cytokine_proxy_arbitrary_units": 0.10064826506751313,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0266155444691956,
+            "tumor_ledger_max_error_million_cells": 3.4638958368304884e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      },
+      {
+        "sample": 61,
+        "parameters": {
+          "growth": 0.1536930169387488,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.5102260931330967,
+          "suppression": 0.022040174703603036,
+          "killing": 2.43614405796171,
+          "activation_half": 0.2,
+          "loss19": 0.0020047580264875736,
+          "loss22": 0.0014959871023402529,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 13.525482433511035,
+            "minimum_tumor_million_cells": 0.49261167163466646,
+            "final_double_negative_fraction": 0.10902470264991038,
+            "final_effector_million_cells": 0.04273606537706374,
+            "final_memory_million_cells": 0.2757267002842932,
+            "peak_cytokine_proxy_arbitrary_units": 0.09412914610202679,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6628079116117527,
+            "tumor_ledger_max_error_million_cells": 3.1086244689504383e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 1.2327051377674514,
+            "minimum_tumor_million_cells": 0.07060861815783104,
+            "final_double_negative_fraction": 0.899080939318226,
+            "final_effector_million_cells": 0.057747913970412484,
+            "final_memory_million_cells": 0.2996581912438488,
+            "peak_cytokine_proxy_arbitrary_units": 0.10647607842186635,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.599355290333269,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 974
+          },
+          "and": {
+            "final_tumor_million_cells": 23.96220270566577,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.0803273789399762,
+            "final_effector_million_cells": 0.04857687550262541,
+            "final_memory_million_cells": 0.2635953652367435,
+            "peak_cytokine_proxy_arbitrary_units": 0.07095032558926075,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9309507521223415,
+            "tumor_ledger_max_error_million_cells": 7.993605777301127e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 62,
+        "parameters": {
+          "growth": 0.1144323816684594,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.5807039535671648,
+          "suppression": 0.02686337175928118,
+          "killing": 2.3417935708831106,
+          "activation_half": 0.2,
+          "loss19": 0.001532697424606493,
+          "loss22": 0.0037263228526504856,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 4.583282949817894,
+            "minimum_tumor_million_cells": 0.39032531849387686,
+            "final_double_negative_fraction": 0.16504414369734374,
+            "final_effector_million_cells": 0.03789914006865393,
+            "final_memory_million_cells": 0.19891942499707102,
+            "peak_cytokine_proxy_arbitrary_units": 0.095916872249995,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5944858245638949,
+            "tumor_ledger_max_error_million_cells": 8.881784197001252e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 0.4071789394501587,
+            "minimum_tumor_million_cells": 0.05209650761139563,
+            "final_double_negative_fraction": 0.8901464680231711,
+            "final_effector_million_cells": 0.03733562902343584,
+            "final_memory_million_cells": 0.2303424332334678,
+            "peak_cytokine_proxy_arbitrary_units": 0.10934701806944068,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5467742833124053,
+            "tumor_ledger_max_error_million_cells": 6.661338147750939e-16,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 989
+          },
+          "and": {
+            "final_tumor_million_cells": 9.043128294818578,
+            "minimum_tumor_million_cells": 0.8983672763142188,
+            "final_double_negative_fraction": 0.10062007177048397,
+            "final_effector_million_cells": 0.050689383534761705,
+            "final_memory_million_cells": 0.14984136371089732,
+            "peak_cytokine_proxy_arbitrary_units": 0.06973415383674379,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.76675083310588,
+            "tumor_ledger_max_error_million_cells": 2.886579864025407e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 947
+          }
+        }
+      },
+      {
+        "sample": 63,
+        "parameters": {
+          "growth": 0.2119342420347982,
+          "capacity": 100.0,
+          "proliferation": 0.8,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 0.6340370336903918,
+          "suppression": 0.03783598563545537,
+          "killing": 1.5962275058312765,
+          "activation_half": 0.2,
+          "loss19": 0.002761349985566016,
+          "loss22": 0.0027205539034768048,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "results": {
+          "cd19": {
+            "final_tumor_million_cells": 47.50732165373775,
+            "minimum_tumor_million_cells": 0.816303786934308,
+            "final_double_negative_fraction": 0.1431540908475104,
+            "final_effector_million_cells": 0.02153258185358844,
+            "final_memory_million_cells": 0.2160442092323739,
+            "peak_cytokine_proxy_arbitrary_units": 0.1513341256742623,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2783223517132027,
+            "tumor_ledger_max_error_million_cells": 1.2434497875801753e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "or": {
+            "final_tumor_million_cells": 6.748704870597536,
+            "minimum_tumor_million_cells": 0.12358196119672663,
+            "final_double_negative_fraction": 0.9708811144693111,
+            "final_effector_million_cells": 0.12314472968740554,
+            "final_memory_million_cells": 0.40774888433056344,
+            "peak_cytokine_proxy_arbitrary_units": 0.16202055056560874,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2048919567122491,
+            "tumor_ledger_max_error_million_cells": 2.886579864025407e-15,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 962
+          },
+          "and": {
+            "final_tumor_million_cells": 64.75740612628188,
+            "minimum_tumor_million_cells": 1.0,
+            "final_double_negative_fraction": 0.10552911656513494,
+            "final_effector_million_cells": 0.011293213295822745,
+            "final_memory_million_cells": 0.08502730485056638,
+            "peak_cytokine_proxy_arbitrary_units": 0.1482649555131071,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.8317680085392312,
+            "tumor_ledger_max_error_million_cells": 5.240252676230739e-14,
+            "minimum_integrated_state": 0.0,
+            "rhs_evaluations": 1007
+          }
+        }
+      }
+    ]
+  },
+  "adapter_component": {
+    "parameters_nM": {
+      "car_kd": 0.03,
+      "target_kd": 1.0,
+      "car_total": 0.01,
+      "target_total": 0.01
+    },
+    "peak_free_adapter_nM": 0.17320508075688773,
+    "maximum_bridge_fraction_of_limiting_receptor": 0.007161587017130412,
+    "exposure_half_life_minutes_synthetic": 60,
+    "boundary": "Separate free-ligand equilibrium demonstration for FITC-folate; no coupling to CD19/CD22 populations, dose conversion or residence-time prediction."
+  },
+  "end_to_end_seconds_including_figures": 2.1612332079093903
+}

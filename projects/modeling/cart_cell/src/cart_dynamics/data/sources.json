@@ -1,0 +1,43 @@
+{
+  "barros2021": {
+    "title": "CARTmath—A Mathematical Model of CAR-T Immunotherapy in Preclinical Studies of Hematological Cancers",
+    "authors": "Barros et al.",
+    "doi": "https://doi.org/10.3390/cancers13122941",
+    "open_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8231202/",
+    "license": "CC BY 4.0; parameter values transcribed from Table 2, HDLM-2 + CAR-T 123 column",
+    "equations": "1–3; coexistence values reported in section 2.3",
+    "parameter_order_note": "Rates are per day; recall, suppression and killing are per cell per day; inverse_capacity is per cell.",
+    "hdlm2_parameters": {
+      "proliferation": 0.265,
+      "reduction": 0.350,
+      "memory_formation": 0.150,
+      "recall": 0.000006,
+      "suppression": 0.000000045,
+      "memory_death": 0.005,
+      "growth": 0.05650026,
+      "inverse_capacity": 0.000000000001404029,
+      "killing": 0.000003715843
+    },
+    "reported_equilibria_cells": [[15205, 197519, 1089], [15205, 263, 1442522]],
+    "reference_discrepancy": "Table 2 implies a lower tumor root of 1091.197 cells, whereas section 2.3 prints 1089 (0.202% difference). Table parameters are retained without adjustment; residuals and both numerical roots are reported.",
+    "boundary": "This is a CD123/HDLM-2 immunodeficient-mouse reference, not B-ALL calibration. The paper approximated BLI units as cells without an established conversion. Its other parameters were not uniquely inferred. No original experimental data or author code are redistributed."
+  },
+  "lee2019": {
+    "doi": "https://doi.org/10.1038/s41467-019-10565-7",
+    "open_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6581910/",
+    "architecture": "Anti-fluorescein CAR, FITC-folate adapter and folate-receptor-positive targets; preclinical study",
+    "car_cell_binding_kd_nM": 0.03,
+    "folate_receptor_binding_kd_nM": 1.0,
+    "source_location": "Results: Characterization of an anti-fluorescein CAR",
+    "boundary": "Use cell-binding Kd 30 pM rather than the isolated-antibody 270 fM. Reported human circulation half-life <90 minutes does not establish mouse tumor exposure or receptor residence times. Prototype free-adapter exposures and receptor totals are synthetic; no dose-to-concentration conversion or CRS fit."
+  },
+  "hu2021": {
+    "doi": "https://doi.org/10.1158/1078-0432.CCR-20-3863",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/33627493/",
+    "role": "Clinical motivation for dual CD19/CD22 recognition; six-patient phase I CTA101 study. No patient-level calibration or claimed replication of CTA101 receptor logic."
+  },
+  "synthetic_extension": {
+    "role": "All population-extension rates, antigen-contact rates, loss rates, starting mixtures and uncertainty bounds are illustrative design inputs, not measured B-ALL parameters.",
+    "review_context": "Motivated by the author's 2023 analytical CAR-T review; review text and unpublished materials are not redistributed."
+  }
+}

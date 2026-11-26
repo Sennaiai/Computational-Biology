@@ -20,6 +20,32 @@ def paths(workflow, event):
 
 
 class WorkflowScopeTests(unittest.TestCase):
+    def test_cart_execution_is_isolated_from_completed_studies(self):
+        cart_paths = (
+            "projects/modeling/cart_cell/src/cart_dynamics/pkpd.py",
+            "tests/modeling/cart_cell/test_models.py",
+            ".github/workflows/cart-dynamics.yml",
+        )
+        for event in ("pull_request", "push"):
+            active = paths("cart-dynamics.yml", event)
+            for changed in cart_paths:
+                self.assertTrue(any(fnmatchcase(changed, p) for p in active))
+                for completed in ("quality-control.yml", "crispr-kinetics.yml"):
+                    self.assertFalse(
+                        any(fnmatchcase(changed, p) for p in paths(completed, event))
+                    )
+            for changed in (
+                "README.md",
+                "tests/test_workflow_scope.py",
+                "projects/modeling/crispr_cas9/MODEL.md",
+                "projects/Genomic_Ancestry/Snakefile",
+            ):
+                self.assertFalse(any(fnmatchcase(changed, p) for p in active))
+        self.assertIn(
+            "  workflow_dispatch:",
+            (ROOT / ".github/workflows/cart-dynamics.yml").read_text(),
+        )
+
     def test_crispr_changes_do_not_execute_bioinformatics(self):
         for event in ("pull_request", "push"):
             triggers = paths("quality-control.yml", event)

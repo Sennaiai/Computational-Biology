@@ -1,0 +1,1845 @@
+{
+  "schema_version": 1,
+  "source_sha256": "273096ce3d50d1f660a59874b2a2035ee4b7bdef5411adf22f55c5c7ce38968d",
+  "seed": 20261126,
+  "question": "At matched cumulative adapter input, how do exposure timing and unmeasured binding kinetics change tumor-control/activation-proxy tradeoffs?",
+  "evidence_boundary": "Separate FR-positive adapter architecture; synthetic PK and cellular PD, with published binding Kds. No clinical dose, CRS risk, patient-response calibration or validated combined CD19/CD22 adapter product.",
+  "configuration": {
+    "horizon_days": 14,
+    "input_window_days": 7,
+    "output_interval_days": 0.02,
+    "initial_million_cells": {
+      "effector": 0.2,
+      "memory": 0,
+      "FR_positive_tumor": 0.99,
+      "FR_negative_tumor": 0.01
+    },
+    "population_parameters": {
+      "growth": 0.15,
+      "capacity": 100.0,
+      "proliferation": 0.8,
+      "reduction": 0.35,
+      "memory_formation": 0.15,
+      "memory_death": 0.005,
+      "recall": 1.0,
+      "suppression": 0.03,
+      "killing": 2.0,
+      "activation_half": 0.2,
+      "loss19": 0,
+      "loss22": 0,
+      "cytokine_production": 1.0,
+      "cytokine_clearance": 2.0
+    },
+    "binding_nM": {
+      "car_kd": 0.03,
+      "target_kd": 1.0,
+      "car_total": 0.01,
+      "target_total": 0.01
+    },
+    "kinetics": {
+      "half_life_minutes": 60,
+      "car_off_per_minute": 0.02,
+      "target_off_per_minute": 0.2,
+      "bridge_half_nM": 5e-05
+    },
+    "protocols": [
+      {
+        "name": "no_adapter",
+        "boluses": [],
+        "infusions": []
+      },
+      {
+        "name": "daily_bolus",
+        "boluses": [
+          [
+            0.0,
+            0.1
+          ],
+          [
+            1.0,
+            0.1
+          ],
+          [
+            2.0,
+            0.1
+          ],
+          [
+            3.0,
+            0.1
+          ],
+          [
+            4.0,
+            0.1
+          ],
+          [
+            5.0,
+            0.1
+          ],
+          [
+            6.0,
+            0.1
+          ]
+        ],
+        "infusions": []
+      },
+      {
+        "name": "split_bolus",
+        "boluses": [
+          [
+            0.0,
+            0.025
+          ],
+          [
+            0.25,
+            0.025
+          ],
+          [
+            0.5,
+            0.025
+          ],
+          [
+            0.75,
+            0.025
+          ],
+          [
+            1.0,
+            0.025
+          ],
+          [
+            1.25,
+            0.025
+          ],
+          [
+            1.5,
+            0.025
+          ],
+          [
+            1.75,
+            0.025
+          ],
+          [
+            2.0,
+            0.025
+          ],
+          [
+            2.25,
+            0.025
+          ],
+          [
+            2.5,
+            0.025
+          ],
+          [
+            2.75,
+            0.025
+          ],
+          [
+            3.0,
+            0.025
+          ],
+          [
+            3.25,
+            0.025
+          ],
+          [
+            3.5,
+            0.025
+          ],
+          [
+            3.75,
+            0.025
+          ],
+          [
+            4.0,
+            0.025
+          ],
+          [
+            4.25,
+            0.025
+          ],
+          [
+            4.5,
+            0.025
+          ],
+          [
+            4.75,
+            0.025
+          ],
+          [
+            5.0,
+            0.025
+          ],
+          [
+            5.25,
+            0.025
+          ],
+          [
+            5.5,
+            0.025
+          ],
+          [
+            5.75,
+            0.025
+          ],
+          [
+            6.0,
+            0.025
+          ],
+          [
+            6.25,
+            0.025
+          ],
+          [
+            6.5,
+            0.025
+          ],
+          [
+            6.75,
+            0.025
+          ]
+        ],
+        "infusions": []
+      },
+      {
+        "name": "ramped_bolus",
+        "boluses": [
+          [
+            0.0,
+            0.01111111111111111
+          ],
+          [
+            1.0,
+            0.02222222222222222
+          ],
+          [
+            2.0,
+            0.04444444444444444
+          ],
+          [
+            3.0,
+            0.08888888888888888
+          ],
+          [
+            4.0,
+            0.17777777777777776
+          ],
+          [
+            5.0,
+            0.17777777777777776
+          ],
+          [
+            6.0,
+            0.17777777777777776
+          ]
+        ],
+        "infusions": []
+      },
+      {
+        "name": "continuous",
+        "boluses": [],
+        "infusions": [
+          [
+            0.0,
+            7.0,
+            0.1
+          ]
+        ]
+      }
+    ],
+    "integration": {
+      "solver": "Radau",
+      "rtol": 2e-07,
+      "atol": 1e-11,
+      "max_step_days": 0.1,
+      "input_boundaries": "all boluses and infusion boundaries split exactly; sampled boundary states are post-input"
+    }
+  },
+  "nominal": {
+    "no_adapter": {
+      "final_tumor_million_cells": 7.620100559002072,
+      "minimum_tumor_million_cells": 1.0,
+      "peak_cytokine_proxy_arbitrary_units": 0.0,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.0,
+      "final_car_t_million_cells": 0.07180947628002485,
+      "cumulative_concentration_equivalent_input_nM": 0.0,
+      "free_adapter_auc_nM_days": 0.0,
+      "pk_ledger_error_nM": 0.0,
+      "tumor_ledger_error_million_cells": 3.552713678800501e-15,
+      "minimum_receptor_pool_nM": 0.0,
+      "rhs_evaluations": 1003
+    },
+    "daily_bolus": {
+      "final_tumor_million_cells": 6.325884275802555,
+      "minimum_tumor_million_cells": 0.9936396847053284,
+      "peak_cytokine_proxy_arbitrary_units": 0.026576713877173478,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.10457629417407968,
+      "final_car_t_million_cells": 0.09771345706219862,
+      "cumulative_concentration_equivalent_input_nM": 0.7,
+      "free_adapter_auc_nM_days": 0.04207860535926142,
+      "pk_ledger_error_nM": 5.551115123125783e-16,
+      "tumor_ledger_error_million_cells": 2.3675506000131463e-14,
+      "minimum_receptor_pool_nM": 0.0,
+      "rhs_evaluations": 9972
+    },
+    "split_bolus": {
+      "final_tumor_million_cells": 3.4766855839241715,
+      "minimum_tumor_million_cells": 1.0,
+      "peak_cytokine_proxy_arbitrary_units": 0.10142113415917212,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.4975790876439465,
+      "final_car_t_million_cells": 0.29907773632416723,
+      "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+      "free_adapter_auc_nM_days": 0.04207860535926149,
+      "pk_ledger_error_nM": 7.771561172376096e-16,
+      "tumor_ledger_error_million_cells": 3.3306690738754696e-15,
+      "minimum_receptor_pool_nM": 0.0,
+      "rhs_evaluations": 20660
+    },
+    "ramped_bolus": {
+      "final_tumor_million_cells": 6.707720345626445,
+      "minimum_tumor_million_cells": 1.0,
+      "peak_cytokine_proxy_arbitrary_units": 0.019493897164822922,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.08121063054353196,
+      "final_car_t_million_cells": 0.08366769150669062,
+      "cumulative_concentration_equivalent_input_nM": 0.7,
+      "free_adapter_auc_nM_days": 0.04207860535926145,
+      "pk_ledger_error_nM": 5.551115123125783e-16,
+      "tumor_ledger_error_million_cells": 3.05241942832879e-14,
+      "minimum_receptor_pool_nM": 0.0,
+      "rhs_evaluations": 9674
+    },
+    "continuous": {
+      "final_tumor_million_cells": 2.637472953967421,
+      "minimum_tumor_million_cells": 0.9606441084339452,
+      "peak_cytokine_proxy_arbitrary_units": 0.1303327273080375,
+      "cytokine_proxy_auc_arbitrary_unit_days": 0.6451650161127622,
+      "final_car_t_million_cells": 0.389847267304233,
+      "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+      "free_adapter_auc_nM_days": 0.04207860535926141,
+      "pk_ledger_error_nM": 1.2212453270876722e-15,
+      "tumor_ledger_error_million_cells": 1.5543122344752192e-15,
+      "minimum_receptor_pool_nM": 0.0,
+      "rhs_evaluations": 2702
+    }
+  },
+  "nominal_peak_proxy_frontier_active_protocols": [
+    "daily_bolus",
+    "split_bolus",
+    "ramped_bolus",
+    "continuous"
+  ],
+  "nominal_auc_proxy_frontier_active_protocols": [
+    "daily_bolus",
+    "split_bolus",
+    "ramped_bolus",
+    "continuous"
+  ],
+  "numerical_checks": {
+    "daily_bolus_final_tumor_difference_tighter_tolerances": 3.7236871364143553e-09,
+    "matched_active_input_nM": 0.7,
+    "nominal_free_adapter_auc_nM_days": 0.04207860535926143
+  },
+  "sensitivity": {
+    "design": "Paired Latin-hypercube scenarios, not a posterior or clinical population. Equilibrium Kds fixed; kon varies consistently with each sampled koff.",
+    "samples": 16,
+    "bounds": {
+      "half_life_minutes": [
+        30,
+        89.9
+      ],
+      "car_off_per_minute_log_uniform": [
+        0.002,
+        0.2
+      ],
+      "target_off_per_minute_log_uniform": [
+        0.02,
+        2
+      ],
+      "bridge_half_factor_log_uniform": [
+        0.5,
+        2
+      ],
+      "killing_factor_log_uniform": [
+        0.5,
+        2
+      ],
+      "proliferation_factor_log_uniform": [
+        0.5,
+        2
+      ]
+    },
+    "peak_proxy_frontier_counts": {
+      "daily_bolus": 16,
+      "split_bolus": 15,
+      "ramped_bolus": 15,
+      "continuous": 15
+    },
+    "auc_proxy_frontier_counts": {
+      "daily_bolus": 16,
+      "split_bolus": 16,
+      "ramped_bolus": 16,
+      "continuous": 15
+    },
+    "lowest_final_tumor_counts": {
+      "daily_bolus": 0,
+      "split_bolus": 1,
+      "ramped_bolus": 0,
+      "continuous": 15
+    },
+    "runs": [
+      {
+        "sample": 0,
+        "kinetics": {
+          "half_life_minutes": 82.79404849830146,
+          "car_off_per_minute": 0.014898335790790024,
+          "target_off_per_minute": 1.7491216234100648,
+          "bridge_half_nM": 9.728014614625714e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.5017686677207926,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 2.9544912976748594,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.190959397308738,
+            "minimum_tumor_million_cells": 0.991571933442154,
+            "peak_cytokine_proxy_arbitrary_units": 0.02519836053633067,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.09629828474202565,
+            "final_car_t_million_cells": 0.07973126485457128,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05806430154759292,
+            "pk_ledger_error_nM": 9.992007221626409e-16,
+            "tumor_ledger_error_million_cells": 1.2712053631958042e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10608
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 4.6408753141126,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.03844848105757748,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.2629798881713704,
+            "final_car_t_million_cells": 0.12258966309412447,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.05806430154759289,
+            "pk_ledger_error_nM": 1.9984014443252818e-15,
+            "tumor_ledger_error_million_cells": 4.363176486776865e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 21325
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.648037378056481,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.015390570712534269,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.07345621466865236,
+            "final_car_t_million_cells": 0.06947691723090363,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05806430154759307,
+            "pk_ledger_error_nM": 1.3322676295501878e-15,
+            "tumor_ledger_error_million_cells": 3.083644450896372e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10307
+          },
+          "continuous": {
+            "final_tumor_million_cells": 4.433567794318932,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.042744974641979905,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.28921833578235207,
+            "final_car_t_million_cells": 0.1294855877790398,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.058064301547602455,
+            "pk_ledger_error_nM": 1.136816335511881e-13,
+            "tumor_ledger_error_million_cells": 6.622090029106964e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2648
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 1,
+        "kinetics": {
+          "half_life_minutes": 32.36370028209449,
+          "car_off_per_minute": 0.0992314096253869,
+          "target_off_per_minute": 0.04952558479549781,
+          "bridge_half_nM": 8.730629249329027e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 1.3801796164908202,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.092765527669346,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 7.372955298508706,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.014054308862025916,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.04121805120224833,
+            "final_car_t_million_cells": 0.09587410600046722,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.022696989535594538,
+            "pk_ledger_error_nM": 7.771561172376096e-16,
+            "tumor_ledger_error_million_cells": 1.8110513089197866e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10472
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 6.813323127082673,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.044177353492470234,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.20088037164894634,
+            "final_car_t_million_cells": 0.22165551273494638,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.02269698953559459,
+            "pk_ledger_error_nM": 1.6653345369377348e-15,
+            "tumor_ledger_error_million_cells": 4.6074255521944e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 25904
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 7.462286536735249,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.008173505453715797,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.0297376879522093,
+            "final_car_t_million_cells": 0.08440386085774353,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.02269698953559454,
+            "pk_ledger_error_nM": 6.661338147750939e-16,
+            "tumor_ledger_error_million_cells": 3.7192471324942744e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10046
+          },
+          "continuous": {
+            "final_tumor_million_cells": 5.579327691376533,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.21402667625687755,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6892293205838091,
+            "final_car_t_million_cells": 0.6704614093080483,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.02269698953559424,
+            "pk_ledger_error_nM": 9.880984919163893e-15,
+            "tumor_ledger_error_million_cells": 2.1094237467877974e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2684
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 2,
+        "kinetics": {
+          "half_life_minutes": 71.86863866751662,
+          "car_off_per_minute": 0.002204134231988175,
+          "target_off_per_minute": 0.9581883573908586,
+          "bridge_half_nM": 5.7161798038352134e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.6719397050575426,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.3572101374542644,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 4.9547721679477865,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.08625558086701494,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.445287754107038,
+            "final_car_t_million_cells": 0.2150563487736215,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05040220140329655,
+            "pk_ledger_error_nM": 1.2212453270876722e-15,
+            "tumor_ledger_error_million_cells": 1.1601830607332886e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9892
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 4.1370721928319645,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.12069224175243735,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6290876553147754,
+            "final_car_t_million_cells": 0.29235663086848607,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.05040220140329647,
+            "pk_ledger_error_nM": 8.326672684688674e-16,
+            "tumor_ledger_error_million_cells": 1.9964932485017073e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 18682
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 5.732617337024425,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.07841139412926397,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3181622047069031,
+            "final_car_t_million_cells": 0.15782395574857716,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.050402201403296445,
+            "pk_ledger_error_nM": 5.551115123125783e-16,
+            "tumor_ledger_error_million_cells": 2.2648549702353193e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9597
+          },
+          "continuous": {
+            "final_tumor_million_cells": 4.1528783277651256,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.12179084098309383,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6321745109954333,
+            "final_car_t_million_cells": 0.29218143412338016,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.050402201403697895,
+            "pk_ledger_error_nM": 5.615423057103719e-12,
+            "tumor_ledger_error_million_cells": 5.662137425588298e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2641
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus"
+        ]
+      },
+      {
+        "sample": 3,
+        "kinetics": {
+          "half_life_minutes": 61.743269268719715,
+          "car_off_per_minute": 0.003358845253045671,
+          "target_off_per_minute": 0.09025462215312974,
+          "bridge_half_nM": 3.092424333493976e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 1.1647886400021052,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.520014400580648,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 2.04343202601189,
+            "minimum_tumor_million_cells": 0.713682491242975,
+            "peak_cytokine_proxy_arbitrary_units": 0.2138249057566909,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.837293866179735,
+            "final_car_t_million_cells": 0.7406648235191046,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.0433011776858178,
+            "pk_ledger_error_nM": 9.992007221626409e-16,
+            "tumor_ledger_error_million_cells": 2.220446049250313e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9322
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 0.4739924999187145,
+            "minimum_tumor_million_cells": 0.17862591370001693,
+            "peak_cytokine_proxy_arbitrary_units": 0.2497813057091012,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.248260085764769,
+            "final_car_t_million_cells": 1.1769442333900457,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.043301177685817836,
+            "pk_ledger_error_nM": 7.216449660063518e-16,
+            "tumor_ledger_error_million_cells": 1.9984014443252818e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 17045
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 2.9440828742688856,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.22603997701462758,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6766244329050586,
+            "final_car_t_million_cells": 0.58499254916448,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04330117768581794,
+            "pk_ledger_error_nM": 1.6653345369377348e-15,
+            "tumor_ledger_error_million_cells": 3.594347042223944e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9105
+          },
+          "continuous": {
+            "final_tumor_million_cells": 0.4440412962278501,
+            "minimum_tumor_million_cells": 0.17078986833532195,
+            "peak_cytokine_proxy_arbitrary_units": 0.2538788710303605,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.2682253253176328,
+            "final_car_t_million_cells": 1.19790852371008,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.04330117768581785,
+            "pk_ledger_error_nM": 9.992007221626409e-16,
+            "tumor_ledger_error_million_cells": 1.7763568394002505e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2719
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 4,
+        "kinetics": {
+          "half_life_minutes": 46.946995436729395,
+          "car_off_per_minute": 0.1206889065449057,
+          "target_off_per_minute": 0.4461034933889218,
+          "bridge_half_nM": 2.8853052229288592e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 1.0547997887220328,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.9175676558743016,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.39456544830293,
+            "minimum_tumor_million_cells": 0.9897388980377739,
+            "peak_cytokine_proxy_arbitrary_units": 0.02406212619847912,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.08875325809116236,
+            "final_car_t_million_cells": 0.10489192825727667,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.03292440156308633,
+            "pk_ledger_error_nM": 1.887379141862766e-15,
+            "tumor_ledger_error_million_cells": 7.605027718682322e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10531
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 2.721110405535174,
+            "minimum_tumor_million_cells": 0.9613666416014252,
+            "peak_cytokine_proxy_arbitrary_units": 0.1253464600216833,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5615645971929107,
+            "final_car_t_million_cells": 0.447035166578483,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.032924401563086333,
+            "pk_ledger_error_nM": 1.6653345369377348e-15,
+            "tumor_ledger_error_million_cells": 5.662137425588298e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 24752
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.732075752459568,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.01791949115555913,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.06963079952330914,
+            "final_car_t_million_cells": 0.09008308605106305,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.0329244015630864,
+            "pk_ledger_error_nM": 6.661338147750939e-16,
+            "tumor_ledger_error_million_cells": 6.6058269965196814e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10346
+          },
+          "continuous": {
+            "final_tumor_million_cells": 0.7688705774137579,
+            "minimum_tumor_million_cells": 0.2757479024979269,
+            "peak_cytokine_proxy_arbitrary_units": 0.17773410464723752,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.9528137567464016,
+            "final_car_t_million_cells": 0.8107882769781739,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.03292440156308644,
+            "pk_ledger_error_nM": 2.220446049250313e-16,
+            "tumor_ledger_error_million_cells": 8.881784197001252e-16,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2803
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 5,
+        "kinetics": {
+          "half_life_minutes": 34.702053003469864,
+          "car_off_per_minute": 0.0416132457259698,
+          "target_off_per_minute": 0.06698679886739407,
+          "bridge_half_nM": 2.671367298227736e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.7163148969687403,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.6723127771308142,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.855270063777453,
+            "minimum_tumor_million_cells": 0.9948934248337042,
+            "peak_cytokine_proxy_arbitrary_units": 0.020501037447099205,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.05940167929160035,
+            "final_car_t_million_cells": 0.07580652657462623,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.02433689989148633,
+            "pk_ledger_error_nM": 8.881784197001252e-16,
+            "tumor_ledger_error_million_cells": 3.858025010572419e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10043
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 5.055354738697586,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.05198262547810588,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.2872392002887712,
+            "final_car_t_million_cells": 0.15858957570578114,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.024336899891486317,
+            "pk_ledger_error_nM": 1.5543122344752192e-15,
+            "tumor_ledger_error_million_cells": 5.88418203051333e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 23774
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 7.076287303047418,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.01275437767204277,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.047324413033927024,
+            "final_car_t_million_cells": 0.06872264105599807,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.024336899891486394,
+            "pk_ledger_error_nM": 1.2212453270876722e-15,
+            "tumor_ledger_error_million_cells": 3.1780134079895106e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9842
+          },
+          "continuous": {
+            "final_tumor_million_cells": 3.0098517316739883,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.13214554837890236,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6447627553186185,
+            "final_car_t_million_cells": 0.3378545359705836,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.024336899891486134,
+            "pk_ledger_error_nM": 7.438494264988549e-15,
+            "tumor_ledger_error_million_cells": 3.774758283725532e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2663
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 6,
+        "kinetics": {
+          "half_life_minutes": 80.75239120165838,
+          "car_off_per_minute": 0.0332290865366141,
+          "target_off_per_minute": 0.7859745559344243,
+          "bridge_half_nM": 4.72086907513198e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.8426791866201935,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.202032880185675,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.4158161839952585,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.0334598110384174,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.16144455624047763,
+            "final_car_t_million_cells": 0.12099306158705579,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05663246668652134,
+            "pk_ledger_error_nM": 1.3322676295501878e-15,
+            "tumor_ledger_error_million_cells": 2.4424906541753444e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10373
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.293628062838174,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.19218868271524686,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.8095257829899587,
+            "final_car_t_million_cells": 0.4810035198612781,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.05663246668652129,
+            "pk_ledger_error_nM": 6.106226635438361e-16,
+            "tumor_ledger_error_million_cells": 7.327471962526033e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 21956
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.756417740823539,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.03260324655153093,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.12423243667775195,
+            "final_car_t_million_cells": 0.1003017611973636,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05663246668652131,
+            "pk_ledger_error_nM": 8.881784197001252e-16,
+            "tumor_ledger_error_million_cells": 1.0783041126671833e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10074
+          },
+          "continuous": {
+            "final_tumor_million_cells": 2.51229653476743,
+            "minimum_tumor_million_cells": 0.9211436948225381,
+            "peak_cytokine_proxy_arbitrary_units": 0.23398537395743074,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.0006651603712764,
+            "final_car_t_million_cells": 0.6082465679499277,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.05663246668652306,
+            "pk_ledger_error_nM": 2.1316282072803006e-14,
+            "tumor_ledger_error_million_cells": 2.4424906541753444e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2731
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 7,
+        "kinetics": {
+          "half_life_minutes": 57.060206047485714,
+          "car_off_per_minute": 0.004837650394231911,
+          "target_off_per_minute": 0.02564756699434277,
+          "bridge_half_nM": 3.936709301295194e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.5479391981441295,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 2.0875452431236448,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 5.2974400100112184,
+            "minimum_tumor_million_cells": 0.9909339339262867,
+            "peak_cytokine_proxy_arbitrary_units": 0.03831236974625985,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.2015624652739686,
+            "final_car_t_million_cells": 0.1053329999123485,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04001689819983824,
+            "pk_ledger_error_nM": 6.661338147750939e-16,
+            "tumor_ledger_error_million_cells": 3.0531133177191805e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 8965
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.3842310431096476,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.07520614258216325,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.45307245419625747,
+            "final_car_t_million_cells": 0.19046451782049967,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.040016898199838266,
+            "pk_ledger_error_nM": 5.551115123125783e-16,
+            "tumor_ledger_error_million_cells": 3.774758283725532e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 15244
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 5.969172960846336,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.03434454561397022,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.15529364417614644,
+            "final_car_t_million_cells": 0.08594853520984848,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04001689819983826,
+            "pk_ledger_error_nM": 6.661338147750939e-16,
+            "tumor_ledger_error_million_cells": 2.942091015256665e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 8773
+          },
+          "continuous": {
+            "final_tumor_million_cells": 3.3065275678769446,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.07765097785068695,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.46759124875504837,
+            "final_car_t_million_cells": 0.1945089418844115,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000008,
+            "free_adapter_auc_nM_days": 0.04001689819983823,
+            "pk_ledger_error_nM": 1.3322676295501878e-15,
+            "tumor_ledger_error_million_cells": 1.4765966227514582e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2621
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 8,
+        "kinetics": {
+          "half_life_minutes": 87.97795655542131,
+          "car_off_per_minute": 0.00833853814628346,
+          "target_off_per_minute": 1.2833392287149323,
+          "bridge_half_nM": 6.707255762515339e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.9676771729032675,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.0060356805146806,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.278541818680398,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.05880079863189098,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.25363863921829827,
+            "final_car_t_million_cells": 0.18572579068668357,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.06169982857016367,
+            "pk_ledger_error_nM": 5.551115123125783e-16,
+            "tumor_ledger_error_million_cells": 3.941291737419306e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10321
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.2950803321191584,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.29135568502923326,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.1019534419970438,
+            "final_car_t_million_cells": 0.7528634846575828,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.06169982857016345,
+            "pk_ledger_error_nM": 3.1086244689504383e-15,
+            "tumor_ledger_error_million_cells": 5.995204332975845e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 19592
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.68430245168132,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.05465049542623857,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.18678134387603046,
+            "final_car_t_million_cells": 0.14498863474864715,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.06169982857016358,
+            "pk_ledger_error_nM": 1.1102230246251565e-15,
+            "tumor_ledger_error_million_cells": 1.0685896612017132e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10027
+          },
+          "continuous": {
+            "final_tumor_million_cells": 3.07683272610339,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.310748028789416,
+            "cytokine_proxy_auc_arbitrary_unit_days": 1.182075351248171,
+            "final_car_t_million_cells": 0.8126867926194186,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.06169982857019461,
+            "pk_ledger_error_nM": 3.5202223080954553e-13,
+            "tumor_ledger_error_million_cells": 9.325873406851315e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2701
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 9,
+        "kinetics": {
+          "half_life_minutes": 52.707616835928945,
+          "car_off_per_minute": 0.018486600758289368,
+          "target_off_per_minute": 0.16124733227166435,
+          "bridge_half_nM": 7.351426005792406e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 1.3292706828778469,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 3.6969604322134404,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 5.765545603505727,
+            "minimum_tumor_million_cells": 0.9795129420792721,
+            "peak_cytokine_proxy_arbitrary_units": 0.023582059393022176,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.09566557211641666,
+            "final_car_t_million_cells": 0.13633494374411095,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.03696438347110371,
+            "pk_ledger_error_nM": 1.5543122344752192e-15,
+            "tumor_ledger_error_million_cells": 8.970602038971265e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9837
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 1.9322665557328629,
+            "minimum_tumor_million_cells": 0.6845358267192545,
+            "peak_cytokine_proxy_arbitrary_units": 0.09279231979520862,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.48014399471383096,
+            "final_car_t_million_cells": 0.5248820651735299,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.03696438347110354,
+            "pk_ledger_error_nM": 2.3314683517128287e-15,
+            "tumor_ledger_error_million_cells": 3.6637359812630166e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 20857
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.3328977570972675,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.020238349769439373,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.0722039622190619,
+            "final_car_t_million_cells": 0.11231793075322587,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.03696438347110356,
+            "pk_ledger_error_nM": 1.2212453270876722e-15,
+            "tumor_ledger_error_million_cells": 3.5177416535248085e-13,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9566
+          },
+          "continuous": {
+            "final_tumor_million_cells": 1.1367894408892727,
+            "minimum_tumor_million_cells": 0.41108677457629006,
+            "peak_cytokine_proxy_arbitrary_units": 0.10594801078477649,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.6006279224621621,
+            "final_car_t_million_cells": 0.6668454727596785,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.03696438347110363,
+            "pk_ledger_error_nM": 1.4432899320127035e-15,
+            "tumor_ledger_error_million_cells": 1.5543122344752192e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2639
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 10,
+        "kinetics": {
+          "half_life_minutes": 68.03402517589004,
+          "car_off_per_minute": 0.16812579130378022,
+          "target_off_per_minute": 0.20238248307093173,
+          "bridge_half_nM": 3.5750785073525505e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.5747917100721198,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 1.7296188811578987,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.358715512877599,
+            "minimum_tumor_million_cells": 0.9929598157037084,
+            "peak_cytokine_proxy_arbitrary_units": 0.028012297156350695,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.10594579560997285,
+            "final_car_t_million_cells": 0.07947187262801489,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04771294827297229,
+            "pk_ledger_error_nM": 1.3322676295501878e-15,
+            "tumor_ledger_error_million_cells": 1.1352030426792226e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10621
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.974162013678955,
+            "minimum_tumor_million_cells": 0.9992762836435908,
+            "peak_cytokine_proxy_arbitrary_units": 0.07358350888011167,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4170117345074881,
+            "final_car_t_million_cells": 0.17904414924976328,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.04771294827297212,
+            "pk_ledger_error_nM": 1.9984014443252818e-15,
+            "tumor_ledger_error_million_cells": 2.942091015256665e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 20997
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.707644874307026,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.018428983800744977,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.0839123279648173,
+            "final_car_t_million_cells": 0.06937001184661884,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04771294827297225,
+            "pk_ledger_error_nM": 5.551115123125783e-16,
+            "tumor_ledger_error_million_cells": 4.163405731283376e-13,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10329
+          },
+          "continuous": {
+            "final_tumor_million_cells": 2.9356947208460253,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.10034700444777171,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5610212583339044,
+            "final_car_t_million_cells": 0.23742884445631252,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.047712948272974266,
+            "pk_ledger_error_nM": 2.986499936241671e-14,
+            "tumor_ledger_error_million_cells": 2.6645352591003757e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2717
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 11,
+        "kinetics": {
+          "half_life_minutes": 42.10627308451355,
+          "car_off_per_minute": 0.026343087584218643,
+          "target_off_per_minute": 0.13575154668404726,
+          "bridge_half_nM": 8.222076273099228e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 1.5006175962790742,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 2.380371249435321,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.776354591233333,
+            "minimum_tumor_million_cells": 0.9973981141708171,
+            "peak_cytokine_proxy_arbitrary_units": 0.018550947359024888,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.06688651673504822,
+            "final_car_t_million_cells": 0.12067719525229886,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.02952955413787561,
+            "pk_ledger_error_nM": 4.440892098500626e-16,
+            "tumor_ledger_error_million_cells": 5.10702591327572e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9902
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 4.167012399341002,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.11361286759531164,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.4376474250247725,
+            "final_car_t_million_cells": 0.4986799464190828,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.029529554137875683,
+            "pk_ledger_error_nM": 1.1102230246251565e-15,
+            "tumor_ledger_error_million_cells": 4.884981308350689e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 22984
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 7.061960336694942,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.013530775995535227,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.04896036469086817,
+            "final_car_t_million_cells": 0.10144054263941105,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.029529554137875638,
+            "pk_ledger_error_nM": 6.661338147750939e-16,
+            "tumor_ledger_error_million_cells": 7.105427357601002e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9658
+          },
+          "continuous": {
+            "final_tumor_million_cells": 2.2390794003452266,
+            "minimum_tumor_million_cells": 0.8101259523037146,
+            "peak_cytokine_proxy_arbitrary_units": 0.2066979042665577,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.844680503516132,
+            "final_car_t_million_cells": 0.9948638042853857,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000006,
+            "free_adapter_auc_nM_days": 0.02952955413787551,
+            "pk_ledger_error_nM": 3.552713678800501e-15,
+            "tumor_ledger_error_million_cells": 2.220446049250313e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2628
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 12,
+        "kinetics": {
+          "half_life_minutes": 38.985310433062004,
+          "car_off_per_minute": 0.009544332602479359,
+          "target_off_per_minute": 0.6123011337544129,
+          "bridge_half_nM": 5.227997795010252e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.9348844981847558,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 2.349765930112587,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.266586406777602,
+            "minimum_tumor_million_cells": 0.9927695829555061,
+            "peak_cytokine_proxy_arbitrary_units": 0.025335625417804482,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.1030945139628132,
+            "final_car_t_million_cells": 0.1093729800262846,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.027340791542018524,
+            "pk_ledger_error_nM": 8.881784197001252e-16,
+            "tumor_ledger_error_million_cells": 1.3281042932078435e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 11041
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.6488132488716793,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.10082963107490342,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.47399926559265615,
+            "final_car_t_million_cells": 0.33948307283054674,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.027340791542018548,
+            "pk_ledger_error_nM": 1.5543122344752192e-15,
+            "tumor_ledger_error_million_cells": 3.6637359812630166e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 24709
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.715463347056903,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.019050831784593877,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.07649302050358034,
+            "final_car_t_million_cells": 0.09113777387197641,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.02734079154201853,
+            "pk_ledger_error_nM": 8.881784197001252e-16,
+            "tumor_ledger_error_million_cells": 2.0816681711721685e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10790
+          },
+          "continuous": {
+            "final_tumor_million_cells": 3.0885445721325286,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.1235685246466358,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.5806334719237117,
+            "final_car_t_million_cells": 0.4151901730043859,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.027340791542018565,
+            "pk_ledger_error_nM": 9.992007221626409e-16,
+            "tumor_ledger_error_million_cells": 7.549516567451064e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2718
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 13,
+        "kinetics": {
+          "half_life_minutes": 64.14239166535504,
+          "car_off_per_minute": 0.08410694487507711,
+          "target_off_per_minute": 0.039910766706128906,
+          "bridge_half_nM": 6.342205883128178e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.4548571479634954,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 2.654686964220385,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 6.403606671332568,
+            "minimum_tumor_million_cells": 0.9889190262578309,
+            "peak_cytokine_proxy_arbitrary_units": 0.023701357574585333,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.07677964662864022,
+            "final_car_t_million_cells": 0.07135888513115018,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.044983706428094294,
+            "pk_ledger_error_nM": 1.6653345369377348e-15,
+            "tumor_ledger_error_million_cells": 3.3681391009565687e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10130
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 4.832598297529697,
+            "minimum_tumor_million_cells": 0.9999399590109223,
+            "peak_cytokine_proxy_arbitrary_units": 0.03723026482522425,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.24209415131970435,
+            "final_car_t_million_cells": 0.10567228228021928,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.044983706428094156,
+            "pk_ledger_error_nM": 1.887379141862766e-15,
+            "tumor_ledger_error_million_cells": 2.220446049250313e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 20390
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 6.7826211449586635,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.013470523266273439,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.05942991951468613,
+            "final_car_t_million_cells": 0.06361589851725517,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.04498370642809424,
+            "pk_ledger_error_nM": 7.771561172376096e-16,
+            "tumor_ledger_error_million_cells": 9.872658246479205e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9845
+          },
+          "continuous": {
+            "final_tumor_million_cells": 4.228782174073532,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.045445057262300546,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.3115579196068412,
+            "final_car_t_million_cells": 0.12384734000512589,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.04498370642809421,
+            "pk_ledger_error_nM": 1.3322676295501878e-15,
+            "tumor_ledger_error_million_cells": 1.2212453270876722e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2635
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 14,
+        "kinetics": {
+          "half_life_minutes": 76.81483680773424,
+          "car_off_per_minute": 0.049843613747331254,
+          "target_off_per_minute": 0.031750288907783336,
+          "bridge_half_nM": 3.281272749087113e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.7662177744124444,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 3.5238894013755733,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 4.263496757877914,
+            "minimum_tumor_million_cells": 0.9415566460166891,
+            "peak_cytokine_proxy_arbitrary_units": 0.03424843291563896,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.1509038427614704,
+            "final_car_t_million_cells": 0.11951251866266374,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.0538710200628119,
+            "pk_ledger_error_nM": 1.2212453270876722e-15,
+            "tumor_ledger_error_million_cells": 1.1546319456101628e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9799
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 0.9258930083880557,
+            "minimum_tumor_million_cells": 0.329130355521723,
+            "peak_cytokine_proxy_arbitrary_units": 0.06972162519283558,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.44297648291831376,
+            "final_car_t_million_cells": 0.2990615189021736,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.053871020062811865,
+            "pk_ledger_error_nM": 1.887379141862766e-15,
+            "tumor_ledger_error_million_cells": 2.886579864025407e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 17637
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 5.003548738927667,
+            "minimum_tumor_million_cells": 0.9939546467214292,
+            "peak_cytokine_proxy_arbitrary_units": 0.029950481881739186,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.12457932131689205,
+            "final_car_t_million_cells": 0.10018013840766832,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.05387102006281194,
+            "pk_ledger_error_nM": 4.440892098500626e-16,
+            "tumor_ledger_error_million_cells": 1.1157741397482823e-14,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9512
+          },
+          "continuous": {
+            "final_tumor_million_cells": 0.6362382590223796,
+            "minimum_tumor_million_cells": 0.2309115586253493,
+            "peak_cytokine_proxy_arbitrary_units": 0.07646312474642583,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.46985334030709863,
+            "final_car_t_million_cells": 0.31978528547423535,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.053871020062812046,
+            "pk_ledger_error_nM": 4.440892098500626e-16,
+            "tumor_ledger_error_million_cells": 5.995204332975845e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2651
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      },
+      {
+        "sample": 15,
+        "kinetics": {
+          "half_life_minutes": 51.175802076778396,
+          "car_off_per_minute": 0.0039023722042075314,
+          "target_off_per_minute": 0.33365829917100576,
+          "bridge_half_nM": 4.3707646775523215e-05
+        },
+        "population_parameters": {
+          "growth": 0.15,
+          "capacity": 100.0,
+          "proliferation": 0.4189584477645145,
+          "reduction": 0.35,
+          "memory_formation": 0.15,
+          "memory_death": 0.005,
+          "recall": 1.0,
+          "suppression": 0.03,
+          "killing": 3.2836538321285613,
+          "activation_half": 0.2,
+          "loss19": 0,
+          "loss22": 0,
+          "cytokine_production": 1.0,
+          "cytokine_clearance": 2.0
+        },
+        "outcomes": {
+          "daily_bolus": {
+            "final_tumor_million_cells": 4.693151938466722,
+            "minimum_tumor_million_cells": 0.968709092487304,
+            "peak_cytokine_proxy_arbitrary_units": 0.03590010748237084,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.17629325325877207,
+            "final_car_t_million_cells": 0.08857691754918696,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.03589010632554056,
+            "pk_ledger_error_nM": 1.2212453270876722e-15,
+            "tumor_ledger_error_million_cells": 6.661338147750939e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 10236
+          },
+          "split_bolus": {
+            "final_tumor_million_cells": 3.4142190453115657,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.04497423180259969,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.30316960228250656,
+            "final_car_t_million_cells": 0.11860140759293789,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000003,
+            "free_adapter_auc_nM_days": 0.03589010632554045,
+            "pk_ledger_error_nM": 1.5543122344752192e-15,
+            "tumor_ledger_error_million_cells": 2.8033131371785203e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 20549
+          },
+          "ramped_bolus": {
+            "final_tumor_million_cells": 5.536092503958401,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.027535213527119125,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.13732484279440235,
+            "final_car_t_million_cells": 0.0723677825108744,
+            "cumulative_concentration_equivalent_input_nM": 0.7,
+            "free_adapter_auc_nM_days": 0.0358901063255405,
+            "pk_ledger_error_nM": 5.551115123125783e-16,
+            "tumor_ledger_error_million_cells": 6.328271240363392e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 9952
+          },
+          "continuous": {
+            "final_tumor_million_cells": 3.401843779719952,
+            "minimum_tumor_million_cells": 1.0,
+            "peak_cytokine_proxy_arbitrary_units": 0.044471446459765994,
+            "cytokine_proxy_auc_arbitrary_unit_days": 0.308353630468147,
+            "final_car_t_million_cells": 0.1184797472621069,
+            "cumulative_concentration_equivalent_input_nM": 0.7000000000000007,
+            "free_adapter_auc_nM_days": 0.03589010632554047,
+            "pk_ledger_error_nM": 1.6653345369377348e-15,
+            "tumor_ledger_error_million_cells": 2.886579864025407e-15,
+            "minimum_receptor_pool_nM": 0.0,
+            "rhs_evaluations": 2681
+          }
+        },
+        "peak_proxy_frontier": [
+          "daily_bolus",
+          "ramped_bolus",
+          "continuous"
+        ],
+        "auc_proxy_frontier": [
+          "daily_bolus",
+          "split_bolus",
+          "ramped_bolus",
+          "continuous"
+        ]
+      }
+    ]
+  },
+  "interpretation": "Nondominance applies only to these schedules and declared endpoints. A high or low arbitrary-unit cytokine proxy is not a probability of toxicity. The minimal model does not establish the clinical decoupling of potency and toxicity discussed in the review; host cytokine feedback and exhaustion are not modeled.",
+  "end_to_end_seconds_including_figures": 16.267707750201225
+}
