@@ -1,0 +1,6 @@
+{
+  "provenance": "synthetic_demonstration",
+  "description": "Illustrative fixed-RNP rates and repair fractions. Not literature-fitted, sequence-calibrated or T-cell-validated.",
+  "units": {"time": "seconds", "free_rnp": "nM", "association": "nM^-1 s^-1", "other_rates": "s^-1", "repair_fractions": "dimensionless"},
+  "rates": {"association_per_nM_s": 0.01, "free_rnp_nM": 10.0, "dissociation_per_s": 0.03, "r_loop_per_s": 0.06, "unwind_per_s": 0.015, "cleavage_per_s": 0.025, "repair_per_s": 0.01, "precise_fraction": 0.4, "indel_fraction": 0.5, "hdr_fraction": 0.1}
+}
