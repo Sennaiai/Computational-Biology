@@ -42,6 +42,8 @@ jobs:
           python -m unittest discover -s tests/modeling/crispr_cas9 -v
       - name: Execute the notebook and numerical experiment
         run: python projects/modeling/crispr_cas9/scripts/execute_notebook.py --output-dir artifacts/crispr_cas9
+      - name: Execute the intracellular and lineage prototype
+        run: python projects/modeling/crispr_cas9/scripts/execute_notebook.py --notebook Cellular_Editing_Simulation.ipynb --output-dir artifacts/cellular
       - name: Save numerical evidence
         uses: actions/upload-artifact@v4
         with:
@@ -51,3 +53,6 @@ jobs:
             artifacts/crispr_cas9/CRISPR_Cas9_Kinetics.ipynb
             artifacts/crispr_cas9/kinetics.json
             artifacts/crispr_cas9/kinetics.svg
+            artifacts/cellular/Cellular_Editing_Simulation.ipynb
+            artifacts/cellular/cellular_results.json
+            artifacts/cellular/cellular_simulation.svg

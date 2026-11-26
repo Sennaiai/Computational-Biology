@@ -6,7 +6,7 @@ Computational Biology · Molecular Systems Modeling · Translational Life Scienc
 ## Studies
 
 - [Genomic ancestry](projects/Genomic_Ancestry): bioinformatics workflow.
-- [CRISPR-Cas9 kinetics](projects/modeling/crispr_cas9): numerically verified binding, cleavage and repair baseline with synthetic parameters; assay calibration remains outstanding.
+- [CRISPR-Cas9 simulation](projects/modeling/crispr_cas9): intracellular editing and lineage prototype with a published-assay repair reference; Arabidopsis predictions remain unvalidated.
 
 ---
 

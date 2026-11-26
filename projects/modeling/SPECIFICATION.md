@@ -6,7 +6,7 @@ This specification combines the three resource proposals with the biological-mod
 
 | Theme | Individual model | Primary observables |
 |---|---|---|
-| Molecular and cellular dynamics | CRISPR-Cas9 editing | Binding/cleavage time courses, first-passage times and conditional repair outcomes. |
+| Molecular and cellular dynamics | CRISPR-Cas9 editing | Intracellular availability, target engagement, repeated cutting/repair and conditional lineage outcomes. |
 | Molecular and cellular dynamics | Dual-target CAR-T signaling | Antigen-dependent signaling, tumor and T-cell dynamics, and cytokine proxies. |
 | Anesthesia and awareness | Anesthetic-modulated neural dynamics | Oscillation spectra, synchrony, perturbation recovery and independently defined state labels. |
 | Mitochondrial electron transfer | Complex III -> cytochrome c -> complex IV | Redox populations, docking/transport contributions, transfer rates and flux. |
@@ -14,6 +14,10 @@ This specification combines the three resource proposals with the biological-mod
 Resource mapping: `Biomolecular_Simulation.md` specifies Cas9; `Molecular_Signaling_Cascades.md` specifies CAR-T; `Anesthesia_Awareness.md` specifies the neural study. The electron-transfer scope is mitochondrial complex III → cytochrome c → complex IV, distinct from a multi-heme protein wire.
 
 ## First implementation and acceptance
+
+The current CRISPR application is grounded in the Arabidopsis ABCG18/ABCG19 experiment. Its main deliverable is a simulation for informed experimental design. The earlier T-cell proposal provides broader context but is not the current case study. Original experimental measurements are unavailable; published assay references support component-level calibration, with biological transfer labeled explicitly.
+
+The intracellular extension uses finite-copy protein/RNA reactions, shared Cas9 competition, target engagement, precise repair/re-cutting and a bounded stochastic lineage. Vector/promoter choices enter as expression timing and production scenarios. Acceptance adds molecular accounting through binding and division, no-Cas9/no-guide controls, analytical birth/repair references and founder-level uncertainty. A simplified DNA-break checkpoint, synthetic mutation categories and unmeasured expression profiles remain explicit assumptions.
 
 The first Cas9 milestone is a transparent probability model: unbound <-> PAM-bound <-> R-loop -> cleaved, followed by precise repair, indel or HDR branches. Free RNP is initially a fixed reservoir. Terminal repair makes this a single-cleavage model; delivery, re-cutting and cellular context must not be implied by this baseline.
 

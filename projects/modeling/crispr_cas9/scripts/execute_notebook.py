@@ -16,11 +16,16 @@ from nbclient import NotebookClient
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--notebook",
+        choices=("CRISPR_Cas9_Kinetics.ipynb", "Cellular_Editing_Simulation.ipynb"),
+        default="CRISPR_Cas9_Kinetics.ipynb",
+    )
     args = parser.parse_args()
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
     project = Path(__file__).resolve().parents[1]
-    notebook = nbformat.read(project / "CRISPR_Cas9_Kinetics.ipynb", as_version=4)
+    notebook = nbformat.read(project / args.notebook, as_version=4)
     # Never reuse saved outputs or a kernel from a different environment.
     for cell in notebook.cells:
         if cell.cell_type == "code":
@@ -52,21 +57,21 @@ def main():
         client = NotebookClient(
             notebook,
             km=manager,
-            timeout=120,
+            timeout=300,
             allow_errors=False,
             resources={"metadata": {"path": str(project)}},
         )
         env = dict(os.environ)
         env["CRISPR_OUTPUT_DIR"] = str(output)
         env["MPLCONFIGDIR"] = str(root / "matplotlib")
-        client.execute(env=env)
+        client.execute(env=env, cleanup_kc=True)
     notebook.metadata.kernelspec = {
         "display_name": "Python 3 (ipykernel)",
         "language": "python",
         "name": "python3",
     }
     nbformat.validate(notebook)
-    nbformat.write(notebook, output / "CRISPR_Cas9_Kinetics.ipynb")
+    nbformat.write(notebook, output / args.notebook)
     print("Executed notebook and numerical evidence saved successfully.")
 
 

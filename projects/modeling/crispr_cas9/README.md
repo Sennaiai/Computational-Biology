@@ -1,22 +1,18 @@
-# CRISPR-Cas9 kinetics
+# CRISPR-Cas9 cell and lineage simulation
 
-A classical numerical baseline for molecular editing. It models target binding, reversible R-loop formation, cleavage and a separate repair layer. **Parameters are synthetic; biological calibration has not been performed.**
+A mechanistic prototype for exploring how expression timing, Cas9/gRNA availability, binding, cleavage, repair and cell divisions influence editing. The case study is the Arabidopsis ABCG18/ABCG19 experiment. **Cellular results are conditional simulations, not validated predictions for those genes or a named promoter.**
 
-Seven target states form a continuous-time Markov model. A fixed free-RNP reservoir gives pseudo-first-order binding. Repair outcomes are terminal: exact repair is not re-cut, indels are not automatically functional knockouts, and HDR is a labeled branch rather than a sequence-resolved repair model. Chromatin, delivery and enzyme depletion are outside this first baseline.
+The [cellular notebook](Cellular_Editing_Simulation.ipynb) compares seven scenarios, including guide imbalance, alternative repair rates and a no-Cas9 control. Finite molecule counts, shared Cas9 competition, nuclear transport, precise repair/re-cutting and allele inheritance are explicit. A simplified break-dependent division checkpoint is a consequential assumption. Mosaicism is a synthetic-genotype proxy; unresolved breaks remain separate.
 
-The matrix exponential and an independent ODE integration solve the same generator. Exact Gillespie trajectories are compared under a predeclared simultaneous sampling bound. Closed-form binding, irreversible-cleavage and branching-repair cases provide independent tests. The model reports first-cleavage probability separately from current unrepaired breaks and altered-repair outcomes.
+A reduced repair model is fitted to the authors' public [Psy1 example assay](https://github.com/fabrimafe/DSBtimecourse), with both 72-hour replicates held out. Held-out mean absolute fraction error is **0.0398**, versus **0.0450** without precise repair. These are tomato example-assay results. Expression, development and Arabidopsis transfer remain uncalibrated. [Model and data definitions](MODEL.md).
 
-From the repository root, using Python 3.11:
+From the repository root with Python 3.11:
 
 ```bash
 python -m pip install -e 'projects/modeling/crispr_cas9[notebook]'
 python -m unittest discover -s tests/modeling/crispr_cas9 -v
-crispr-kinetics --output artifacts/crispr_cas9
-python projects/modeling/crispr_cas9/scripts/execute_notebook.py --output-dir artifacts/crispr_cas9
+python -m crispr_kinetics.cell_study --output artifacts/cellular --founders 64
+python projects/modeling/crispr_cas9/scripts/execute_notebook.py --notebook Cellular_Editing_Simulation.ipynb --output-dir artifacts/cellular
 ```
 
-The [executed notebook](CRISPR_Cas9_Kinetics.ipynb) shows the generator and distinct cleavage/repair readouts. The exported JSON records all state probabilities, stochastic counts, seeds, source hashes, dependency versions and numerical runtime. CI executes this study only when its files change; manual execution remains available.
-
-The [reference run](results/kinetics.json) gives a maximum ODE/matrix-exponential difference of **2.65 × 10⁻¹¹**. Three ensembles of 4,000 trajectories have a maximum state-probability gap of **0.0223**, below the predeclared simultaneous bound **0.0520**. These measure numerical consistency, not biological predictive accuracy.
-
-Mechanistic references: [Farasat and Salis, 2016](https://doi.org/10.1371/journal.pcbi.1004724), [Gong et al., 2018](https://doi.org/10.1016/j.celrep.2017.12.041), and [Eslami-Mossallam et al., 2022](https://doi.org/10.1038/s41467-022-28994-2). This coarse-grained baseline is not a reproduction of their full parameterized models. Published-assay calibration, sequence-level learning and any quantum extension require separate validation.
+[Reference results](results/cellular_results.json) record seeds, parameters, molecular ledgers, founder-level uncertainty and source hashes. The [single-target notebook](CRISPR_Cas9_Kinetics.ipynb) retains the matrix-exponential/ODE/Gillespie baseline. CI executes this project only for its own changes.

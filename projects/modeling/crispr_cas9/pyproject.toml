@@ -14,9 +14,10 @@ notebook = ["nbformat==5.10.4", "nbclient==0.10.2", "ipykernel==7.1.0"]
 
 [project.scripts]
 crispr-kinetics = "crispr_kinetics.study:main"
+crispr-cell = "crispr_kinetics.cell_study:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-crispr_kinetics = ["data/*.json"]
+crispr_kinetics = ["data/*.json", "data/*.tsv"]

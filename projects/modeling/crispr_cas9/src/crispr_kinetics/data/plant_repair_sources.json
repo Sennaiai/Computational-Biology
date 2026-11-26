@@ -1,0 +1,46 @@
+{
+  "paper": "Uncovering the dynamics of precise repair at CRISPR/Cas9-induced double-strand breaks",
+  "doi": "https://doi.org/10.1038/s41467-024-49410-x",
+  "authors": "Ben Tov, Mafessoni et al. (2024)",
+  "paper_license": "https://creativecommons.org/licenses/by/4.0/",
+  "organism_and_assay": "Tomato protoplasts; UMI-DSBseq; not Arabidopsis embryonic development",
+  "repository": "https://github.com/fabrimafe/DSBtimecourse",
+  "source_commit": "a278e042509b37f2e6e85e36cbd7622c45e9508e",
+  "data_scope": "Authors' public Psy1 example count table. Not asserted identical to the final paper Source Data workbook. No author R code is redistributed.",
+  "raw_columns": {
+    "y1": "intact",
+    "y2": "indels",
+    "y3": "direct_DSB",
+    "y4": "processed_DSB"
+  },
+  "column_evidence": "csv2timecourse.R selects time,WT.Sub,indels,preciseDSB,impreciseDSB before renaming to time,y1,y2,y3,y4; predict_models in likelihood_functions.R confirms that order. The repository README describes a conflicting order.",
+  "held_out": "Both 72-hour replicates; all earlier times are training. No random row split.",
+  "files": {
+    "psy1_timecourse.tsv": {
+      "original_path": "test/timecourse_RNP_Psy1.txt",
+      "sha256": "659f563686831d23c5c5956b9a9ce90ca1600d047d9fa3b5ec87948ad4be7ea8"
+    },
+    "psy1_error.tsv": {
+      "original_path": "test/error_matrix4_Psy1_errorsfromunbroken.tsv",
+      "sha256": "8ec52497915ae200aaed08b3227e1f925e418076d118dde939f6184dd923521e"
+    }
+  },
+  "published_table_1_rates_per_h": {
+    "Psy1": {
+      "cutting": 0.0092,
+      "precise_repair": 0.0791,
+      "mutation_repair": 0.0335
+    },
+    "CRTISO": {
+      "cutting": 0.0175,
+      "precise_repair": 0.0675,
+      "mutation_repair": 0.0777
+    },
+    "PhyB2": {
+      "cutting": 0.0718,
+      "precise_repair": 0.0583,
+      "mutation_repair": 0.0864
+    }
+  },
+  "interpretation": "Reported effective repair rates serve as transfer/sensitivity references. Cellular expression, target engagement, product release, volumes, division and synthetic repair-allele probabilities remain scenario assumptions."
+}
