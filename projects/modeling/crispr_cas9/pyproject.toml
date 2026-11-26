@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crispr-cas9-kinetics-study"
+version = "0.1.0"
+description = "A verified, coarse-grained Cas9 cleavage and repair kinetics baseline"
+requires-python = ">=3.11,<3.12"
+dependencies = ["numpy==2.3.4", "scipy==1.16.3", "matplotlib==3.10.7"]
+
+[project.optional-dependencies]
+notebook = ["nbformat==5.10.4", "nbclient==0.10.2", "ipykernel==7.1.0"]
+
+[project.scripts]
+crispr-kinetics = "crispr_kinetics.study:main"
+crispr-cell = "crispr_kinetics.cell_study:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+crispr_kinetics = ["data/*.json", "data/*.tsv"]

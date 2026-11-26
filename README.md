@@ -1,7 +1,12 @@
 # Computational Biology Portfolio
 
-**Sennai Kahssai**
+**Senay Kahsay**
 Computational Biology · Molecular Systems Modeling · Translational Life Sciences
+
+## Studies
+
+- [Genomic ancestry](projects/Genomic_Ancestry): bioinformatics workflow.
+- [CRISPR-Cas9 simulation](projects/modeling/crispr_cas9): intracellular editing and lineage prototype with a published-assay repair reference; Arabidopsis predictions remain unvalidated.
 
 ---
 
