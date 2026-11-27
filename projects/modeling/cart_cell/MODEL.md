@@ -1,5 +1,23 @@
 # Model and verification
 
+## Equation provenance
+
+This is an adaptation and model-comparison project. It does not claim a new biological rate law. Deriving an equation from a reaction scheme establishes its mathematical meaning; experimental evidence is still needed to establish whether that scheme is adequate.
+
+| Component | Origin | What is assumed or derived here |
+|---|---|---|
+| Published effector/memory/tumor reference | Barros et al. (2021), equations 1–3 and HDLM-2 parameters | Independent implementation of the original equations; no new fit or change to the reference |
+| Finite receptor proofreading | Standard sequential kinetic-proofreading principle; see [McKeithan (1995)](https://doi.org/10.1073/pnas.92.11.5042) | A selected finite reaction chain and its stationary active fraction; the TCR paper does not validate these CAR rates |
+| Dual recognition | Probability algebra | OR/AND aggregation assumes independent opportunities; actual receptor architecture must determine the rule |
+| Antigen-resolved population model | Adapted from the reference's population terms | Antigen-gated proliferation/recall/killing, shared carrying capacity and a conservative phenotype-loss generator; extension parameters are synthetic |
+| Cytokine proxy | Assumed activation-to-output mapping plus first-order clearance | An arbitrary-unit surrogate, not a published clinical CRS equation or a fit to a measured cytokine |
+| Adapter binding | Mass-action reactions and finite receptor balances | Equilibrium and kinetic equations derived below; Lee et al. supplies two affinities, not this system of ODEs |
+| Adapter exposure | Fixed-volume balance with first-order elimination | A deliberately limited one-compartment approximation; clearance and inputs are illustrative, not a fitted patient PK model |
+
+The review motivates **a mechanism-adequacy question**: can binding/exposure dynamics account for improved killing with reduced inflammatory activation, or are the assumed dynamics insufficient for the measured responses? The two architectures address different parts of the review and are not ranked against one another as therapies.
+
+Current simulations establish conditional consequences and numerical correctness. They do not independently verify antigen escape or toxicity simply by including these processes. Useful empirical evidence would require matched assay inputs, an observation model, identifiable parameter estimates and predictions on withheld conditions. A failed prediction would challenge the combined biological/observation model, not identify a unique missing mechanism.
+
 ## Receptor component
 
 The finite-state process is `U ⇄ C0 → C1 → … → Cn`. Association is `kon × a`, where `a` is a dimensionless effective antigen-contact input. Each bound state dissociates to `U` at `koff`; progression occurs at `kp`. Only `Cn` is active. Rates are in **min⁻¹**. These synthetic effective rates do not specify a measured CD19/CD22 affinity or antigen count per cell. Proofreading is a coarse-grained delay, not an explicit CD3ζ/ZAP70/MAPK network.
@@ -7,6 +25,8 @@ The finite-state process is `U ⇄ C0 → C1 → … → Cn`. Association is `ko
 For row generator `Q`, probabilities satisfy `dp/dt = Qᵀp`. The active-state equilibrium is
 
 `f(a) = kon·a / (kon·a + koff) × [kp / (kp + koff)]ⁿ`.
+
+To derive this expression, sum all bound states: internal proofreading transitions cancel, so association balances `koff` times the total bound fraction. This gives total occupancy `kon·a/(kon·a+koff)`. At every intermediate stage, progression competes with dissociation, giving factor `kp/(kp+koff)`. The final state has no further progression; solving the stationary recurrences yields occupancy times this factor to power `n`. The formula follows from this chosen scheme, rather than being a measured CAR activation law.
 
 Matrix exponentiation and an exact finite-receptor Gillespie process give independent deterministic/stochastic references. The stochastic check uses 4,000 independent receptors initially unbound. Its simultaneous absolute-error bound is `sqrt(log(2m/δ)/(2N))`, with `m` states and `δ = 10⁻⁶`. Event-budget exhaustion raises an error. This check concerns receptor sampling, not biological uncertainty.
 
@@ -109,6 +129,6 @@ Compare daily boluses, four split boluses/day, ramped boluses and continuous inp
 
 Sixteen paired sensitivity scenarios vary exposure half-life (30–89.9 min), CAR and target off-rates (0.002–0.2/min and 0.02–2/min), and bridge half-activation, killing and proliferation (0.5–2× nominal). Kds stay fixed. The half-life interval is illustrative and does not calibrate mouse tumor kinetics from a human circulation bound. A schedule is nondominated if no other tested schedule has both lower-or-equal final tumor and lower-or-equal proxy, with at least one strict improvement. Separate comparisons use peak and integrated proxy. Frontier counts describe these selected scenarios, not clinical success probabilities or a globally optimized regimen.
 
-The model may expose a tradeoff but cannot explain or establish the review's observed improvement in antitumor potency alongside reduced toxicity. Exhaustion, host cytokine amplification and tissue injury are not represented. Unresolved mechanisms are not added simply to force agreement with the paper. Raw assay observations would be needed to calibrate these responses and discriminate mechanisms; published affinities and a numerical reference are not enough.
+The nominal comparison exposes a tradeoff but does not reproduce the review's reported improvement in potency alongside reduced toxicity. It does not reject the model, because experimental and simulated inputs/readouts are not yet matched. Exhaustion, host cytokine amplification and tissue injury are not represented. Additional mechanisms must not be introduced merely to force agreement. The empirical acceptance target is a simultaneous account of killing and cytokine readouts with parameters shared across conditions, followed by withheld-condition prediction. Published affinities and a numerical reference alone cannot meet that target.
 
 The baseline excludes normal B cells, host immunity, allogeneic rejection, exhaustion states, spatial trafficking, manufacturing and stochastic tumor extinction. Normal B cells also express the target antigens, so tumor selectivity or clinical safety cannot be inferred. TRAC/CD52 edits and their effects are not simulated; no genotype-to-phenotype mapping is borrowed from the Cas9 prototype. DFT and quantum algorithms are not required to solve this classical baseline.

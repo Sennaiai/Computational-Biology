@@ -1,21 +1,27 @@
 # CAR-T: tumor control and activation tradeoffs
 
-A mechanistic simulation motivated by my 2023 CAR-T analytical review, coauthored with Ryan Owchar: **how do recognition strategy and controlled exposure affect tumor suppression, antigen escape and inflammatory activation?** The contribution is a reproducible comparison tool with explicit uncertainty, rather than a claim of a new treatment mechanism.
+Motivated by my 2023 CAR-T review, coauthored with Ryan Owchar: **can controlled engagement preserve tumor killing while reducing inflammatory activation?**
 
-Two complementary experiments keep their biological architectures separate:
+The model isolates recognition and exposure changes under controlled assumptions. Its purpose is to test whether binding/exposure dynamics can account for the tradeoff, and identify measurements that could change a comparison. Reproducing a concern already encoded in the equations does not independently confirm it.
 
-- **CD19/CD22 recognition:** single-target, idealized OR and AND rules, finite receptor proofreading, effector/memory dynamics and four antigen phenotypes.
-- **Adapter exposure:** a separate anti-fluorescein/FITC-folate/folate-receptor model compares bolus, split, ramped and continuous input. A modest PK/PD layer connects exposure and binding kinetics to cellular response; active schedules have equal total input and free-adapter AUC.
+Two experiments keep their biological architectures separate:
 
-## Evidence and results
+- **CD19/CD22:** single-target, idealized OR/AND recognition, receptor proofreading, effector/memory dynamics and antigen escape.
+- **FITC-folate/folate receptor:** adapter binding and a modest PK/PD layer compare bolus, split, ramped and continuous exposure at equal total input and free-adapter AUC.
 
-Published mouse-model equations and reported equilibria provide an independent numerical reference. Published adapter-binding affinities anchor a separate component. **Population-extension and exposure-response parameters remain illustrative; this is not assay-calibrated B-ALL or clinical risk prediction.**
+## Equation origins and evidence
 
-The nominal antigen study gives day-30 tumor burdens of **12.29 million cells (CD19), 12.97 (CD22), 1.11 (OR) and 22.12 (AND)** from one million initial tumor cells. OR reaches a transient minimum of 0.072 million, then double-negative escape drives regrowth. These are conditional simulations, not treatment success rates.
+The reference population equations come from [Barros et al. (2021)](https://doi.org/10.3390/cancers13122941). The extensions adapt those terms and introduce explicit response assumptions. Adapter equations are derived from a stated mass-action scheme; [Lee et al. (2019)](https://doi.org/10.1038/s41467-019-10565-7) supplies affinities and experimental motivation, not these coupled equations. [Equation provenance and derivations](MODEL.md#equation-provenance) distinguish each component.
 
-The exposure-matched adapter study shows a tradeoff:
+**The extensions are illustrative and uncalibrated.** The present contribution is a reproducible comparison framework, not new biological rate laws or established treatment guidance.
 
-| Input schedule | Day-14 tumor, million cells | Peak activation proxy, arbitrary units |
+## Conditional results
+
+From one million initial tumor cells, day-30 burdens are **12.29 million (CD19), 12.97 (CD22), 1.11 (OR) and 22.12 (AND)**. OR reaches 0.072 million before double-negative escape drives regrowth.
+
+The separate, exposure-matched adapter experiment gives:
+
+| Schedule | Day-14 tumor, million cells | Peak activation proxy, arbitrary units |
 |---|---:|---:|
 | No adapter | 7.62 | 0 |
 | Daily bolus | 6.33 | 0.0266 |
@@ -23,9 +29,13 @@ The exposure-matched adapter study shows a tradeoff:
 | Ramped bolus | 6.71 | 0.0195 |
 | Continuous | 2.64 | 0.1303 |
 
-Lower tumor burden does not automatically mean a better overall tradeoff. Paired sensitivity analyses retain all parameter draws and assess dominance under both peak and integrated proxy. Unknown binding residence times are varied while measured affinities stay fixed. No clinical risk probability, safe dose or preferred patient regimen is inferred.
+This nominal comparison shows a tradeoff, rather than reproducing the paper's reported potency/toxicity co-improvement. It does not reject the mechanism: experimental and simulated inputs are not yet matched. Paired sensitivity scenarios retain all draws and vary unknown residence times at fixed affinities.
 
 ![Matched-input comparison](results/pkpd_tradeoffs.svg)
+
+## Evidence needed for experimental use
+
+The acceptance target is a simultaneous account of paired killing/cytokine measurements, followed by prediction of withheld conditions. Lee's in-vitro readouts are a candidate anchor, subject to usable measurements and matching assay metadata. Fits must use an identifiable parameter subset; digitized means cannot substitute for raw replicates. Failed predictions could challenge the mechanism or observation model without proving a unique cause. This validation remains unperformed.
 
 ## Run and inspect
 
@@ -37,8 +47,6 @@ python -m unittest discover -s tests/modeling/cart_cell -v
 python projects/modeling/cart_cell/scripts/execute_notebook.py --output-dir artifacts/cart_cell
 ```
 
-[Executed notebook](CAR_T_Tradeoffs.ipynb) · [Equations, units and checks](MODEL.md) · [Sources](src/cart_dynamics/data/sources.json) · [Recognition results](results/cart_results.json) · [Exposure comparison](results/pkpd_results.json)
+[Executed notebook](CAR_T_Tradeoffs.ipynb) · [Equations and checks](MODEL.md) · [Sources](src/cart_dynamics/data/sources.json) · [Recognition results](results/cart_results.json) · [Exposure results](results/pkpd_results.json)
 
-Analytical controls, exact receptor sampling, independent solvers, input boundaries and receptor/tumor/exposure accounting are tested. Scoped CI executes this study without rerunning completed projects. Results record configurations, seeds, source hashes, numerical residuals and runtime. The published table/text equilibrium discrepancy (0.20%) is retained and documented.
-
-Normal B cells, host immunity, exhaustion, tissue distribution and clinical cytokine feedback are absent. The proxy is not CRS; universal-cell edits and combined CD19/CD22 adapter constructs are not simulated. The review supplies the motivation; this prototype does not establish clinical efficacy or safety.
+Analytical controls, independent solvers and receptor/tumor/exposure accounting are tested; CI executes only this study. Records include inputs, seeds, source hashes, residuals and runtime. Normal B cells, host cytokine feedback and exhaustion are absent. The activation proxy is not clinical CRS, and no patient regimen is recommended.
