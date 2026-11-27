@@ -44,12 +44,6 @@ Complete, self-contained computational biology projects, including data processi
 
 ---
 
-### `resources/`
-
-Conceptual and theoretical reference material supporting the projects.
-
----
-
 This repository serves as a continuously evolving research portfolio at the intersection of biological systems modeling and advanced computation.
 
 ---
